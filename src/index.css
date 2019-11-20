@@ -1,8 +1,10 @@
 @import './styles/App.css';
 @import './styles/Landing.css';
 @import './styles/SearchCard.css';
+@import './styles/SearchBar.css';
 @import '~antd/dist/antd.css';
 @import '~react-datepicker/dist/react-datepicker.css';
+
 
 
 body {
