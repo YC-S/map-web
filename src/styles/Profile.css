@@ -1,0 +1,40 @@
+.profile {
+  background-color: white;
+  width: 60%;
+  min-height: 200px;
+  margin: auto;
+  display: flex;
+  border-bottom: 1px solid gainsboro;
+}
+
+.head-profile {
+  /* flex-grow: 2; */
+  width: 30%;
+  height: 30%;
+  margin-top: auto;
+  margin-bottom: auto;
+  border-radius: 50%;
+  border: 1px solid gray;
+  margin-right: 15px;
+}
+
+.person-name {
+  float: left;
+  margin-left: 20px;
+}
+.edit-profile {
+  font-weight: bold;
+}
+
+.text-description {
+  /* width: 60%;
+  height: 20%; */
+  text-align: left;
+  padding-left: 20px;
+  margin: auto;
+}
+
+.post {
+  float: left;
+  margin-left: 20px;
+}

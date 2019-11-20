@@ -1,0 +1,12 @@
+.imageContainer {
+  margin-top: 20px;
+  width: 70%;
+  margin: auto;
+}
+
+.image {
+  height: 30%;
+  width: 30%;
+  float: left;
+  padding: 10px;
+}
