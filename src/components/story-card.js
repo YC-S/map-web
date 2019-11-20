@@ -1,0 +1,19 @@
+import React, {Component} from 'react'
+
+export default class storycard extends React.Component {
+  render() {
+    return (
+      <div>
+        <h1> Experience </h1>
+        <ul>
+          <li>1</li>
+          <li>1</li>
+          <li>1</li>
+          <li>1</li>
+          <li>1</li>
+          <li>1</li>
+        </ul>
+      </div>
+    )
+  }
+}
