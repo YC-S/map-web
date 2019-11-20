@@ -13,6 +13,7 @@ export default class experienceHeader extends React.Component {
           <Row type="flex">
             <Col span={6} order={4}>
               Space Needle
+              <br/>
               {/*<img src={spaceNeedle} />*/}
               <img src={require('../resources/images/space-needle.jpg')} height={250}/>
               <p>
@@ -21,6 +22,7 @@ export default class experienceHeader extends React.Component {
             </Col>
             <Col span={6} order={3}>
               Museum of Pop Culture
+              <br/>
               <img src={require('../resources/images/museum-of-pop-culture.jpg')} height={250}/>
               <p>
                 Experience Music Project
@@ -28,6 +30,7 @@ export default class experienceHeader extends React.Component {
             </Col>
             <Col span={6} order={2}>
               Seattle Public Library
+              <br/>
               <img src={require('../resources/images/seattle-public-library.jpeg')} height={250}/>
               <p>
                 Striking, modern information repository
@@ -35,6 +38,7 @@ export default class experienceHeader extends React.Component {
             </Col>
             <Col span={6} order={1}>
               Pike Place Market
+              <br/>
               <img src={require('../resources/images/pike-place-market.jpg')} height={250}/>
               <p>
                 Busy eateries & lively Pike Place Market
