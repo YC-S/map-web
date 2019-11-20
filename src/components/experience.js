@@ -7,7 +7,6 @@ export default class experience extends React.Component {
   render() {
     return (
       <div className="experience">
-        {/*<h1>Experience</h1>*/}
         <TopNavBar />
         <ExperienceHeader />
         <StoryCard />

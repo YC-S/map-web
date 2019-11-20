@@ -2,9 +2,9 @@
 @import 'styles/landing.css';
 @import 'styles/search-card.css';
 @import 'styles/search-bar.css';
+@import 'styles/experience-header.css';
 @import 'styles/experience.css';
 @import 'styles/top-nav-bar.css';
-@import 'styles/experience-header.css';
 @import '~antd/dist/antd.css';
 @import '~react-datepicker/dist/react-datepicker.css';
 

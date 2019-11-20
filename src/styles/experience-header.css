@@ -1,5 +1,20 @@
 .experience-header {
   background-color: black;
+}
+
+.experience-header > h6 {
+  font-family: "Roboto Mono for Powerline";
   color: red;
   text-align: center;
+}
+
+.experience-header > h1 {
+  font-size:56px;
+  margin-top: 30px;
+  color: white;
+  text-align: center;
+}
+
+.experience-header > Section {
+  color: white;
 }
