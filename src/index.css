@@ -2,6 +2,8 @@
 @import './styles/Landing.css';
 @import './styles/SearchCard.css';
 @import './styles/SearchBar.css';
+@import './styles/LoginForm.css';
+@import './styles/AuthorizationModal.css';
 @import '~antd/dist/antd.css';
 @import '~react-datepicker/dist/react-datepicker.css';
 
