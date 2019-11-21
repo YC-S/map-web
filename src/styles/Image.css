@@ -7,6 +7,16 @@
 .image {
   height: 30%;
   width: 30%;
-  float: left;
+  /* float: left; */
   padding: 10px;
+  /* background: lightblue; */
+}
+
+@media (max-width: 858px) {
+  .image {
+    height: 30%;
+    width: 80%;
+    float: none;
+    padding: 10px;
+  }
 }
