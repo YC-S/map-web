@@ -4,6 +4,7 @@ export class Images extends Component {
   constructor() {
     super();
     this.state = {
+      //image list consist of all image user uploaded, will change once database is ready
       imageList: [
         require("../images/1.jpg"),
         require("../images/2.jpg"),
@@ -15,8 +16,9 @@ export class Images extends Component {
     };
   }
   render() {
-    console.log(this.state.imageList[0]);
+    // console.log(this.state.imageList[0]);
     return (
+      //mapping each image and index to image html
       <div className="imageContainer">
         {this.state.imageList.map((image, idx) => (
           <img

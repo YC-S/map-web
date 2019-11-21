@@ -1,22 +1,38 @@
 import React from "react";
 import boy from "../images/boy.svg";
-export const Profile = () => {
-  return (
-    <div className="profile">
-      <img src={boy} alt="boy-head" className="head-profile" />
-      <div>
-        <h4>
-          <span className="person-name">Johm Smith</span>
-          <button className="edit-profile">Edit Profile</button>
-        </h4>
-        <p className="text-description">
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text.
-        </p>
-        <p className="post">
-          <strong>0</strong> posts
-        </p>
+
+export class Profile extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleOnClick = this.handleOnClick.bind(this);
+  }
+  handleOnClick = () => {
+    return <div>{alert("button clicked")}</div>;
+  };
+  render() {
+    return (
+      <div className="profile">
+        {/* head profile */}
+        <img src={boy} alt="boy-head" className="head-profile" />
+        <div>
+          {/* user information and button to let user change his/her profile */}
+          <h4>
+            <span id="person-name">Johm Smith</span>
+            <button className="edit-profile" onClick={this.handleOnClick}>
+              Edit Profile
+            </button>
+          </h4>
+          {/* text description which can let user personalize their expression */}
+          <p className="text-description">
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry. Lorem Ipsum has been the industry's standard dummy text.
+          </p>
+          {/* number of posts that user has beed posted */}
+          <p className="post">
+            <strong>0</strong> posts
+          </p>
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
