@@ -1,0 +1,5 @@
+.map-sidebar {
+    min-width: 400px;
+    overflow:auto;
+    height: 100vh;
+}
