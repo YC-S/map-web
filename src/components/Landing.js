@@ -13,15 +13,23 @@ class Landing extends React.Component {
         visibleLogin: false,
         visibleRegister: false,
     }
+
     showLogin = () => {
         this.setState({
             visibleLogin: true
-        })
+        });
     }
 
-    hideLogin = () => {
+    showRegister = () => {
+        this .setState({
+            visibleRegister: true,
+        });
+    }
+
+    hideForm = () => {
         this.setState({
-            visibleLogin: false
+            visibleLogin: false,
+            visibleRegister: false
         })
     }
 
@@ -29,9 +37,9 @@ class Landing extends React.Component {
     render() {
         return (
             <div className="landing">
-                <TopNavBar showLogin={this.showLogin}/>
+                <TopNavBar showLogin={this.showLogin} showRegister={this.showRegister}/>
                 <SearchBar />
-                <AuthorizationModal visibleLogin={this.state.visibleLogin} hideLogin={this.hideLogin}/>
+                <AuthorizationModal visibleLogin={this.state.visibleLogin} visibleRegister={this.state.visibleRegister} hideForm={this.hideForm}/>
             </div>
         );
     }

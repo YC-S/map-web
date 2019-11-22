@@ -2,6 +2,9 @@ import React from 'react';
 import { Form, Icon, Input, Button, Checkbox } from 'antd';
 
 class LoginForm extends React.Component {
+    state = {
+        loading: false,
+    }
 
     handleSubmit = e => {
         e.preventDefault();
@@ -9,14 +12,18 @@ class LoginForm extends React.Component {
         this.props.form.validateFields((err, values) => {
             if (!err) {
                 console.log('Received values of form: ', values);
-                this.props.handleModalOk();
+                this.setState({ loading: true });
+                setTimeout(() => {
+                    this.setState({ loading: false });
+                    this.props.hideForm();
+                }, 3000);
             }
         });
     };
 
     render() {
         const { getFieldDecorator } = this.props.form;
-        const loading = this.props.loadingState;
+        const { loading } = this.state;
         return (
             <Form onSubmit={this.handleSubmit} className="login-form">
                 <Form.Item>
