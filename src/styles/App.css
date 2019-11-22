@@ -1,8 +1,8 @@
 
 .map-container {
   position: relative;
-  width: 800px;
-  height: 500px;
+  width: 100vw;
+  height: 100vh;
 }
 
 .App {

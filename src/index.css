@@ -1,9 +1,13 @@
 @import './styles/App.css';
 @import './styles/Landing.css';
+@import './styles/TopNavBar.css';
 @import './styles/SearchCard.css';
 @import './styles/SearchBar.css';
 @import './styles/LoginForm.css';
 @import './styles/AuthorizationModal.css';
+@import './styles/SideBarComponent.css';
+@import './styles/MapPage.css';
+@import './styles/MapSideBar.css';
 @import '~antd/dist/antd.css';
 @import '~react-datepicker/dist/react-datepicker.css';
 

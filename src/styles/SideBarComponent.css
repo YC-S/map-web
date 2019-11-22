@@ -1,0 +1,12 @@
+.sidebar-component {
+    margin: 10px;
+    padding: 20px;
+    border-bottom: solid 1px lightgray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebar-description {
+    padding-left: 20px;
+}
