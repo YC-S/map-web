@@ -1,0 +1,21 @@
+server:
+  port: 8081
+
+spring:
+  profiles:
+    active: dev
+
+event:
+  name: "Gobble Up Seattle 2019"
+  eventId: 00000001
+  open: true
+  category: food
+  startDate: 2019/11/23
+  maps: {k1: v1, k2: v2}
+  lists:
+    - "Now in its third year,"
+    - "we are so excited to bring you Gobble Up Seattle 2019! "
+    - "This specialty food show will be geared to both everyday customers,"
+    - "as well as to restaurants, chefs"
+
+
