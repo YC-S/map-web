@@ -1,4 +1,3 @@
-@import './styles/App.css';
 @import './styles/Landing.css';
 @import './styles/TopNavBar.css';
 @import './styles/SearchCard.css';
@@ -11,7 +10,10 @@
 @import '~antd/dist/antd.css';
 @import '~react-datepicker/dist/react-datepicker.css';
 @import './styles/Map.css';
-
+@import './styles/FriendSideBar.css';
+@import './styles/FriendsPage.css';
+@import 'styles/FriendsRecommand.css';
+@import './styles/FriendCard.css';
 
 
 body {

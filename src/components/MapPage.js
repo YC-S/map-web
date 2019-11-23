@@ -1,7 +1,7 @@
 import React from 'react';
-import TopNavBar from "./TopNavBar"
-import App from "./App"
-import MapSideBar from "./MapSideBar"
+import TopNavBar from "./TopNavBar";
+import MapSideBar from "./MapSideBar";
+import Map from "./Map";
 
 class MapPage extends React.Component {
     render() {
@@ -11,8 +11,8 @@ class MapPage extends React.Component {
                     <TopNavBar />
                 </div>
                 <div className="map-page-main">
-                    <MapSideBar />
-                    <App />
+                    <MapSideBar/>
+                    <Map/>
                 </div>
             </div>
         );

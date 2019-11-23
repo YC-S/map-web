@@ -6,8 +6,9 @@ import MapPage from "./components/MapPage"
 import Landing from './components/Landing';
 import Map from './components/Map';
 import * as serviceWorker from './serviceWorker';
+import FriendsPage from "./components/FriendsPage"
 
-ReactDOM.render(<MapPage />, document.getElementById('root'));
+ReactDOM.render(<FriendsPage />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
