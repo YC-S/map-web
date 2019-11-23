@@ -1,26 +1,26 @@
 .card {
     margin-top: 20px;
-    height: 300px;
+    height: 350px;
     width: 240px;
 }
 
 #friend-image {
-    padding-top: 40px;
+    padding-top: 10px;
     text-align: center;
 }
 
 #friend-name {
-    padding-top: 20px;
+    padding-top: 10px;
     font-size: x-large;
     text-align: center;
 }
 
 #friend-title {
-    padding-top: 30px;
+    padding-top: 10px;
     text-align: center;
 }
 
 #connect-button {
-    padding-top: 30px;
+    padding-top: 10px;
 }
 

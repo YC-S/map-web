@@ -13,7 +13,7 @@ class FriendCard extends React.Component {
                 className="card"
             >
                 <div id="friend-image">
-                    <Avatar className="avatar" style={{verticalAlign: 'middle'}} size="large" src={componentData.img} />
+                    <Avatar className="avatar" style={{verticalAlign: 'middle'}} size={150} src={componentData.img} />
                 </div>
                 <div id="friend-name">{componentData.name}</div>
                 <div id="friend-title">{componentData.intro}</div>
