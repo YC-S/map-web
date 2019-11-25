@@ -1,0 +1,17 @@
+.top-nav-bar {
+  background-color: transparent;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.top-nav-bar a{
+  color: white;
+  font-weight: bold;
+  margin: 25px;
+}
+
+.top-nav-bar a:hover {
+  color: #484848;
+}

@@ -102,6 +102,8 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 * Yuanchen Shi
 * Mu Chen
 * Bing Zhou
+* Shuo Liu
+* Quan Ma
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
