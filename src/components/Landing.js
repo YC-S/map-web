@@ -33,7 +33,7 @@ class Landing extends React.Component {
         return (
             <div className="landing">
                 <TopNavBar showLogin={this.showLogin} showRegister={this.showRegister}/>
-                <SearchBar />
+                <SearchBar class={"search-bar-wrapper-landing"} dataSource={['Seattle', 'Chicago', 'San Francisco']}/>
                 <AuthorizationModal visibleLogin={this.state.visibleLogin} visibleRegister={this.state.visibleRegister} hideForm={this.hideForm}/>
             </div>
         );

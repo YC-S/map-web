@@ -1,5 +1,24 @@
 .map-sidebar {
-    min-width: 400px;
-    overflow:auto;
+    display: flex;
+    position: absolute;
+    top: 0;
+    height: 100%;
+    background-color: white;
+}
+
+.map-sidebar-main {
+    width: 400px;
+    overflow: auto;
     height: 100vh;
+}
+
+.map-collapse-button {
+    width: 15px;
+    height: 100%;
+    text-align: center;
+    font-size: large;
+}
+.map-collapse-button:hover {
+    background-color: lightgray;
+    transition: 0.2s;
 }

@@ -25,15 +25,15 @@ class App extends React.Component {
       zoom
     });
 
-    const geocoder = new MapboxGeocoder({
-      accessToken: mapboxgl.accessToken,
-      marker: {
-        color: 'orange'
-      },
-      mapboxgl: mapboxgl
-    });
-
-    map.addControl(geocoder);
+    // const geocoder = new MapboxGeocoder({
+    //   accessToken: mapboxgl.accessToken,
+    //   marker: {
+    //     color: 'orange'
+    //   },
+    //   mapboxgl: mapboxgl
+    // });
+    //
+    // map.addControl(geocoder);
 
     map.on('move', () => {
       const { lng, lat } = map.getCenter();
@@ -53,10 +53,10 @@ class App extends React.Component {
     return (
         <div>
 
-          <div className="inline-block absolute top left mt12 ml12 bg-darken75 color-white z1 py6 px12 round-full txt-s txt-bold">
-            <div>{`Longitude: ${lng} Latitude: ${lat} Zoom: ${zoom}`}</div>
+          {/*<div className="inline-block absolute top left mt12 ml12 bg-darken75 color-white z1 py6 px12 round-full txt-s txt-bold">*/}
+          {/*  /!*<div>{`Longitude: ${lng} Latitude: ${lat} Zoom: ${zoom}`}</div>*!/*/}
 
-          </div>
+          {/*</div>*/}
           <div className={"map-container"}>
             <div ref={el => this.mapContainer = el} className="absolute top right left bottom" />
           </div>
