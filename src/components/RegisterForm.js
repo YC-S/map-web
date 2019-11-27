@@ -4,6 +4,8 @@ import {
     Input,
     Checkbox,
     Button,
+    Tooltip,
+    Icon
 } from 'antd';
 
 
@@ -60,11 +62,17 @@ class RegistrationForm extends React.Component {
         const formItemLayout = {
             labelCol: {
                 xs: { span: 24 },
-                sm: { span: 8 },
+                sm: { span: 24 },
+                md: { span: 24 },
+                lg: { span: 24 },
+                xl: { span: 24 },
             },
             wrapperCol: {
                 xs: { span: 24 },
-                sm: { span: 16 },
+                sm: { span: 24 },
+                md: { span: 24 },
+                lg: { span: 24 },
+                xl: { span: 24 },
             },
         };
         const tailFormItemLayout = {
@@ -75,7 +83,7 @@ class RegistrationForm extends React.Component {
                 },
                 sm: {
                     span: 16,
-                    offset: 8,
+                    offset: 0,
                 },
             },
         };
@@ -95,6 +103,20 @@ class RegistrationForm extends React.Component {
                             },
                         ],
                     })(<Input />)}
+                </Form.Item>
+                <Form.Item
+                    label={
+                        <span>
+                        Username&nbsp;
+                            <Tooltip title="This is the name that will be shown on your profile">
+                                <Icon type="question-circle-o"/>
+                            </Tooltip>
+                        </span>
+                    }
+                >
+                    {getFieldDecorator('username', {
+                        rules: [{required: true, message: 'Please input your username!', whitespace: true}],
+                    })(<Input/>)}
                 </Form.Item>
                 <Form.Item label="Password" hasFeedback>
                     {getFieldDecorator('password', {
@@ -123,9 +145,11 @@ class RegistrationForm extends React.Component {
                     })(<Input.Password onBlur={this.handleConfirmBlur} />)}
                 </Form.Item>
 
+
                 <Form.Item {...tailFormItemLayout}>
                     {getFieldDecorator('agreement', {
                         valuePropName: 'checked',
+                        rules: [{required: true, message: 'Please read the agreement!'}]
                     })(
                         <Checkbox>
                             I have read the <a href="">agreement</a>

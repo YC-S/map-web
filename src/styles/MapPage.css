@@ -4,6 +4,5 @@
 }
 
 .map-page-main {
-    display: flex;
-
+    position: relative;
 }

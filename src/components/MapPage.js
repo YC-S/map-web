@@ -11,8 +11,8 @@ class MapPage extends React.Component {
                     <TopNavBar />
                 </div>
                 <div className="map-page-main">
-                    <MapSideBar />
                     <App />
+                    <MapSideBar />
                 </div>
             </div>
         );
