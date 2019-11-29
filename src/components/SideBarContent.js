@@ -3,10 +3,10 @@ import SideBarComponent from "./SideBarComponent"
 
 class SideBarContent extends React.Component {
     render() {
-        const data = this.props.data;
+        const { addPointsToPlan, data } = this.props;
         return (
             <div>
-                {data.map((element, i) => <SideBarComponent key={i} componentData={element} />)};
+                {data.map((element, i) => <SideBarComponent key={element.id} componentData={element} addPointsToPlan={addPointsToPlan}/>)};
             </div>
 
         )
