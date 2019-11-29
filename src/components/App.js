@@ -4,46 +4,62 @@ import mapboxgl from 'mapbox-gl';
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4M29iazA2Z2gycXA4N2pmbDZmangifQ.-g_vE53SD2WrJ6tFX7QHmA';
-
+let map;
+let currentMarkers=[];
 class App extends React.Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      lng: -122.335167,
-      lat:  47.608013,
-      zoom: 13
-    };
+  state = {
+    lng: -122.335167,
+    lat: 47.608013,
+    zoom: 5
   }
+
+
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    const { pointsInPlan } = this.props;
+
+    if (currentMarkers!==null) {
+      for (let i = currentMarkers.length - 1; i >= 0; i--) {
+        currentMarkers[i].remove();
+      }
+      currentMarkers = [];
+    }
+    for (let i = 0; i < pointsInPlan.length; i++) {
+      const marker = new mapboxgl.Marker({'color': '#008000'})// Create a new green marker
+      marker.setLngLat([pointsInPlan[i].lng, pointsInPlan[i].lat]).addTo(map);
+      currentMarkers.push(marker);
+    }
+  }
+
   componentDidMount() {
     const { lng, lat, zoom } = this.state;
 
-    const map = new mapboxgl.Map({
+
+    map = new mapboxgl.Map({
       container: this.mapContainer,
       style: 'mapbox://styles/mapbox/streets-v9',
       center: [lng, lat],
       zoom
     });
 
-    // const geocoder = new MapboxGeocoder({
-    //   accessToken: mapboxgl.accessToken,
-    //   marker: {
-    //     color: 'orange'
-    //   },
-    //   mapboxgl: mapboxgl
-    // });
-    //
-    // map.addControl(geocoder);
-
-    map.on('move', () => {
-      const { lng, lat } = map.getCenter();
-
-      this.setState({
-        lng: lng.toFixed(4),
-        lat: lat.toFixed(4),
-        zoom: map.getZoom().toFixed(2)
-      });
+    const geocoder = new MapboxGeocoder({
+      accessToken: mapboxgl.accessToken,
+      mapboxgl: mapboxgl
     });
+
+    map.addControl(geocoder, 'top-left');
+
+
+    geocoder.on('result', function(data) { // When the geocoder returns a result
+      const point = data.result.center; // Capture the result coordinates
+      console.log(data);
+
+      const marker = new mapboxgl.Marker({'color': '#008000'})// Create a new green marker
+      marker.setLngLat(point).addTo(map); // Add the marker to the map at the result coordinates
+
+    });
+
   }
 
   render() {
