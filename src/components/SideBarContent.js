@@ -3,10 +3,12 @@ import SideBarComponent from "./SideBarComponent"
 
 class SideBarContent extends React.Component {
     render() {
-        const { addPointsToPlan, data } = this.props;
+        const { addPointsToPlan, data, pointsInPlan } = this.props;
+        const pointsInPlanIds = pointsInPlan.map(point => point.id);
+        const filtered = data.filter(element => !pointsInPlanIds.includes(element.id));
         return (
-            <div>
-                {data.map((element, i) => <SideBarComponent key={element.id} componentData={element} addPointsToPlan={addPointsToPlan}/>)};
+            <div className={"sideBar-content"}>
+                {filtered.map((element) => <SideBarComponent key={element.id} componentData={element} addPointsToPlan={addPointsToPlan}/>)}
             </div>
 
         )

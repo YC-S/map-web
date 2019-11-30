@@ -1,10 +1,9 @@
 .sidebar-component {
-    margin: 10px;
-    padding: 20px;
     border-bottom: solid 1px lightgray;
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden !important;
 }
 
 .sidebar-description-and-button {

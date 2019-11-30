@@ -7,6 +7,7 @@
 @import './styles/AuthorizationModal.css';
 @import './styles/SideBarComponent.css';
 @import './styles/SideBarTopContainer.css';
+@import  './styles/SideBarContent.css';
 @import './styles/MapPage.css';
 @import './styles/MapSideBar.css';
 @import '~antd/dist/antd.css';
