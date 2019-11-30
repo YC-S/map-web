@@ -45,7 +45,12 @@ class MapPage extends React.Component {
     }
 
     addPointsToPlan = (point) => {
-        this.setState(prevState => ({pointsInPlan: [...prevState.pointsInPlan, point]}));
+        if (this.state.pointsInPlan.length < 10) {
+            this.setState(prevState => ({pointsInPlan: [...prevState.pointsInPlan, point]}));
+        } else {
+            alert('Maximum number of stops is reached. Please delete some before adding more.');
+        }
+
     }
 
     render() {
@@ -57,7 +62,7 @@ class MapPage extends React.Component {
                 </div>
                 <div className="map-page-main">
                     <App data={data} pointsInPlan={pointsInPlan}/>
-                    <MapSideBar data={data} addPointsToPlan={this.addPointsToPlan}/>
+                    <MapSideBar data={data} addPointsToPlan={this.addPointsToPlan} pointsInPlan={pointsInPlan}/>
                 </div>
             </div>
         );
