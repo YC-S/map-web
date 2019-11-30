@@ -30,10 +30,13 @@
   text-align: center;
   padding: 5px;
   background: lightgray;
-  box-shadow: 0 2px #999;
-  border-radius: 10px;
+  /* box-shadow: 0 2px #999; */
+  /* border-radius: 10px; */
 }
-
+.edit-profile:hover {
+  background: black;
+  color: white;
+}
 .text-description {
   /* width: 60%;
   height: 20%; */

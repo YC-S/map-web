@@ -4,6 +4,9 @@ import boy from "../images/boy.svg";
 export class Profile extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      name: "John Smith"
+    };
     this.handleOnClick = this.handleOnClick.bind(this);
   }
   handleOnClick = () => {
@@ -17,7 +20,7 @@ export class Profile extends React.Component {
         <div>
           {/* user information and button to let user change his/her profile */}
           <h4>
-            <span id="person-name">Johm Smith</span>
+            <span id="person-name">{this.state.name}</span>
             <button className="edit-profile" onClick={this.handleOnClick}>
               Edit Profile
             </button>
@@ -29,7 +32,7 @@ export class Profile extends React.Component {
           </p>
           {/* number of posts that user has beed posted */}
           <p className="post">
-            <strong>0</strong> posts
+            <strong>{this.props.numberOfImages}</strong> posts
           </p>
         </div>
       </div>
