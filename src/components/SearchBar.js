@@ -8,6 +8,7 @@ class SearchBar extends React.Component {
 
     onSelect = (value) => {
         console.log('onSelect', value);
+        this.props.handleSelectLocation(value);
     }
 
     render() {

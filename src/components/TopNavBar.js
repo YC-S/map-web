@@ -1,5 +1,4 @@
 import React from 'react';
-import AuthorizationModal from "./AuthorizationModal"
 
 class TopNavBar extends React.Component {
 
