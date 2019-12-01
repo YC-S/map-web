@@ -9,6 +9,7 @@
 @import './styles/SideBarTopContainer.css';
 @import  './styles/SideBarContent.css';
 @import './styles/MapPage.css';
+@import './styles/Map.css';
 @import './styles/MapSideBar.css';
 @import '~antd/dist/antd.css';
 @import '~react-datepicker/dist/react-datepicker.css';

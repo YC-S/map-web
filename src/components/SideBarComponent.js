@@ -17,7 +17,6 @@ class SideBarComponent extends React.Component {
 
         const { componentData } = this.props;
         const { inTrip } = this.state;
-        console.log(this.state.inTrip);
         return (
             <div className='sidebar-component' style={{ height: inTrip? "0":"132px", transition: "0.8s", visibility: inTrip ? "hidden":"visible"}}>
                 {/* Different visual effect: mpty the box first */}
