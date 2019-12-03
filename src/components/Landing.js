@@ -38,7 +38,6 @@ class Landing extends React.Component {
             'Chicago': [-87.623177, 41.881832],
         }
         const selectedLoc = locations[location];
-        debugger;
         this.props.history.push(`/map?lng=${selectedLoc[0]}&lat=${selectedLoc[1]}`)
     }
 

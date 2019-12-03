@@ -3,6 +3,7 @@ import TopNavBar from "./TopNavBar"
 import Map from "./Map"
 import MapSideBar from "./MapSideBar"
 import * as QueryString from "query-string"
+import { Switch, Icon } from 'antd';
 
 class MapPage extends React.Component {
     constructor(props) {
@@ -46,7 +47,8 @@ class MapPage extends React.Component {
                     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam hendrerit nisi sed sollicitudin pellentesque. Nunc posuere purus rhoncus '
                 },
             ],
-            pointsInPlan: []
+            pointsInPlan: [],
+            showRoute: false,
         }
     }
     
@@ -60,16 +62,27 @@ class MapPage extends React.Component {
 
     }
 
+
+    handleRouteSwitch = () => {
+        this.setState(prevState => ({showRoute: !prevState.showRoute}));
+    }
+
     render() {
-        const {pointsInPlan, data, location} = this.state;
+        const {pointsInPlan, data, location, showRoute} = this.state;
+        console.log(pointsInPlan);
+        
         return (
             <div className="map-page">
                 <div className="nav-bar-other">
                     <TopNavBar />
                 </div>
                 <div className="map-page-main">
-                    <Map data={data} pointsInPlan={pointsInPlan} location={location}/>
+                    <Map data={data} pointsInPlan={pointsInPlan} location={location} showRoute={showRoute}/>
                     <MapSideBar data={data} addPointsToPlan={this.addPointsToPlan} pointsInPlan={pointsInPlan}/>
+                    <div className="show-route-container">
+                        <span id="route-button-notation">Route</span>
+                        <Switch id="route-switch" checkedChildren="On" unCheckedChildren="Off" checked={showRoute} onChange={this.handleRouteSwitch}/>
+                    </div>
                 </div>
             </div>
         );
