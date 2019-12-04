@@ -4,12 +4,16 @@
     top: 0;
     height: 100%;
     background-color: white;
+    
+}
+
+.tab-content {
+    box-sizing: border-box;
+    padding: 10px;
 }
 
 .map-sidebar-main {
-    width: 400px;
-    overflow: auto;
-    height: 100vh;
+    height: calc(100vh - 61px - 50px);
 }
 
 .map-collapse-button {
