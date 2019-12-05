@@ -20,7 +20,7 @@ class MapSideBar extends React.Component {
 
     render() {
         const { collapse } = this.state;
-        const { addPointsToPlan, data, pointsInPlan }= this.props;
+        const { addPointsToPlan, data, pointsInPlan, handleHoverSearchResult }= this.props;
         return (
             <div className="map-sidebar">
                 <div className="tab-content" style={{width: collapse? "0":"400px", padding: collapse? "0":"10px",  transition: "0.2s"}}>
@@ -28,7 +28,7 @@ class MapSideBar extends React.Component {
                     <TabPane tab="&emsp;Discovery&emsp;" key="1">
                         <div className="map-sidebar-main" >
                             <SideBarTopContainer />
-                            <SideBarContent data={data} addPointsToPlan={addPointsToPlan} pointsInPlan={pointsInPlan}/>
+                            <SideBarContent data={data} addPointsToPlan={addPointsToPlan} pointsInPlan={pointsInPlan} handleHoverSearchResult={handleHoverSearchResult}/>
                         </div>
                     </TabPane>
                     <TabPane tab="&emsp;&emsp;My Plan&emsp;&emsp;" key="2">

@@ -48,6 +48,7 @@ class MapPage extends React.Component {
                 },
             ],
             pointsInPlan: [],
+            selectedPoint: null,
             showRoute: false,
         }
     }
@@ -67,18 +68,22 @@ class MapPage extends React.Component {
         this.setState(prevState => ({showRoute: !prevState.showRoute}));
     }
 
+    handleHoverSearchResult = (componentData) => (e) => {
+        this.setState({selectedPoint: componentData});       
+    }
+
+    
+
     render() {
-        const {pointsInPlan, data, location, showRoute} = this.state;
-        console.log(pointsInPlan);
-        
+        const {pointsInPlan, data, location, showRoute, selectedPoint} = this.state;       
         return (
             <div className="map-page">
                 <div className="nav-bar-other">
                     <TopNavBar />
                 </div>
                 <div className="map-page-main">
-                    <Map data={data} pointsInPlan={pointsInPlan} location={location} showRoute={showRoute}/>
-                    <MapSideBar data={data} addPointsToPlan={this.addPointsToPlan} pointsInPlan={pointsInPlan}/>
+                    <Map data={data} pointsInPlan={pointsInPlan} location={location} showRoute={showRoute} selectedPoint={selectedPoint}/>
+                    <MapSideBar data={data} addPointsToPlan={this.addPointsToPlan} pointsInPlan={pointsInPlan} handleHoverSearchResult={this.handleHoverSearchResult}/>
                     <div className="show-route-container">
                         <span id="route-button-notation">Route</span>
                         <Switch id="route-switch" checkedChildren="On" unCheckedChildren="Off" checked={showRoute} onChange={this.handleRouteSwitch}/>

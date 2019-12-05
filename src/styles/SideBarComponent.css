@@ -6,6 +6,10 @@
     overflow: hidden !important;
 }
 
+.sidebar-component:hover {
+    background-color: gainsboro;
+}
+
 .sidebar-description-and-button {
     margin-left: 20px;
 }

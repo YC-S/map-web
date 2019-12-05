@@ -27,8 +27,14 @@ class Map extends React.Component {
     });
 }
 
+addMarker = (point, style) => {
+    const marker = new mapboxgl.Marker(style);
+    marker.setLngLat([point.lng, point.lat]).addTo(map);
+    currentMarkers.push(marker);
+}
+
   componentDidUpdate(prevProps, prevState, snapshot) {
-    const { pointsInPlan, showRoute } = this.props;
+    const { pointsInPlan, showRoute, selectedPoint } = this.props;
     // Could improve efficiency here? No need to update every marker and no need to update whenever render is called
     if (currentMarkers!==null) {
       for (let i = currentMarkers.length - 1; i >= 0; i--) {
@@ -36,34 +42,40 @@ class Map extends React.Component {
       }
       currentMarkers = [];
     }
-    for (let i = 0; i < pointsInPlan.length; i++) {
-      const marker = new mapboxgl.Marker({'color': '#008000'})// Create a new green marker
-      marker.setLngLat([pointsInPlan[i].lng, pointsInPlan[i].lat]).addTo(map);
-      currentMarkers.push(marker);
+    if (map.loaded()) {
+        // add markers
+        if (selectedPoint) {
+            this.addMarker(selectedPoint, {'color': 'rgba(0, 128, 0, 0.5)'});
+        }
+        
+        for (let i = 0; i < pointsInPlan.length; i++) {
+            this.addMarker(pointsInPlan[i], {'color': 'rgb(0, 128, 0)'});
+        }
+        
+        // add route
+        if (showRoute) {
+            fetch("https://api.mapbox.com/optimized-trips/v1/mapbox/driving/" + pointsInPlan.map(o => {return [o.lng, o.lat]}).join(";") + "?overview=full&geometries=geojson&source=first&destination=any&roundtrip=true&access_token=" + mapboxgl.accessToken)
+            .then(this.handleResponse)
+            .then(data => {
+                console.log(data);
+                var routeGeoJSON = turf.featureCollection([turf.feature(data.trips[0].geometry)]);
+                // If there is no route provided, reset
+                
+                if (!data.trips[0]) {
+                    routeGeoJSON = turf.featureCollection([]);
+                } else {
+                    // Update the `route` source by getting the route source
+                    // and setting the data equal to routeGeoJSON
+                    map.getSource('route')
+                    .setData(routeGeoJSON);
+                }
+            })
+        } else {
+            map.getSource('route')
+            .setData(turf.featureCollection([]));
+        }
     }
     
-    if (showRoute) {
-        console.log(pointsInPlan.map(o => {return [o.lng, o.lat]}).join(";"));
-        fetch("https://api.mapbox.com/optimized-trips/v1/mapbox/driving/" + pointsInPlan.map(o => {return [o.lng, o.lat]}).join(";") + "?overview=full&steps=true&geometries=geojson&source=first&access_token=" + mapboxgl.accessToken)
-        .then(this.handleResponse)
-        .then(data => {
-            console.log(data);
-            var routeGeoJSON = turf.featureCollection([turf.feature(data.trips[0].geometry)]);
-            // If there is no route provided, reset
-            
-            if (!data.trips[0]) {
-                routeGeoJSON = turf.featureCollection([]);
-            } else {
-                // Update the `route` source by getting the route source
-                // and setting the data equal to routeGeoJSON
-                map.getSource('route')
-                .setData(routeGeoJSON);
-            }
-        })
-    } else {
-        map.getSource('route')
-        .setData(turf.featureCollection([]));
-    }
 
   }
 

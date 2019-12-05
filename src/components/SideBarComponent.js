@@ -5,21 +5,21 @@ class SideBarComponent extends React.Component {
         inTrip: false
     }
 
-    handleAddToTrip = () => {
+    handleAddToTrip = (e) => {
         // animation to hide this card
         this.setState(prevState => ({inTrip: !prevState.inTrip}));
         // add it to state in mapPage, add to database, add to cache?
-        setTimeout(() => {this.props.addPointsToPlan(this.props.componentData)}, 800)
+        setTimeout(() => {this.props.addPointsToPlan(this.props.componentData)}, 300)
 
     };
 
     render() {
 
-        const { componentData } = this.props;
+        const { componentData, handleHoverSearchResult } = this.props;
         const { inTrip } = this.state;
         return (
-            <div className='sidebar-component' style={{ height: inTrip? "0":"132px", transition: "0.8s", visibility: inTrip ? "hidden":"visible"}}>
-                {/* Different visual effect: mpty the box first */}
+            <div onMouseEnter={handleHoverSearchResult(componentData)} onMouseLeave={handleHoverSearchResult()} className='sidebar-component' style={{ height: inTrip? "0":"132px", transition: "0.3s", visibility: inTrip ? "hidden":"visible"}}>
+                {/* Different visual effect: empty the box first */}
                 {/*{inTrip ? null : (<div style={{display: "inherit"}}>*/}
                 {/*        <img src={componentData.imgURL} alt=" " height="100" width="100" />*/}
                 {/*        <div className="sidebar-description-and-button">*/}
