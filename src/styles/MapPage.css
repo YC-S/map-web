@@ -5,4 +5,27 @@
 
 .map-page-main {
     position: relative;
+    display: flex;
 }
+
+.show-route-container {
+    position: absolute;
+    top: 2%;
+    right: 2%;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+    padding: 5px;
+    width: 105px;
+}
+
+#route-button-notation {
+    font-weight: 700;
+    padding-left: 0px;
+}
+
+#route-switch {
+    position: absolute;
+    right: 5px;
+  
+}
+

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Icon, Input, AutoComplete } from 'antd';
-const { Option } = AutoComplete;
 
 
 
@@ -24,7 +23,7 @@ class SearchBar extends React.Component {
                     size="large"
                     style={{ width: '100%' }}
                     dataSource={dataSource}
-                    placeholder="Location"
+                    placeholder="Search location"
                     filterOption={(inputValue, option) =>
                         option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
                     }
