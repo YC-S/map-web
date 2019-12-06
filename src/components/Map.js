@@ -34,15 +34,16 @@ addMarker = (point, style) => {
 }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    const { pointsInPlan, showRoute, selectedPoint } = this.props;
+    const { pointsInPlan, showRoute, selectedPoint, updatePlan, setUpdatePlanFalse } = this.props;
     // Could improve efficiency here? No need to update every marker and no need to update whenever render is called
-    if (currentMarkers!==null) {
-      for (let i = currentMarkers.length - 1; i >= 0; i--) {
-        currentMarkers[i].remove();
-      }
-      currentMarkers = [];
-    }
+    
     if (map.loaded()) {
+      if (currentMarkers!==null) {
+        for (let i = currentMarkers.length - 1; i >= 0; i--) {
+          currentMarkers[i].remove();
+        }
+        currentMarkers = [];
+      }
         // add markers
         if (selectedPoint) {
             this.addMarker(selectedPoint, {'color': 'rgba(0, 128, 0, 0.5)'});
@@ -54,6 +55,10 @@ addMarker = (point, style) => {
         
         // add route
         if (showRoute) {
+          // if plan is updated, fetch the new route
+          if (updatePlan) {
+            // set updatePlan to false until plan is actually updated
+            setUpdatePlanFalse();
             fetch("https://api.mapbox.com/optimized-trips/v1/mapbox/driving/" + pointsInPlan.map(o => {return [o.lng, o.lat]}).join(";") + "?overview=full&geometries=geojson&source=first&destination=any&roundtrip=true&access_token=" + mapboxgl.accessToken)
             .then(this.handleResponse)
             .then(data => {
@@ -70,6 +75,8 @@ addMarker = (point, style) => {
                     .setData(routeGeoJSON);
                 }
             })
+            .catch (error => console.log(error));
+          }        
         } else {
             map.getSource('route')
             .setData(turf.featureCollection([]));

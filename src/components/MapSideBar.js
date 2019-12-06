@@ -2,6 +2,7 @@ import React from 'react';
 import SideBarContent from './SideBarContent';
 import SideBarTopContainer from "./SideBarTopContainer"
 import { Tabs } from 'antd';
+import styles from '../styles/MapSideBar.css';
 
 const { TabPane } = Tabs;
 
@@ -22,7 +23,7 @@ class MapSideBar extends React.Component {
         const { collapse } = this.state;
         const { addPointsToPlan, data, pointsInPlan, handleHoverSearchResult }= this.props;
         return (
-            <div className="map-sidebar">
+            <div className={"mapSidebar"}>
                 <div className="tab-content" style={{width: collapse? "0":"400px", padding: collapse? "0":"10px",  transition: "0.2s"}}>
                 <Tabs defaultActiveKey="1" onChange={this.callback} tabBarStyle={{textAlign: "center"}}>
                     <TabPane tab="&emsp;Discovery&emsp;" key="1">
