@@ -1,7 +1,6 @@
 .plan-item {
     border: 1px solid grey;
     border-radius: 25px;
-    padding: 5px;
     display: flex;
     align-items: center;
     justify-content: center;

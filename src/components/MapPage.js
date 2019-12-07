@@ -67,6 +67,13 @@ class MapPage extends React.Component {
 
     }
 
+    deletePointsFromPlan = (pointId) => {
+        console.log("about to delete from db..id=" + pointId);
+
+        this.setState(prevState => ({pointsInPlan: [...(prevState.pointsInPlan.filter(point => {return point.id != pointId}))],
+            updatePlan: true}));
+    }
+
     handleRouteSwitch = () => {
         this.setState(prevState => ({showRoute: !prevState.showRoute,
         updatePlan: true}));
@@ -97,7 +104,7 @@ class MapPage extends React.Component {
                 </div>
                 <div className="map-page-main">
                     <Map data={data} pointsInPlan={pointsInPlan} location={location} showRoute={showRoute} selectedPoint={selectedPoint} updatePlan={updatePlan} setUpdatePlanFalse={this.setUpdatePlanFalse}/>
-                    <MapSideBar data={data} addPointsToPlan={this.addPointsToPlan} pointsInPlan={pointsInPlan} handleHoverSearchResult={this.handleHoverSearchResult}/>
+                    <MapSideBar data={data} addPointsToPlan={this.addPointsToPlan} pointsInPlan={pointsInPlan} handleHoverSearchResult={this.handleHoverSearchResult} deletePointsFromPlan={this.deletePointsFromPlan}/>
                     <div className="show-route-container">
                         <span id="route-button-notation">Route</span>
                         <Switch id="route-switch" checkedChildren="On" unCheckedChildren="Off" checked={showRoute} onChange={this.handleRouteSwitch}/>
