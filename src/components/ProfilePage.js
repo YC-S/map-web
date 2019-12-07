@@ -43,7 +43,6 @@ class ProfilePage extends React.Component {
     this.setState({ images: false, plans: false, tempPage: true });
   }
   render() {
-    console.log(this.state.imagesOrPlans);
     return (
       <div className="App">
         <Header />
