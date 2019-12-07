@@ -2,7 +2,7 @@ import React from 'react';
 import SideBarContent from './SideBarContent';
 import SideBarTopContainer from "./SideBarTopContainer"
 import { Tabs } from 'antd';
-import styles from '../styles/MapSideBar.css';
+import MyPlanContainer from './MyPlanContainer';
 
 const { TabPane } = Tabs;
 
@@ -33,7 +33,9 @@ class MapSideBar extends React.Component {
                         </div>
                     </TabPane>
                     <TabPane tab="&emsp;&emsp;My Plan&emsp;&emsp;" key="2">
-                        The Plan.
+                        <div className="map-sidebar-main" >
+                            <MyPlanContainer pointsInPlan={pointsInPlan}/>
+                        </div>
                     </TabPane>
                 </Tabs>
                 </div>
