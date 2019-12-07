@@ -11,10 +11,6 @@ function App() {
   return (
     <div className="App">
       <AppRouter />
-      {/* <img src={require("../images/1.jpg")} /> */}
-      {/* <Header />
-      <Profile />
-      <Images /> */}
     </div>
   );
 }

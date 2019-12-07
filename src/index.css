@@ -3,6 +3,7 @@
 @import "./styles/Image.css";
 @import "./styles/Profile.css";
 @import "./styles/PlanView.css";
+@import "./styles/SettingProfile.css";
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
