@@ -10,7 +10,7 @@ class Map extends React.Component {
   state = {
     lng: -122.335167,
     lat: 47.608013,
-    zoom: 10
+    zoom: 10,
   }
 
 
@@ -28,13 +28,34 @@ class Map extends React.Component {
 }
 
 addMarker = (point, style) => {
+  var markerHeight = 50, markerRadius = 10, linearOffset = 25;
+  var popupOffsets = {
+  'top': [0, 0],
+  'top-left': [0,0],
+  'top-right': [0,0],
+  'bottom': [0, -markerHeight],
+  'bottom-left': [linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
+  'bottom-right': [-linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
+  'left': [markerRadius, (markerHeight - markerRadius) * -1],
+  'right': [-markerRadius, (markerHeight - markerRadius) * -1],
+  
+  };
+  const popup = new mapboxgl.Popup({offset: popupOffsets, className: 'my-class', closeButton: false,
+  closeOnClick: false})
+  .setLngLat([point.lng, point.lat])
+  .setHTML('<div style="display:flex;width:150px;align-items:center;justify-content:space-around;"><img src="' + point.imgURL + '" height="80" width="80" /><h1>'+ point.title + '</h1></div>')
+  .setMaxWidth("300px")
+  .addTo(map);
     const marker = new mapboxgl.Marker(style);
-    marker.setLngLat([point.lng, point.lat]).addTo(map);
+    marker.setLngLat([point.lng, point.lat]).setPopup(popup).addTo(map);
+    const markerDiv = marker.getElement();
+    markerDiv.addEventListener('mouseenter', () => { if (!marker.getPopup().isOpen()) {marker.togglePopup()}});
+    markerDiv.addEventListener('mouseleave', () => { if (marker.getPopup().isOpen()) {marker.togglePopup()}});
     currentMarkers.push(marker);
 }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    const { pointsInPlan, showRoute, selectedPoint, updatePlan, setUpdatePlanFalse } = this.props;
+    const { pointsInPlan, showRoute, selectedPoint, updatePlan, setUpdatePlanFalse, setRouteObj } = this.props;
     // Could improve efficiency here? No need to update every marker and no need to update whenever render is called
     
     if (map.loaded()) {
@@ -59,23 +80,28 @@ addMarker = (point, style) => {
           if (updatePlan) {
             // set updatePlan to false until plan is actually updated
             setUpdatePlanFalse();
-            fetch("https://api.mapbox.com/optimized-trips/v1/mapbox/driving/" + pointsInPlan.map(o => {return [o.lng, o.lat]}).join(";") + "?overview=full&geometries=geojson&source=first&destination=any&roundtrip=true&access_token=" + mapboxgl.accessToken)
+            fetch("https://api.mapbox.com/directions/v5/mapbox/driving/" + pointsInPlan.map(o => {return [o.lng, o.lat]}).join(";") + "?overview=full&geometries=geojson&access_token=" + mapboxgl.accessToken)
             .then(this.handleResponse)
             .then(data => {
-                console.log(data);
-                var routeGeoJSON = turf.featureCollection([turf.feature(data.trips[0].geometry)]);
-                // If there is no route provided, reset
-                
-                if (!data.trips[0]) {
-                    routeGeoJSON = turf.featureCollection([]);
+                //console.log(data);
+                // If there is no route provided                
+                if (!data.routes[0]) {
+                    map.getSource('route')
+                    .setData(turf.featureCollection([]));
                 } else {
                     // Update the `route` source by getting the route source
                     // and setting the data equal to routeGeoJSON
+                    setRouteObj(data);
+                    const routeGeoJSON = turf.featureCollection([turf.feature(data.routes[0].geometry)]);
                     map.getSource('route')
                     .setData(routeGeoJSON);
                 }
             })
-            .catch (error => console.log(error));
+            .catch (error => {
+              console.log(error);
+              map.getSource('route')
+              .setData(turf.featureCollection([]));
+            });
           }        
         } else {
             map.getSource('route')
@@ -171,13 +197,8 @@ addMarker = (point, style) => {
   }
 
   render() {
-    const { lng, lat, zoom } = this.state;
     return (
         <div>
-
-          {/*<div className="inline-block absolute top left mt12 ml12 bg-darken75 color-white z1 py6 px12 round-full txt-s txt-bold">*/}
-          {/*  /!*<div>{`Longitude: ${lng} Latitude: ${lat} Zoom: ${zoom}`}</div>*!/*/}
-          {/*</div>*/}
           <div className={"map-container"}>
             <div ref={el => this.mapContainer = el} className="absolute top right left bottom"/>
           </div>

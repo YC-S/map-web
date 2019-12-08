@@ -12,7 +12,7 @@
     position: absolute;
     top: 2%;
     right: 2%;
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.5);
     border-radius: 15px;
     padding: 5px;
     width: 105px;
@@ -21,6 +21,7 @@
 #route-button-notation {
     font-weight: 700;
     padding-left: 0px;
+    color: white;
 }
 
 #route-switch {

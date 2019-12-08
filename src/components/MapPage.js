@@ -53,9 +53,14 @@ class MapPage extends React.Component {
             updatePlan: false,
             selectedPoint: null,
             showRoute: false,
+            routeObj: null,
         }
     }
     
+
+    setRouteObj = (routeObj) => {
+        this.setState({routeObj: routeObj});
+    }
 
     addPointsToPlan = (point) => {
         if (this.state.pointsInPlan.length < 10) {
@@ -96,15 +101,15 @@ class MapPage extends React.Component {
     }
 
     render() {
-        const {pointsInPlan, data, location, showRoute, selectedPoint, updatePlan} = this.state;       
+        const {pointsInPlan, data, location, showRoute, selectedPoint, updatePlan, routeObj} = this.state;       
         return (
             <div className="map-page">
                 <div className="nav-bar-other">
                     <TopNavBar />
                 </div>
                 <div className="map-page-main">
-                    <Map data={data} pointsInPlan={pointsInPlan} location={location} showRoute={showRoute} selectedPoint={selectedPoint} updatePlan={updatePlan} setUpdatePlanFalse={this.setUpdatePlanFalse}/>
-                    <MapSideBar data={data} addPointsToPlan={this.addPointsToPlan} pointsInPlan={pointsInPlan} handleHoverSearchResult={this.handleHoverSearchResult} deletePointsFromPlan={this.deletePointsFromPlan}/>
+                    <Map data={data} pointsInPlan={pointsInPlan} location={location} showRoute={showRoute} selectedPoint={selectedPoint} updatePlan={updatePlan} setUpdatePlanFalse={this.setUpdatePlanFalse} setRouteObj={this.setRouteObj}/>
+                    <MapSideBar data={data} addPointsToPlan={this.addPointsToPlan} pointsInPlan={pointsInPlan} handleHoverSearchResult={this.handleHoverSearchResult} deletePointsFromPlan={this.deletePointsFromPlan} showRoute={showRoute} routeObj={routeObj}/>
                     <div className="show-route-container">
                         <span id="route-button-notation">Route</span>
                         <Switch id="route-switch" checkedChildren="On" unCheckedChildren="Off" checked={showRoute} onChange={this.handleRouteSwitch}/>

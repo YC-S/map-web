@@ -4,8 +4,7 @@ import Arrow from './Arrow';
 
 class MyPlanContainer extends React.Component {
     render() {
-        const { pointsInPlan, deletePointsFromPlan } = this.props;
-        console.log(pointsInPlan);
+        const { pointsInPlan, deletePointsFromPlan, showRoute, routeObj } = this.props;
         return (
             <div className={"plan-container"}>
                 
@@ -15,7 +14,7 @@ class MyPlanContainer extends React.Component {
                     <div key={ind}>
                         <div className="arrow-and-time">
                             <Arrow />
-                            <div style={{textAlign: "center"}} draggable="true">20min</div>
+                            {showRoute && routeObj && (routeObj.routes[0].legs.length ===  pointsInPlan.length - 1) ? <div style={{textAlign: "center"}} draggable="true">{Math.ceil(routeObj.routes[0].legs[ind].duration/60)} min </div> : null}
                         </div>
                         <PLanItem data={point} deletePointsFromPlan={deletePointsFromPlan} key={point.id}/>
                     </div>               
