@@ -1,0 +1,14 @@
+.plan-container {
+    height: calc(100vh - 61px - 50px);
+    overflow: auto;
+}
+
+.plan-container::-webkit-scrollbar { 
+    display: none; 
+}
+
+.arrow-and-time {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

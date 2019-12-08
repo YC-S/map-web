@@ -2,7 +2,7 @@ import React from 'react';
 import SideBarContent from './SideBarContent';
 import SideBarTopContainer from "./SideBarTopContainer"
 import { Tabs } from 'antd';
-import styles from '../styles/MapSideBar.css';
+import MyPlanContainer from './MyPlanContainer';
 
 const { TabPane } = Tabs;
 
@@ -21,7 +21,7 @@ class MapSideBar extends React.Component {
 
     render() {
         const { collapse } = this.state;
-        const { addPointsToPlan, data, pointsInPlan, handleHoverSearchResult }= this.props;
+        const { addPointsToPlan, data, pointsInPlan, handleHoverSearchResult, deletePointsFromPlan, showRoute, routeObj }= this.props;
         return (
             <div className={"mapSidebar"}>
                 <div className="tab-content" style={{width: collapse? "0":"400px", padding: collapse? "0":"10px",  transition: "0.2s"}}>
@@ -33,7 +33,9 @@ class MapSideBar extends React.Component {
                         </div>
                     </TabPane>
                     <TabPane tab="&emsp;&emsp;My Plan&emsp;&emsp;" key="2">
-                        The Plan.
+                        <div className="map-sidebar-main" >
+                            <MyPlanContainer pointsInPlan={pointsInPlan} deletePointsFromPlan={deletePointsFromPlan} showRoute={showRoute} routeObj={routeObj}/>
+                        </div>
                     </TabPane>
                 </Tabs>
                 </div>
