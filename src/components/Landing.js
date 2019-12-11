@@ -1,7 +1,7 @@
 import React from 'react';
 import TopNavBar from "./TopNavBar"
 import SearchCard from "./SearchCard"
-import SearchBar from "./SearchBar"
+import WrappedAdvancedSearchForm from "./SearchBar"
 import AuthorizationModal from "./AuthorizationModal"
 
 
@@ -45,7 +45,7 @@ class Landing extends React.Component {
         return (
             <div className="landing">
                 <TopNavBar showLogin={this.showLogin} showRegister={this.showRegister}/>
-                <SearchBar class={"search-bar-wrapper-landing"} dataSource={['Seattle', 'Chicago', 'San Francisco']} handleSelectLocation={this.handleSelectLocation}/>
+                <WrappedAdvancedSearchForm class={"search-bar-wrapper-landing"} dataSource={['Seattle', 'Chicago', 'San Francisco']} handleSelectLocation={this.handleSelectLocation}/>
                 <AuthorizationModal visibleLogin={this.state.visibleLogin} visibleRegister={this.state.visibleRegister} hideForm={this.hideForm}/>
             </div>
         );
