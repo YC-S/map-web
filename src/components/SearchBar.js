@@ -1,24 +1,19 @@
 import React from 'react';
 import { Icon, Input, AutoComplete } from 'antd';
-const { Option } = AutoComplete;
 
 
 
 class SearchBar extends React.Component {
-    state = {
-        dataSource: [],
-    };
 
     onSelect = (value) => {
         console.log('onSelect', value);
+        this.props.handleSelectLocation(value);
     }
 
-
-
     render() {
-        const dataSource = ['Seattle', 'San Francisco', 'New York'];
+        const dataSource = this.props.dataSource;
         return (
-            <div className="search-bar-wrapper" >
+            <div className={this.props.class} >
                 <AutoComplete
                     className="search-bar"
                     dropdownClassName="search-bar-dropdown"
@@ -28,7 +23,7 @@ class SearchBar extends React.Component {
                     size="large"
                     style={{ width: '100%' }}
                     dataSource={dataSource}
-                    placeholder="Location"
+                    placeholder="Search location"
                     filterOption={(inputValue, option) =>
                         option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
                     }
