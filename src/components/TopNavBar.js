@@ -1,5 +1,4 @@
 import React from 'react';
-import AuthorizationModal from "./AuthorizationModal"
 
 class TopNavBar extends React.Component {
 
@@ -7,12 +6,16 @@ class TopNavBar extends React.Component {
         this.props.showLogin();
     }
 
+    handleRegisterLogin = () => {
+        this.props.showRegister();
+    }
+
     render() {
         return (
             <div>
                 <header className="landing-header">
                     <a href="#">Home</a>
-                    <a href="#">Sign up</a>
+                    <a href="#" onClick={this.handleRegisterLogin}>Sign up</a>
                     <a href="#" onClick={this.handleLoginClick}>Login</a>
                 </header>
             </div>

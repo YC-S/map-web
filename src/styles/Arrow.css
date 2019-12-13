@@ -1,0 +1,17 @@
+.arrow {
+    width: 30px;
+    margin: 5px;
+}
+
+.arrow-line {
+    margin: 0 auto;
+    width : 5px;
+    height: 40px;
+    background: grey;
+}
+
+.arrow-pointer {
+    border-top: 10px solid grey;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+}

@@ -1,39 +1,29 @@
 import React from 'react';
-import { Modal, Button } from 'antd';
+import { Modal } from 'antd';
 import WrappedNormalLoginForm from "./LoginForm"
+import WrappedRegistrationForm from './RegisterForm';
 
 class AuthorizationModal extends React.Component {
-    state = {
-        loading: false,
-    };
-
-
-    handleOk = () => {
-        this.setState({ loading: true });
-        setTimeout(() => {
-            this.props.hideLogin();
-            this.setState({ loading: false });
-        }, 3000);
-    };
 
     handleCancel = () => {
-        this.props.hideLogin();
+        this.props.hideForm();
     };
 
     render() {
-        const { loading } = this.state;
-        const visible = this.props.visibleLogin;
+
+        const visible = this.props.visibleLogin || this.props.visibleRegister;
         return (
             <div>
                 <Modal
                     visible={visible}
                     title="Title"
-                    onOk={this.handleOk}
+                    //onOk={this.handleOk}
                     onCancel={this.handleCancel}
                     footer={null}
                 >
                     <div className="form-container">
-                        <WrappedNormalLoginForm loadingState={loading} handleModalOk={this.handleOk}/>
+                        {this.props.visibleLogin ? <WrappedNormalLoginForm hideForm={this.props.hideForm} /> : null}
+                        {this.props.visibleRegister ? <WrappedRegistrationForm hideForm={this.props.hideForm}/> : null}
                     </div>
                 </Modal>
             </div>

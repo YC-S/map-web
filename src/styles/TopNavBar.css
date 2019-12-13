@@ -1,0 +1,17 @@
+.landing-header {
+    background-color: transparent;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.landing-header a {
+    color: white;
+    font-weight: bold;
+    margin: 0 25px;
+}
+
+.landing-header a:hover {
+    color: #484848;
+}
