@@ -93,6 +93,11 @@ class MapPage extends React.Component {
             const right = this.state.pointsInPlan.slice(target_pos + 1, this.state.pointsInPlan.length);
             //debugger;
             this.setState(prevState => ({pointsInPlan: [...left, ...middle, prevState.pointsInPlan[initial_pos], ...right]}));
+        } else {
+            const left = this.state.pointsInPlan.slice(0, target_pos);
+            const middle = this.state.pointsInPlan.slice(target_pos, initial_pos);
+            const right = this.state.pointsInPlan.slice(initial_pos + 1, this.state.pointsInPlan.length);
+            this.setState(prevState => ({pointsInPlan: [...left, prevState.pointsInPlan[initial_pos], ...middle, ...right]}));
         }
         this.setState({updatePlan: true});
         //const left = initial_ind === 0 ? [] : this.state.pointsInPlan.slice(0, initial_ind);

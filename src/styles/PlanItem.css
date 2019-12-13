@@ -6,10 +6,10 @@
     justify-content: center;
     overflow: hidden !important;
 }
-
+/* 
 .plan-item:hover {
     background-color: gainsboro;
-}
+} */
 
 .plan-item-description-and-button {
     margin-left: 20px;
