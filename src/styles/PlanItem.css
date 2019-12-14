@@ -5,9 +5,11 @@
     align-items: center;
     justify-content: center;
     overflow: hidden !important;
+    background-color: gainsboro;
+    
 }
-/* 
-.plan-item:hover {
+
+/* .plan-item:hover {
     background-color: gainsboro;
 } */
 

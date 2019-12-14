@@ -77,33 +77,40 @@ class MapPage extends React.Component {
             updatePlan: true}));
     }
 
-    rearrangePointsInPlan = (initial_id, target_id) => {
-        if (initial_id === target_id) {          
-            console.log('no change');        
-            return;
-        }
-        console.log(target_id);
-        console.log('switch from ' + initial_id + ' to ' + target_id);
-        // find the corresponding ids then insert
-        let initial_pos = this.findPos(this.state.pointsInPlan, initial_id);
-        let target_pos = this.findPos(this.state.pointsInPlan, target_id);
-        if (initial_pos < target_pos) {
-            const left = this.state.pointsInPlan.slice(0, initial_pos);
-            const middle = this.state.pointsInPlan.slice(initial_pos + 1, target_pos + 1);
-            const right = this.state.pointsInPlan.slice(target_pos + 1, this.state.pointsInPlan.length);
-            //debugger;
-            this.setState(prevState => ({pointsInPlan: [...left, ...middle, prevState.pointsInPlan[initial_pos], ...right]}));
-        } else {
-            const left = this.state.pointsInPlan.slice(0, target_pos);
-            const middle = this.state.pointsInPlan.slice(target_pos, initial_pos);
-            const right = this.state.pointsInPlan.slice(initial_pos + 1, this.state.pointsInPlan.length);
-            this.setState(prevState => ({pointsInPlan: [...left, prevState.pointsInPlan[initial_pos], ...middle, ...right]}));
-        }
-        this.setState({updatePlan: true});
-        //const left = initial_ind === 0 ? [] : this.state.pointsInPlan.slice(0, initial_ind);
-        //const right = initial_ind === this.state.pointsInPlan.length - 1 ? [] : this.state.pointsInPlan.slice(initial_ind);
-
+    rearrangePointsInPlan = (destination_index, source_index, draggableId) => {
+        const newPlan = Array.from(this.state.pointsInPlan);
+        newPlan.splice(source_index, 1);
+        let draggedPoint = null;
+        this.state.pointsInPlan.forEach(point => {if (draggableId == point.id) draggedPoint = point});
+        newPlan.splice(destination_index, 0, draggedPoint);
+        this.setState({pointsInPlan: newPlan});
     }
+
+    // rearrangePointsInPlan = (initial_id, target_id) => {
+    //     if (initial_id === target_id) {          
+    //         console.log('no change');        
+    //         return;
+    //     }
+    //     console.log(target_id);
+    //     console.log('switch from ' + initial_id + ' to ' + target_id);
+    //     // find the corresponding ids then insert
+    //     let initial_pos = this.findPos(this.state.pointsInPlan, initial_id);
+    //     let target_pos = this.findPos(this.state.pointsInPlan, target_id);
+    //     if (initial_pos < target_pos) {
+    //         const left = this.state.pointsInPlan.slice(0, initial_pos);
+    //         const middle = this.state.pointsInPlan.slice(initial_pos + 1, target_pos + 1);
+    //         const right = this.state.pointsInPlan.slice(target_pos + 1, this.state.pointsInPlan.length);
+    //         //debugger;
+    //         this.setState(prevState => ({pointsInPlan: [...left, ...middle, prevState.pointsInPlan[initial_pos], ...right]}));
+    //     } else {
+    //         const left = this.state.pointsInPlan.slice(0, target_pos);
+    //         const middle = this.state.pointsInPlan.slice(target_pos, initial_pos);
+    //         const right = this.state.pointsInPlan.slice(initial_pos + 1, this.state.pointsInPlan.length);
+    //         this.setState(prevState => ({pointsInPlan: [...left, prevState.pointsInPlan[initial_pos], ...middle, ...right]}));
+    //     }
+    //     this.setState({updatePlan: true});
+
+    // }
 
     findPos = (array, id) => {
         for (let i = 0; i < array.length; i++) {
