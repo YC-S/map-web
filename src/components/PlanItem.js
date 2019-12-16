@@ -1,7 +1,10 @@
 import React from 'react';
 import { Button } from 'antd';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMinus } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components';
 import {Draggable} from 'react-beautiful-dnd';
+
 
 const Container = styled.div`
    margin-bottom: 10px;
@@ -13,44 +16,24 @@ class PlanItem extends React.Component {
     
     }
 
-    handleDelete = () => {
+    handleDelete = (e) => {
         this.setState({inTrip: false});
-        console.log(this.props.data.id + "delete clicked");
+        console.log(this.props.data.id + "delete clicked");       
         setTimeout(() => {this.props.deletePointsFromPlan(this.props.data.id)}, 300)
     }
 
-
-    // handleOnDragStart = (e) => {
-    //     console.log('drag start at ' + e.target.id);
-    //     this.props.setSourceId(e.target.id);
-    // }
-
-    // handleOnDragOver = (e) => {
-    //     e.preventDefault();
-    //     const { rearrangePointsInPlan, sourceId } = this.props;
-    //     let target = e.target;
-    //     while (target.id === "") {
-    //         target = target.parentElement;
-    //     }
-    //     const targetId = target.id;      
-    //     rearrangePointsInPlan(sourceId, targetId);
-    // }
-
-
-
-    // componentDidUpdate() {
-    //     console.log('update');
-    // }
+    handleMouseDown = () => {
+        this.props.setDragging(true);
+    }
 
     render() {
-        const { data } = this.props;
+        const { data, setDragging, editing } = this.props;
         const { inTrip } = this.state;
-        console.log(this.props.index);
         return (
             <Draggable
                 draggableId={data.id}
                 index={this.props.index}
-                isDragDisabled={false}
+                isDragDisabled={!editing}
             >
                 {provided => (
                     <Container
@@ -59,13 +42,12 @@ class PlanItem extends React.Component {
                         ref={provided.innerRef}
                         >
                     {
-                        <div 
+                        <div id={`planItem${data.id}`}
+                        onMouseDown={this.handleMouseDown} onMouseUp={()=> {setDragging(false)}}
                         className={"plan-item"} style={{height: inTrip? "104px":"0", transition: "0.3s", visibility: inTrip ? "visible":"hidden"}}>
                         <img src={data.imgURL} alt=" " height="80" width="80" />
-                        <div className="plan-item-description-and-button">
-                            <div className='plan-item-description'>{data.description}</div>
-                            <Button shape="round" size="small" type="danger" className="add-to-trip-button" onClick={this.handleDelete}>Delete</Button>
-                        </div>
+                        <div className='plan-item-description'>{data.description}</div>
+                        <Button style={{visibility: editing? "visible":"hidden"}} onMouseDown={(e) => {e.stopPropagation()}} shape="circle" size="small" type="danger" className="add-to-trip-button" onClick={this.handleDelete}><FontAwesomeIcon icon={faMinus} /></Button>
                     </div>} 
                     </Container>
                 )}

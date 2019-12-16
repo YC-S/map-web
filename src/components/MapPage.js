@@ -53,6 +53,7 @@ class MapPage extends React.Component {
             updatePlan: false,
             selectedPoint: null,
             showRoute: false,
+            disableRoute: false,
             routeObj: null,
         }
     }
@@ -84,6 +85,7 @@ class MapPage extends React.Component {
         this.state.pointsInPlan.forEach(point => {if (draggableId == point.id) draggedPoint = point});
         newPlan.splice(destination_index, 0, draggedPoint);
         this.setState({pointsInPlan: newPlan});
+        this.setState({updatePlan: true});
     }
 
     // rearrangePointsInPlan = (initial_id, target_id) => {
@@ -123,16 +125,23 @@ class MapPage extends React.Component {
 
     handleRouteSwitch = () => {
         this.setState(prevState => ({showRoute: !prevState.showRoute,
-        updatePlan: true}));
-        
+        updatePlan: true}));  
+    }
+
+    handleDisableRoute = () => {
+        this.setState({showRoute: false, disableRoute: true});
+    }
+
+    handleEnableRoute = () => {
+        this.setState({disableRoute: false});
     }
 
     handleHoverSearchResult = (componentData) => (e) => {
         this.setState({selectedPoint: componentData});       
     }
 
-    setUpdatePlanFalse = () => {
-        this.setState({updatePlan: false});
+    setUpdatePlan = (isUpdated) => {
+        this.setState({updatePlan: isUpdated});
     }
 
     componentDidMount() {
@@ -143,18 +152,18 @@ class MapPage extends React.Component {
     }
 
     render() {
-        const {pointsInPlan, data, location, showRoute, selectedPoint, updatePlan, routeObj} = this.state;       
+        const {pointsInPlan, data, location, showRoute, selectedPoint, updatePlan, routeObj, disableRoute} = this.state;       
         return (
             <div className="map-page">
                 <div className="nav-bar-other">
                     <TopNavBar />
                 </div>
                 <div className="map-page-main">
-                    <Map data={data} pointsInPlan={pointsInPlan} location={location} showRoute={showRoute} selectedPoint={selectedPoint} updatePlan={updatePlan} setUpdatePlanFalse={this.setUpdatePlanFalse} setRouteObj={this.setRouteObj}/>
-                    <MapSideBar data={data} addPointsToPlan={this.addPointsToPlan} pointsInPlan={pointsInPlan} handleHoverSearchResult={this.handleHoverSearchResult} deletePointsFromPlan={this.deletePointsFromPlan} rearrangePointsInPlan={this.rearrangePointsInPlan} showRoute={showRoute} routeObj={routeObj}/>
+                    <Map data={data} pointsInPlan={pointsInPlan} location={location} showRoute={showRoute} selectedPoint={selectedPoint} updatePlan={updatePlan} setUpdatePlan={this.setUpdatePlan} setRouteObj={this.setRouteObj}/>
+                    <MapSideBar data={data} addPointsToPlan={this.addPointsToPlan} pointsInPlan={pointsInPlan} handleHoverSearchResult={this.handleHoverSearchResult} deletePointsFromPlan={this.deletePointsFromPlan} rearrangePointsInPlan={this.rearrangePointsInPlan} showRoute={showRoute} routeObj={routeObj} handleDisableRoute={this.handleDisableRoute} handleEnableRoute={this.handleEnableRoute}/>
                     <div className="show-route-container">
                         <span id="route-button-notation">Route</span>
-                        <Switch id="route-switch" checkedChildren="On" unCheckedChildren="Off" checked={showRoute} onChange={this.handleRouteSwitch}/>
+                        <Switch id="route-switch" checkedChildren="On" unCheckedChildren="Off" checked={showRoute} onChange={this.handleRouteSwitch} disabled={disableRoute}/>
                     </div>
                 </div>
             </div>
