@@ -7,6 +7,7 @@ import {
     Tooltip,
     Icon
 } from 'antd';
+import { userService } from '../api/UserServices';
 
 
 
@@ -15,6 +16,7 @@ class RegistrationForm extends React.Component {
         confirmDirty: false,
         autoCompleteResult: [],
         loading: false,
+        errMessage: null,
     };
 
     handleSubmit = e => {
@@ -22,12 +24,17 @@ class RegistrationForm extends React.Component {
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
                 console.log('Received values of form: ', values);
-
                 this.setState({ loading: true });
-                setTimeout(() => {
+                userService.register(values.username, values.password, values.email)
+                .then(() => {
                     this.setState({ loading: false });
                     this.props.hideForm();
-                }, 3000);
+                    console.log('hiding register form');
+                    this.props.setToMap(true);
+                })
+                .catch(error => {
+                    this.setState({errMessage: error})
+                })                
             }
         });
     };
@@ -57,7 +64,7 @@ class RegistrationForm extends React.Component {
 
     render() {
         const { getFieldDecorator } = this.props.form;
-        const { loading } = this.state;
+        const { loading, errMessage } = this.state;
 
         const formItemLayout = {
             labelCol: {
@@ -157,6 +164,7 @@ class RegistrationForm extends React.Component {
                     )}
                 </Form.Item>
                 <Form.Item {...tailFormItemLayout}>
+                    <p style={{color: "red"}}>{errMessage}</p>
                     <Button type="primary" htmlType="submit" loading={loading}>
                         Register
                     </Button>

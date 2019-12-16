@@ -23,7 +23,7 @@ class AuthorizationModal extends React.Component {
                 >
                     <div className="form-container">
                         {this.props.visibleLogin ? <WrappedNormalLoginForm hideForm={this.props.hideForm} setToMap={this.props.setToMap}/> : null}
-                        {this.props.visibleRegister ? <WrappedRegistrationForm hideForm={this.props.hideForm}/> : null}
+                        {this.props.visibleRegister ? <WrappedRegistrationForm hideForm={this.props.hideForm} setToMap={this.props.setToMap}/> : null}
                     </div>
                 </Modal>
             </div>
