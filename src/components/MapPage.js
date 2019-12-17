@@ -53,6 +53,7 @@ class MapPage extends React.Component {
             updatePlan: false,
             selectedPoint: null,
             showRoute: false,
+            disableRoute: false,
             routeObj: null,
         }
     }
@@ -73,24 +74,74 @@ class MapPage extends React.Component {
     }
 
     deletePointsFromPlan = (pointId) => {
-        console.log("about to delete from db..id=" + pointId);
-
         this.setState(prevState => ({pointsInPlan: [...(prevState.pointsInPlan.filter(point => {return point.id != pointId}))],
             updatePlan: true}));
     }
 
+    rearrangePointsInPlan = (destination_index, source_index, draggableId) => {
+        const newPlan = Array.from(this.state.pointsInPlan);
+        newPlan.splice(source_index, 1);
+        let draggedPoint = null;
+        this.state.pointsInPlan.forEach(point => {if (draggableId == point.id) draggedPoint = point});
+        newPlan.splice(destination_index, 0, draggedPoint);
+        this.setState({pointsInPlan: newPlan});
+        this.setState({updatePlan: true});
+    }
+
+    // rearrangePointsInPlan = (initial_id, target_id) => {
+    //     if (initial_id === target_id) {          
+    //         console.log('no change');        
+    //         return;
+    //     }
+    //     console.log(target_id);
+    //     console.log('switch from ' + initial_id + ' to ' + target_id);
+    //     // find the corresponding ids then insert
+    //     let initial_pos = this.findPos(this.state.pointsInPlan, initial_id);
+    //     let target_pos = this.findPos(this.state.pointsInPlan, target_id);
+    //     if (initial_pos < target_pos) {
+    //         const left = this.state.pointsInPlan.slice(0, initial_pos);
+    //         const middle = this.state.pointsInPlan.slice(initial_pos + 1, target_pos + 1);
+    //         const right = this.state.pointsInPlan.slice(target_pos + 1, this.state.pointsInPlan.length);
+    //         //debugger;
+    //         this.setState(prevState => ({pointsInPlan: [...left, ...middle, prevState.pointsInPlan[initial_pos], ...right]}));
+    //     } else {
+    //         const left = this.state.pointsInPlan.slice(0, target_pos);
+    //         const middle = this.state.pointsInPlan.slice(target_pos, initial_pos);
+    //         const right = this.state.pointsInPlan.slice(initial_pos + 1, this.state.pointsInPlan.length);
+    //         this.setState(prevState => ({pointsInPlan: [...left, prevState.pointsInPlan[initial_pos], ...middle, ...right]}));
+    //     }
+    //     this.setState({updatePlan: true});
+
+    // }
+
+    findPos = (array, id) => {
+        for (let i = 0; i < array.length; i++) {
+            if (array[i].id == id) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
     handleRouteSwitch = () => {
         this.setState(prevState => ({showRoute: !prevState.showRoute,
-        updatePlan: true}));
-        
+        updatePlan: true}));  
+    }
+
+    handleDisableRoute = () => {
+        this.setState({showRoute: false, disableRoute: true});
+    }
+
+    handleEnableRoute = () => {
+        this.setState({disableRoute: false});
     }
 
     handleHoverSearchResult = (componentData) => (e) => {
         this.setState({selectedPoint: componentData});       
     }
 
-    setUpdatePlanFalse = () => {
-        this.setState({updatePlan: false});
+    setUpdatePlan = (isUpdated) => {
+        this.setState({updatePlan: isUpdated});
     }
 
     componentDidMount() {
@@ -101,18 +152,18 @@ class MapPage extends React.Component {
     }
 
     render() {
-        const {pointsInPlan, data, location, showRoute, selectedPoint, updatePlan, routeObj} = this.state;       
+        const {pointsInPlan, data, location, showRoute, selectedPoint, updatePlan, routeObj, disableRoute} = this.state;       
         return (
             <div className="map-page">
                 <div className="nav-bar-other">
                     <TopNavBar />
                 </div>
                 <div className="map-page-main">
-                    <Map data={data} pointsInPlan={pointsInPlan} location={location} showRoute={showRoute} selectedPoint={selectedPoint} updatePlan={updatePlan} setUpdatePlanFalse={this.setUpdatePlanFalse} setRouteObj={this.setRouteObj}/>
-                    <MapSideBar data={data} addPointsToPlan={this.addPointsToPlan} pointsInPlan={pointsInPlan} handleHoverSearchResult={this.handleHoverSearchResult} deletePointsFromPlan={this.deletePointsFromPlan} showRoute={showRoute} routeObj={routeObj}/>
+                    <Map data={data} pointsInPlan={pointsInPlan} location={location} showRoute={showRoute} selectedPoint={selectedPoint} updatePlan={updatePlan} setUpdatePlan={this.setUpdatePlan} setRouteObj={this.setRouteObj}/>
+                    <MapSideBar data={data} addPointsToPlan={this.addPointsToPlan} pointsInPlan={pointsInPlan} handleHoverSearchResult={this.handleHoverSearchResult} deletePointsFromPlan={this.deletePointsFromPlan} rearrangePointsInPlan={this.rearrangePointsInPlan} showRoute={showRoute} routeObj={routeObj} handleDisableRoute={this.handleDisableRoute} handleEnableRoute={this.handleEnableRoute}/>
                     <div className="show-route-container">
                         <span id="route-button-notation">Route</span>
-                        <Switch id="route-switch" checkedChildren="On" unCheckedChildren="Off" checked={showRoute} onChange={this.handleRouteSwitch}/>
+                        <Switch id="route-switch" checkedChildren="On" unCheckedChildren="Off" checked={showRoute} onChange={this.handleRouteSwitch} disabled={disableRoute}/>
                     </div>
                 </div>
             </div>

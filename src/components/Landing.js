@@ -1,14 +1,21 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import TopNavBar from "./TopNavBar"
 import SearchCard from "./SearchCard"
-import SearchBar from "./SearchBar"
+import WrappedAdvancedSearchForm from "./SearchBar"
 import AuthorizationModal from "./AuthorizationModal"
+
 
 
 class Landing extends React.Component {
     state = {
         visibleLogin: false,
         visibleRegister: false,
+        toMap: false
+    }
+
+    setToMap = (toMap) => {
+        this.setState({toMap: toMap});
     }
 
     showLogin = () => {
@@ -38,15 +45,18 @@ class Landing extends React.Component {
             'Chicago': [-87.623177, 41.881832],
         }
         const selectedLoc = locations[location];
-        this.props.history.push(`/map?lng=${selectedLoc[0]}&lat=${selectedLoc[1]}`)
+        this.props.history.push(`/map?lng=${selectedLoc[0]}&lat=${selectedLoc[1]}&plan=null`)
     }
 
     render() {
+        if (this.state.toMap) {
+            return <Redirect to='/map?lng=-122.335167&lat=47.608013&plan=null' />
+        }
         return (
             <div className="landing">
                 <TopNavBar showLogin={this.showLogin} showRegister={this.showRegister}/>
-                <SearchBar class={"search-bar-wrapper-landing"} dataSource={['Seattle', 'Chicago', 'San Francisco']} handleSelectLocation={this.handleSelectLocation}/>
-                <AuthorizationModal visibleLogin={this.state.visibleLogin} visibleRegister={this.state.visibleRegister} hideForm={this.hideForm}/>
+                <WrappedAdvancedSearchForm class={"search-bar-wrapper-landing"} dataSource={['Seattle', 'Chicago', 'San Francisco']} handleSelectLocation={this.handleSelectLocation}/>
+                <AuthorizationModal visibleLogin={this.state.visibleLogin} visibleRegister={this.state.visibleRegister} hideForm={this.hideForm} setToMap={this.setToMap}/>
             </div>
         );
     }

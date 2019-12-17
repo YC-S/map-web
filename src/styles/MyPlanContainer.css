@@ -1,6 +1,7 @@
 .plan-container {
     height: calc(100vh - 61px - 50px);
     overflow: auto;
+    position: relative;
 }
 
 .plan-container::-webkit-scrollbar { 
@@ -11,4 +12,17 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    position: sticky;
+}
+
+#plan_edit_button {
+    position: absolute;
+    left: 10px;
+    margin-top: 20px;
+}
+
+#plan_save_button {
+    position: absolute;
+    right: 10px;
+    margin-top: 20px;
 }

@@ -16,14 +16,14 @@ class AuthorizationModal extends React.Component {
             <div>
                 <Modal
                     visible={visible}
-                    title="Title"
+                    //title=" "
                     //onOk={this.handleOk}
                     onCancel={this.handleCancel}
                     footer={null}
                 >
                     <div className="form-container">
-                        {this.props.visibleLogin ? <WrappedNormalLoginForm hideForm={this.props.hideForm} /> : null}
-                        {this.props.visibleRegister ? <WrappedRegistrationForm hideForm={this.props.hideForm}/> : null}
+                        {this.props.visibleLogin ? <WrappedNormalLoginForm hideForm={this.props.hideForm} setToMap={this.props.setToMap}/> : null}
+                        {this.props.visibleRegister ? <WrappedRegistrationForm hideForm={this.props.hideForm} setToMap={this.props.setToMap}/> : null}
                     </div>
                 </Modal>
             </div>
