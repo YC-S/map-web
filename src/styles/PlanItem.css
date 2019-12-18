@@ -5,20 +5,18 @@
     align-items: center;
     justify-content: center;
     overflow: hidden !important;
-}
-
-.plan-item:hover {
     background-color: gainsboro;
+    
 }
 
-.plan-item-description-and-button {
-    margin-left: 20px;
-  
-}
+/* .plan-item:hover {
+    background-color: gainsboro;
+} */
 
 .plan-item-description {
-    width: 240px;
+    width: 220px;
     height: 68px; 
+    margin-left: 10px;
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
@@ -28,5 +26,5 @@
 }
 
 .add-to-trip-button {
-    float: right;
+    margin-right: 10px;
 }

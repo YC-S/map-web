@@ -55,7 +55,7 @@ addMarker = (point, style) => {
 }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    const { pointsInPlan, showRoute, selectedPoint, updatePlan, setUpdatePlanFalse, setRouteObj } = this.props;
+    const { pointsInPlan, showRoute, selectedPoint, updatePlan, setUpdatePlan, setRouteObj } = this.props;
     // Could improve efficiency here? No need to update every marker and no need to update whenever render is called
     
     if (map.loaded()) {
@@ -79,7 +79,7 @@ addMarker = (point, style) => {
           // if plan is updated, fetch the new route
           if (updatePlan) {
             // set updatePlan to false until plan is actually updated
-            setUpdatePlanFalse();
+            setUpdatePlan(false);
             fetch("https://api.mapbox.com/directions/v5/mapbox/driving/" + pointsInPlan.map(o => {return [o.lng, o.lat]}).join(";") + "?overview=full&geometries=geojson&access_token=" + mapboxgl.accessToken)
             .then(this.handleResponse)
             .then(data => {
