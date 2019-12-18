@@ -21,7 +21,7 @@ class MapSideBar extends React.Component {
 
     render() {
         const { collapse } = this.state;
-        const { addPointsToPlan, data, pointsInPlan, handleHoverSearchResult, deletePointsFromPlan, rearrangePointsInPlan, showRoute, routeObj, handleDisableRoute, handleEnableRoute, planId, planTitle, setPlanTitle }= this.props;
+        const { addPointsToPlan, data, pointsInPlan, handleHoverSearchResult, deletePointsFromPlan, rearrangePointsInPlan, showRoute, routeObj, handleDisableRoute, handleEnableRoute, planId, planTitle, setPlanTitle, showLogin }= this.props;
         return (
             <div className={"mapSidebar"}>
                 <div className="tab-content" style={{width: collapse? "0":"400px", padding: collapse? "0":"10px",  transition: "0.2s"}}>
@@ -34,7 +34,7 @@ class MapSideBar extends React.Component {
                     </TabPane>
                     <TabPane tab="&emsp;&emsp;My Plan&emsp;&emsp;" key="2">
                         <div className="map-sidebar-main" >
-                            <MyPlanContainer pointsInPlan={pointsInPlan} deletePointsFromPlan={deletePointsFromPlan} rearrangePointsInPlan={rearrangePointsInPlan} showRoute={showRoute} routeObj={routeObj} handleDisableRoute={handleDisableRoute} handleEnableRoute={handleEnableRoute} planId={planId} planTitle={planTitle} setPlanTitle={setPlanTitle}/>
+                            <MyPlanContainer pointsInPlan={pointsInPlan} deletePointsFromPlan={deletePointsFromPlan} rearrangePointsInPlan={rearrangePointsInPlan} showRoute={showRoute} routeObj={routeObj} handleDisableRoute={handleDisableRoute} handleEnableRoute={handleEnableRoute} planId={planId} planTitle={planTitle} setPlanTitle={setPlanTitle} showLogin={showLogin}/>
                         </div>
                     </TabPane>
                 </Tabs>

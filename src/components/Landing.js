@@ -20,13 +20,15 @@ class Landing extends React.Component {
 
     showLogin = () => {
         this.setState({
-            visibleLogin: true
+            visibleLogin: true,
+            visibleRegister: false,
         });
     }
 
     showRegister = () => {
         this.setState({
-            visibleRegister: true,
+            visibleLogin: false,
+            visibleRegister: true
         });
     }
 
@@ -45,7 +47,7 @@ class Landing extends React.Component {
             'Chicago': [-87.623177, 41.881832],
         }
         const selectedLoc = locations[location];
-        this.props.history.push(`/map?lng=${selectedLoc[0]}&lat=${selectedLoc[1]}&plan=null`)
+        this.props.history.push(`/map?lng=${selectedLoc[0]}&lat=${selectedLoc[1]}`)
     }
 
     render() {
@@ -56,7 +58,7 @@ class Landing extends React.Component {
             <div className="landing">
                 <TopNavBar showLogin={this.showLogin} showRegister={this.showRegister}/>
                 <WrappedAdvancedSearchForm class={"search-bar-wrapper-landing"} dataSource={['Seattle', 'Chicago', 'San Francisco']} handleSelectLocation={this.handleSelectLocation}/>
-                <AuthorizationModal visibleLogin={this.state.visibleLogin} visibleRegister={this.state.visibleRegister} hideForm={this.hideForm} setToMap={this.setToMap}/>
+                <AuthorizationModal visibleLogin={this.state.visibleLogin} visibleRegister={this.state.visibleRegister} hideForm={this.hideForm} setToMap={this.setToMap} showRegister={this.showRegister}/>
             </div>
         );
     }

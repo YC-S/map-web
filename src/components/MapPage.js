@@ -5,6 +5,7 @@ import MapSideBar from "./MapSideBar"
 import * as QueryString from "query-string"
 import { Switch, Icon } from 'antd';
 import handleResponse from '../api/APIUtils';
+import AuthorizationModal from './AuthorizationModal';
 
 class MapPage extends React.Component {
     constructor(props) {
@@ -57,6 +58,8 @@ class MapPage extends React.Component {
             showRoute: false,
             disableRoute: false,
             routeObj: null,
+            visibleLogin: false,
+            visibleRegister: false,
         }
     }
     
@@ -66,11 +69,11 @@ class MapPage extends React.Component {
     }
 
     addPointsToPlan = (point) => {
-        if (this.state.pointsInPlan.length < 10) {
+        if (this.state.pointsInPlan.length < 6) {
             this.setState(prevState => ({pointsInPlan: [...prevState.pointsInPlan, point],
             updatePlan: true}));
         } else {
-            alert('Maximum number of stops 10 is reached. Please delete some before adding more.');
+            alert('Maximum number of stops 6 is reached. Please delete some before adding more.');
         }
 
     }
@@ -124,6 +127,29 @@ class MapPage extends React.Component {
         this.setState({planTitle: title});
     }
 
+    showLogin = () => {
+        this.setState({
+            visibleLogin: true,
+            visibleRegister: false,
+        });
+    }
+
+    showRegister = () => {
+        this.setState({
+            visibleLogin: false,
+            visibleRegister: true
+        });
+    }
+
+    hideForm = () => {
+        this.setState({
+            visibleLogin: false,
+            visibleRegister: false
+        })
+    }
+
+    setToMap = () => {}
+
     componentDidMount() {
         // get top recommended items in that city
         fetch('http://localhost:8080/search/searchTerm')
@@ -134,6 +160,8 @@ class MapPage extends React.Component {
         // fetch plan based on planId
         // **************** add code here ******************
         // set planTitle
+        //
+        //
     }
 
     render() {
@@ -141,16 +169,17 @@ class MapPage extends React.Component {
         return (
             <div className="map-page">
                 <div className="nav-bar-other">
-                    <TopNavBar />
+                    <TopNavBar showLogin={this.showLogin} showRegister={this.showRegister}/>
                 </div>
                 <div className="map-page-main">
                     <Map data={data} pointsInPlan={pointsInPlan} location={location} showRoute={showRoute} selectedPoint={selectedPoint} updatePlan={updatePlan} setUpdatePlan={this.setUpdatePlan} setRouteObj={this.setRouteObj}/>
-                    <MapSideBar data={data} addPointsToPlan={this.addPointsToPlan} pointsInPlan={pointsInPlan} handleHoverSearchResult={this.handleHoverSearchResult} deletePointsFromPlan={this.deletePointsFromPlan} rearrangePointsInPlan={this.rearrangePointsInPlan} showRoute={showRoute} routeObj={routeObj} handleDisableRoute={this.handleDisableRoute} handleEnableRoute={this.handleEnableRoute} planId={planId} planTitle={planTitle} setPlanTitle={this.setPlanTitle}/>
+                    <MapSideBar data={data} addPointsToPlan={this.addPointsToPlan} pointsInPlan={pointsInPlan} handleHoverSearchResult={this.handleHoverSearchResult} deletePointsFromPlan={this.deletePointsFromPlan} rearrangePointsInPlan={this.rearrangePointsInPlan} showRoute={showRoute} routeObj={routeObj} handleDisableRoute={this.handleDisableRoute} handleEnableRoute={this.handleEnableRoute} planId={planId} planTitle={planTitle} setPlanTitle={this.setPlanTitle} showLogin={this.showLogin}/>
                     <div className="show-route-container">
                         <span id="route-button-notation">Route</span>
                         <Switch id="route-switch" checkedChildren="On" unCheckedChildren="Off" checked={showRoute} onChange={this.handleRouteSwitch} disabled={disableRoute}/>
                     </div>
                 </div>
+                <AuthorizationModal visibleLogin={this.state.visibleLogin} visibleRegister={this.state.visibleRegister} hideForm={this.hideForm} setToMap={this.setToMap} showRegister={this.showRegister}/>
             </div>
         );
     }

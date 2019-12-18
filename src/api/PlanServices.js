@@ -25,11 +25,11 @@ function updatePlan(username, planId, pointsInPlan) {
     .then(handleResponse)
 }
 
-function createPlan(username, pointsInPlan, planTitle, city) {
+function createPlan(username, pointsInPlan, planTitle, city, privacy) {
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ pointsInPlan, planTitle, city}),
+        body: JSON.stringify({ pointsInPlan, planTitle, city, privacy}),
     };
     return fetch(`http://localhost:8080/${username}/plans`, requestOptions)
     .then(handleResponse)

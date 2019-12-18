@@ -49,23 +49,31 @@ class MyPlanContainer extends React.Component {
     }
 
     handleClickSavePlan = () => {
-        const { pointsInPlan, planId } = this.props;
-        // if ther is no planId paramter in url
-        if (planId) {
-            // update plan
-            PlanService.updatePlan(localStorage.getItem('username'), planId, pointsInPlan)
-                .then(() => {
-                    console.log('Plan successfully updated!');
-                })
-                .catch(err => {
-                    console.log('Could not update plan: ' + err);
-                })
-            this.setState({ editing: false });
-            this.props.handleEnableRoute();
+        const { pointsInPlan, planId, showLogin } = this.props;
+        if (localStorage.getItem("username")) {
+            // user logged in
+            // if ther is no planId paramter in url
+            if (planId) {
+                // update plan
+                PlanService.updatePlan(localStorage.getItem('username'), planId, pointsInPlan)
+                    .then(() => {
+                        console.log('Plan successfully updated!');
+                    })
+                    .catch(err => {
+                        console.log('Could not update plan: ' + err);
+                    })
+                this.setState({ editing: false });
+                this.props.handleEnableRoute();
+            } else {
+                // open plan setting modal to create a new plan
+                this.setState({ planSettingVisible: true });
+            }
         } else {
-            // open plan setting modal and create a new plan
-            this.setState({ planSettingVisible: true });
+            // guest user
+            // open login modal
+            showLogin();
         }
+
     }
 
     handleCreatePlan = () => {
@@ -78,6 +86,12 @@ class MyPlanContainer extends React.Component {
             form.resetFields();
             this.setState({ planSettingVisible: false, editing: false });
             this.props.setPlanTitle(values.title);
+
+            // call create plan api and get back an id
+            // assign the id to planId 
+            // ************ code goes here ***************
+            //
+            //
         });
     }
 
