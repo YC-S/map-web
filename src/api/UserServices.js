@@ -25,7 +25,6 @@ function login(username, password) {
                 //user.authdata = window.btoa(username + ':' + password);
                 localStorage.setItem('username', username);
             //}
-
             //return user;
         })
         
@@ -61,7 +60,7 @@ function register(username, password, email) {
 
 function handleResponse(response) {
     return response.text().then(text => {
-        console.log(response);
+        //console.log(response);
         const data = text && JSON.parse(text);
         if (!response.ok) {
             if (response.status === 401) {
@@ -69,7 +68,7 @@ function handleResponse(response) {
                 logout();
                 //location.reload(true);
             }
-            const error = (data && data.message) || response.statusText;
+            const error = (data && data.message) || response.statusText || response.status + " error occured!";
             return Promise.reject(error);
         }
         return data;
