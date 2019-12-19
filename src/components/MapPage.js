@@ -60,6 +60,7 @@ class MapPage extends React.Component {
             routeObj: null,
             visibleLogin: false,
             visibleRegister: false,
+            popConfirmDisabled: true
         }
     }
     
@@ -69,13 +70,15 @@ class MapPage extends React.Component {
     }
 
     addPointsToPlan = (point) => {
-        if (this.state.pointsInPlan.length < 6) {
-            this.setState(prevState => ({pointsInPlan: [...prevState.pointsInPlan, point],
+        if (this.state.pointsInPlan.length === 5) {
+            this.setState({popConfirmDisabled: false});
+        } 
+        this.setState(prevState => ({pointsInPlan: [...prevState.pointsInPlan, point],
             updatePlan: true}));
-        } else {
-            alert('Maximum number of stops 6 is reached. Please delete some before adding more.');
-        }
+    }
 
+    disablePopConfirm = () => {
+        this.setState({popConfirmDisabled: true});
     }
 
     deletePointsFromPlan = (pointId) => {
@@ -165,7 +168,7 @@ class MapPage extends React.Component {
     }
 
     render() {
-        const {pointsInPlan, data, location, showRoute, selectedPoint, updatePlan, routeObj, disableRoute, planId, planTitle} = this.state;       
+        const {pointsInPlan, data, location, showRoute, selectedPoint, updatePlan, routeObj, disableRoute, planId, planTitle, popConfirmDisabled} = this.state;       
         return (
             <div className="map-page">
                 <div className="nav-bar-other">
@@ -173,7 +176,7 @@ class MapPage extends React.Component {
                 </div>
                 <div className="map-page-main">
                     <Map data={data} pointsInPlan={pointsInPlan} location={location} showRoute={showRoute} selectedPoint={selectedPoint} updatePlan={updatePlan} setUpdatePlan={this.setUpdatePlan} setRouteObj={this.setRouteObj}/>
-                    <MapSideBar data={data} addPointsToPlan={this.addPointsToPlan} pointsInPlan={pointsInPlan} handleHoverSearchResult={this.handleHoverSearchResult} deletePointsFromPlan={this.deletePointsFromPlan} rearrangePointsInPlan={this.rearrangePointsInPlan} showRoute={showRoute} routeObj={routeObj} handleDisableRoute={this.handleDisableRoute} handleEnableRoute={this.handleEnableRoute} planId={planId} planTitle={planTitle} setPlanTitle={this.setPlanTitle} showLogin={this.showLogin}/>
+                    <MapSideBar data={data} addPointsToPlan={this.addPointsToPlan} pointsInPlan={pointsInPlan} handleHoverSearchResult={this.handleHoverSearchResult} deletePointsFromPlan={this.deletePointsFromPlan} rearrangePointsInPlan={this.rearrangePointsInPlan} showRoute={showRoute} routeObj={routeObj} handleDisableRoute={this.handleDisableRoute} handleEnableRoute={this.handleEnableRoute} planId={planId} planTitle={planTitle} setPlanTitle={this.setPlanTitle} showLogin={this.showLogin} popConfirmDisabled={popConfirmDisabled} disablePopConfirm={this.disablePopConfirm}/>
                     <div className="show-route-container">
                         <span id="route-button-notation">Route</span>
                         <Switch id="route-switch" checkedChildren="On" unCheckedChildren="Off" checked={showRoute} onChange={this.handleRouteSwitch} disabled={disableRoute}/>

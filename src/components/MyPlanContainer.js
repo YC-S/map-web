@@ -85,6 +85,7 @@ class MyPlanContainer extends React.Component {
             console.log('Received values of form: ', values);
             form.resetFields();
             this.setState({ planSettingVisible: false, editing: false });
+            this.props.handleEnableRoute();
             this.props.setPlanTitle(values.title);
 
             // call create plan api and get back an id
