@@ -6,6 +6,7 @@ import * as QueryString from "query-string"
 import { Switch, Icon } from 'antd';
 import handleResponse from '../api/APIUtils';
 import AuthorizationModal from './AuthorizationModal';
+import cloneDeep from 'lodash/cloneDeep';
 
 class MapPage extends React.Component {
     constructor(props) {
@@ -60,37 +61,45 @@ class MapPage extends React.Component {
             routeObj: null,
             visibleLogin: false,
             visibleRegister: false,
-            popConfirmDisabled: true
+            popConfirmDisabled: true,
         }
     }
-    
 
     setRouteObj = (routeObj) => {
         this.setState({routeObj: routeObj});
     }
 
-    addPointsToPlan = (point) => {
+    addPointsToPlan = (point, index) => {
         if (this.state.pointsInPlan.length === 5) {
             this.setState({popConfirmDisabled: false});
         } 
-        this.setState(prevState => ({pointsInPlan: [...prevState.pointsInPlan, point],
-            updatePlan: true}));
+        let newPoint = cloneDeep(point);
+        const newPlan = Array.from(this.state.pointsInPlan);
+        // assign a draggableId for dragging
+        newPoint.draggingId = Math.floor(Math.random() * 1000000).toString();
+        if (index === -1) {
+            newPlan.splice(newPlan.length, 0, newPoint);
+        } else {
+            newPlan.splice(index, 0, newPoint);
+        }
+        this.setState({pointsInPlan: newPlan, updatePlan: true});
     }
 
     disablePopConfirm = () => {
         this.setState({popConfirmDisabled: true});
     }
 
-    deletePointsFromPlan = (pointId) => {
-        this.setState(prevState => ({pointsInPlan: [...(prevState.pointsInPlan.filter(point => {return point.id != pointId}))],
-            updatePlan: true}));
+    deletePointsFromPlan = (pointIndex) => {
+        const newPlan = Array.from(this.state.pointsInPlan);
+        newPlan.splice(pointIndex, 1);
+        this.setState({pointsInPlan: newPlan, updatePlan: true});
     }
 
     rearrangePointsInPlan = (destination_index, source_index, draggableId) => {
         const newPlan = Array.from(this.state.pointsInPlan);
         newPlan.splice(source_index, 1);
         let draggedPoint = null;
-        this.state.pointsInPlan.forEach(point => {if (draggableId == point.id) draggedPoint = point});
+        this.state.pointsInPlan.forEach(point => {if (draggableId == point.draggingId) draggedPoint = point});
         newPlan.splice(destination_index, 0, draggedPoint);
         this.setState({pointsInPlan: newPlan});
         this.setState({updatePlan: true});
@@ -105,12 +114,13 @@ class MapPage extends React.Component {
         return -1;
     }
 
-    handleRouteSwitch = () => {
-        this.setState(prevState => ({showRoute: !prevState.showRoute,
-        updatePlan: true}));  
+    handleRouteSwitch = (change) => {
+        this.setState({showRoute: change,
+        updatePlan: true});  
     }
 
     handleDisableRoute = () => {
+        // swicth it off and disable it
         this.setState({showRoute: false, disableRoute: true});
     }
 
@@ -168,14 +178,14 @@ class MapPage extends React.Component {
     }
 
     render() {
-        const {pointsInPlan, data, location, showRoute, selectedPoint, updatePlan, routeObj, disableRoute, planId, planTitle, popConfirmDisabled} = this.state;       
+        const {pointsInPlan, data, location, showRoute, selectedPoint, updatePlan, routeObj, disableRoute, planId, planTitle, popConfirmDisabled, roundTrip} = this.state;       
         return (
             <div className="map-page">
                 <div className="nav-bar-other">
                     <TopNavBar showLogin={this.showLogin} showRegister={this.showRegister}/>
                 </div>
                 <div className="map-page-main">
-                    <Map data={data} pointsInPlan={pointsInPlan} location={location} showRoute={showRoute} selectedPoint={selectedPoint} updatePlan={updatePlan} setUpdatePlan={this.setUpdatePlan} setRouteObj={this.setRouteObj}/>
+                    <Map data={data} pointsInPlan={pointsInPlan} location={location} showRoute={showRoute} selectedPoint={selectedPoint} updatePlan={updatePlan} setUpdatePlan={this.setUpdatePlan} setRouteObj={this.setRouteObj} />
                     <MapSideBar data={data} addPointsToPlan={this.addPointsToPlan} pointsInPlan={pointsInPlan} handleHoverSearchResult={this.handleHoverSearchResult} deletePointsFromPlan={this.deletePointsFromPlan} rearrangePointsInPlan={this.rearrangePointsInPlan} showRoute={showRoute} routeObj={routeObj} handleDisableRoute={this.handleDisableRoute} handleEnableRoute={this.handleEnableRoute} planId={planId} planTitle={planTitle} setPlanTitle={this.setPlanTitle} showLogin={this.showLogin} popConfirmDisabled={popConfirmDisabled} disablePopConfirm={this.disablePopConfirm}/>
                     <div className="show-route-container">
                         <span id="route-button-notation">Route</span>

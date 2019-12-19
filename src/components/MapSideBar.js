@@ -34,7 +34,7 @@ class MapSideBar extends React.Component {
                     </TabPane>
                     <TabPane tab="&emsp;&emsp;My Plan&emsp;&emsp;" key="2">
                         <div className="map-sidebar-main" >
-                            <MyPlanContainer pointsInPlan={pointsInPlan} deletePointsFromPlan={deletePointsFromPlan} rearrangePointsInPlan={rearrangePointsInPlan} showRoute={showRoute} routeObj={routeObj} handleDisableRoute={handleDisableRoute} handleEnableRoute={handleEnableRoute} planId={planId} planTitle={planTitle} setPlanTitle={setPlanTitle} showLogin={showLogin}/>
+                            <MyPlanContainer pointsInPlan={pointsInPlan} addPointsToPlan={addPointsToPlan} deletePointsFromPlan={deletePointsFromPlan} rearrangePointsInPlan={rearrangePointsInPlan} showRoute={showRoute} routeObj={routeObj} handleDisableRoute={handleDisableRoute} handleEnableRoute={handleEnableRoute} planId={planId} planTitle={planTitle} setPlanTitle={setPlanTitle} showLogin={showLogin}/>
                         </div>
                     </TabPane>
                 </Tabs>

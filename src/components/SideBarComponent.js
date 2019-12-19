@@ -11,7 +11,7 @@ class SideBarComponent extends React.Component {
         // animation to hide this card
         this.setState(prevState => ({inTrip: !prevState.inTrip}));
         // add it to state in mapPage, add to database, add to cache?
-        setTimeout(() => {this.props.addPointsToPlan(this.props.componentData)}, 300)
+        setTimeout(() => {this.props.addPointsToPlan(this.props.componentData, -1)}, 300)
 
     };
 

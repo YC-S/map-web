@@ -89,7 +89,7 @@ class MyPlanContainer extends React.Component {
             this.props.setPlanTitle(values.title);
 
             // call create plan api and get back an id
-            // assign the id to planId 
+            // then assign the id to planId 
             // ************ code goes here ***************
             //
             //
@@ -103,14 +103,14 @@ class MyPlanContainer extends React.Component {
 
 
     render() {
-        const { pointsInPlan, deletePointsFromPlan, showRoute, routeObj, planTitle } = this.props;
+        const { pointsInPlan, deletePointsFromPlan, addPointsToPlan, showRoute, routeObj, planTitle } = this.props;
         const { dragging, editing, planSettingVisible } = this.state;
         return (
             <div>
                 <DragDropContext onDragEnd={this.onDragEnd} onDragStart={this.onDragStart}>
                     <div className={"plan-container"} >
                         <h1 className="plan-title">{planTitle}</h1>
-                        <Droppable droppableId={"drop_area_1"}>
+                           <Droppable droppableId={"drop_area_1"}>
                             {provided => (
                                 <div
                                     ref={provided.innerRef}
@@ -118,13 +118,13 @@ class MyPlanContainer extends React.Component {
                                     {...provided.droppablePlaceholder}
                                 >
                                     {pointsInPlan.map((point, ind) =>
-                                        <div key={point.id}>
+                                        <div key={point.draggingId}>
                                             {ind === 0 || !showRoute || dragging ? null : <div className="arrow-and-time">
                                                 <Arrow />
                                                 {showRoute && routeObj && (routeObj.routes[0].legs.length === pointsInPlan.length - 1) ?
                                                     <div style={{ textAlign: "center" }}>{Math.ceil(routeObj.routes[0].legs[ind - 1].duration / 60)} min </div> : null}
                                             </div>}
-                                            <PLanItem editing={editing} setDragging={this.setDragging} index={ind} data={point} deletePointsFromPlan={deletePointsFromPlan} />
+                                            <PLanItem editing={editing} setDragging={this.setDragging} index={ind} data={point} deletePointsFromPlan={deletePointsFromPlan} addPointsToPlan={addPointsToPlan}/>
                                         </div>
                                     )}
                                     {provided.placeholder}
@@ -134,7 +134,7 @@ class MyPlanContainer extends React.Component {
                         {pointsInPlan.length > 0 ?
                             (<div>
                                 {editing ? null : <Button id="plan_edit_button" type="primary" onClick={this.handleClickEdit}>Edit</Button>}
-                                {editing ? <Button id="plan_save_button" type="danger" onClick={this.handleClickSavePlan}>Save Changes</Button> : null}
+                                {editing ? <Button id="plan_save_button" type="danger" onClick={this.handleClickSavePlan}>Save and Update</Button> : null}
                             </div>) : null}
                     </div>
                 </DragDropContext>
