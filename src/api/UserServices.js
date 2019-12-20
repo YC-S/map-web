@@ -3,7 +3,8 @@
 export const userService = {
     login,
     logout,
-    register
+    register,
+    getProfileImg
 };
 
 function login(username, password) {
@@ -35,7 +36,6 @@ function logout() {
     localStorage.removeItem('username');
 }
 
-
 function register(username, password, email) {
     const requestOptions = {
         method: 'POST',
@@ -56,6 +56,17 @@ function register(username, password, email) {
             //}
             //return user;
         })
+}
+
+function getProfileImg(username) {
+    username = encodeURIComponent(username);
+    const requestOptions = {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username })
+    };
+    return fetch(`http://localhost:8080/profileImage/${username}`, requestOptions)
+    .then(handleResponse)
 }
 
 function handleResponse(response) {
