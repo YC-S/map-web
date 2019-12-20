@@ -10,7 +10,6 @@ import HelpPage from "./HelpPage";
 const AppRouter = () => (
     <BrowserRouter>
     <div>
-      {/* this swtich will loop through each of the route and check if there is a match */}
         <Switch>
           {/* urlpath to match and the component to render for the page. exact specifies the exact url*/}
           <Route path="/" exact={true} component={Landing} />
