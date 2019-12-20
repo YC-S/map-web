@@ -71,7 +71,7 @@ class LoginForm extends React.Component {
                     <Button type="primary" htmlType="submit" loading={loading} className="login-form-button">
                         Log in
                     </Button>
-                    Or <a href="">register now!</a>
+                    Or <button className="login-form-button-to-register" onClick={this.props.showRegister}>register now!</button>
                 </Form.Item>
             </Form>
         );

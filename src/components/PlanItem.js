@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMinus } from '@fortawesome/free-solid-svg-icons';
+import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components';
 import {Draggable} from 'react-beautiful-dnd';
 
@@ -19,11 +19,15 @@ class PlanItem extends React.Component {
     handleDelete = (e) => {
         this.setState({inTrip: false});
         console.log(this.props.data.id + "delete clicked");       
-        setTimeout(() => {this.props.deletePointsFromPlan(this.props.data.id)}, 300)
+        setTimeout(() => {this.props.deletePointsFromPlan(this.props.index)}, 300)
     }
 
     handleMouseDown = () => {
         this.props.setDragging(true);
+    }
+
+    handleDuplicate = () => {
+        this.props.addPointsToPlan(this.props.data, this.props.index);
     }
 
     render() {
@@ -31,7 +35,7 @@ class PlanItem extends React.Component {
         const { inTrip } = this.state;
         return (
             <Draggable
-                draggableId={data.id}
+                draggableId={data.draggingId}
                 index={this.props.index}
                 isDragDisabled={!editing}
             >
@@ -42,12 +46,15 @@ class PlanItem extends React.Component {
                         ref={provided.innerRef}
                         >
                     {
-                        <div id={`planItem${data.id}`}
+                        <div id={`planItem${data.draggingId}`}
                         onMouseDown={this.handleMouseDown} onMouseUp={()=> {setDragging(false)}}
                         className={"plan-item"} style={{height: inTrip? "104px":"0", transition: "0.3s", visibility: inTrip ? "visible":"hidden"}}>
                         <img src={data.imgURL} alt=" " height="80" width="80" />
                         <div className='plan-item-description'>{data.description}</div>
+                        <div style={{width: editing?"56px":"0", transition: "0.3s", display: "flex"}}>
                         <Button style={{visibility: editing? "visible":"hidden"}} onMouseDown={(e) => {e.stopPropagation()}} shape="circle" size="small" type="danger" className="add-to-trip-button" onClick={this.handleDelete}><FontAwesomeIcon icon={faMinus} /></Button>
+                        <Button style={{visibility: editing? "visible":"hidden"}} onMouseDown={(e) => {e.stopPropagation()}} shape="circle" size="small" type="primary" className="add-to-trip-button" onClick={this.handleDuplicate}><FontAwesomeIcon icon={faPlus} /></Button>
+                        </div>
                     </div>} 
                     </Container>
                 )}
