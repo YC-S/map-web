@@ -1,8 +1,5 @@
 import React from 'react';
-import { Icon, Input, AutoComplete, Button, Form } from 'antd';
-import { he } from 'date-fns/locale';
-
-
+import { Icon, Input, AutoComplete, Form } from 'antd';
 
 class SearchBar extends React.Component {
 
@@ -13,7 +10,7 @@ class SearchBar extends React.Component {
 
     onSubmit = e => {
         e.preventDefault();
-        // step for verification comes inside here
+        // verification comes inside here
         this.props.form.validateFields((err, value) => {
             if (!err) {
                 console.log('Received values of search form: ', value);
@@ -62,4 +59,5 @@ class SearchBar extends React.Component {
 }
 
 const WrappedAdvancedSearchForm = Form.create({ name: 'advanced_search' })(SearchBar);
+
 export default WrappedAdvancedSearchForm;

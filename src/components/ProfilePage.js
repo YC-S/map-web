@@ -8,6 +8,7 @@ import { TempPlace } from "./ProfileTempTab";
 import { Tabs } from 'antd';
 
 const { TabPane } = Tabs;
+
 // import "../styles/Profile.css";
 
 //profile page

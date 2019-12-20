@@ -1,3 +1,9 @@
+@import "./styles/App.css";
+@import "./styles/Header.css";
+@import "./styles/Image.css";
+@import "./styles/Profile.css";
+@import "./styles/PlanView.css";
+@import "./styles/SettingProfile.css";
 @import './styles/App.css';
 @import './styles/Landing.css';
 @import './styles/TopNavBar.css';
