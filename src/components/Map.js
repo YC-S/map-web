@@ -80,7 +80,8 @@ addMarker = (point, style) => {
           if (updatePlan) {
             // set updatePlan to false until plan is actually updated
             setUpdatePlan(false);
-            fetch("https://api.mapbox.com/directions/v5/mapbox/driving/" + pointsInPlan.map(o => {return [o.lng, o.lat]}).join(";") + "?overview=full&geometries=geojson&access_token=" + mapboxgl.accessToken)
+            const url = "https://api.mapbox.com/directions/v5/mapbox/driving/" + pointsInPlan.map(o => {return [o.lng, o.lat]}).join(";") + "?overview=full&geometries=geojson&access_token=" + mapboxgl.accessToken;
+            fetch(url)
             .then(this.handleResponse)
             .then(data => {
                 //console.log(data);

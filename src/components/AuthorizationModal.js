@@ -12,6 +12,7 @@ class AuthorizationModal extends React.Component {
     render() {
 
         const visible = this.props.visibleLogin || this.props.visibleRegister;
+        //debugger;
         return (
             <div>
                 <Modal
@@ -22,7 +23,7 @@ class AuthorizationModal extends React.Component {
                     footer={null}
                 >
                     <div className="form-container">
-                        {this.props.visibleLogin ? <WrappedNormalLoginForm hideForm={this.props.hideForm} setToMap={this.props.setToMap}/> : null}
+                        {this.props.visibleLogin ? <WrappedNormalLoginForm hideForm={this.props.hideForm} setToMap={this.props.setToMap} showRegister={this.props.showRegister}/> : null}
                         {this.props.visibleRegister ? <WrappedRegistrationForm hideForm={this.props.hideForm} setToMap={this.props.setToMap}/> : null}
                     </div>
                 </Modal>

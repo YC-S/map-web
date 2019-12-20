@@ -14,6 +14,7 @@
 @import './styles/Arrow.css';
 @import './styles/PlanItem.css';
 @import './styles/MapSideBar.css';
+@import './styles/PlanSettingModal.css';
 @import '~antd/dist/antd.css';
 @import '~react-datepicker/dist/react-datepicker.css';
 
