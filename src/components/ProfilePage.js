@@ -29,7 +29,19 @@ class ProfilePage extends React.Component {
             planId: 0,
             planTitle: 'One day in Seattle',
             city: 'Seattle',
-            pointsInPlan: []
+            pointsInPlan: [(-122.335167, 47.608013)]
+          },
+          {
+            planId: 1,
+            planTitle: 'Spring break at Chicago',
+            city: 'Chicago',
+            pointsInPlan: [(-87.623177, 41.881832)]
+          },
+          {
+            planId: 2,
+            planTitle: 'A trip to San Francisco',
+            city: 'San Francisco',
+            pointsInPlan: [(-122.446747, 37.733795)]
           }
         ]
       };
@@ -45,7 +57,7 @@ class ProfilePage extends React.Component {
                   <Images imageList={this.state.imageList} />
                 </TabPane>
                 <TabPane tab="Plans" key="2">
-                  {/* <PlanView POIList={this.state.POIList} /> */}
+                  <PlanView planList={this.state.planList} />
                 </TabPane>
                 <TabPane tab="Temp" key="3">
                     content of a temp tab

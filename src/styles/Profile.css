@@ -67,3 +67,8 @@
   float: left;
   margin-left: 20px;
 }
+
+.plan-tab {
+  width: 900px;
+  margin: auto;
+}
