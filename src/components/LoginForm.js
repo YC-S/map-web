@@ -1,7 +1,12 @@
 import React from 'react';
 import { Form, Icon, Input, Button, Checkbox } from 'antd';
+import { userService } from '../api/UserServices';
 
 class LoginForm extends React.Component {
+    state = {
+        loading: false,
+        errorMessage: null,
+    }
 
     handleSubmit = e => {
         e.preventDefault();
@@ -9,14 +14,28 @@ class LoginForm extends React.Component {
         this.props.form.validateFields((err, values) => {
             if (!err) {
                 console.log('Received values of form: ', values);
-                this.props.handleModalOk();
+                this.setState({ loading: true });
+                userService.login(values.username, values.password)
+                .then(() => {
+                    this.setState({ loading: false });
+                    this.props.hideForm();
+                    console.log('hiding login form');
+                    this.props.setToMap(true);
+                    }
+                ) 
+                .catch(error => {
+                    console.log(error);
+                    this.setState({ loading: false });
+                    this.setState({errorMessage: error.toString()});
+                });
+
             }
         });
     };
 
     render() {
         const { getFieldDecorator } = this.props.form;
-        const loading = this.props.loadingState;
+        const { loading, errorMessage } = this.state;
         return (
             <Form onSubmit={this.handleSubmit} className="login-form">
                 <Form.Item>
@@ -48,10 +67,11 @@ class LoginForm extends React.Component {
                     <a className="login-form-forgot" href="">
                         Forgot password
                     </a>
+                    <p style={{color: "red"}}>{errorMessage}</p>
                     <Button type="primary" htmlType="submit" loading={loading} className="login-form-button">
                         Log in
                     </Button>
-                    Or <a href="">register now!</a>
+                    Or <button className="login-form-button-to-register" onClick={this.props.showRegister}>register now!</button>
                 </Form.Item>
             </Form>
         );

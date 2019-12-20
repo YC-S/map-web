@@ -1,18 +1,56 @@
-
-.map-container {
-  position: relative;
-  width: 800px;
-  height: 500px;
+/* <<<<<<< HEAD */
+.buttonBackground {
+  width: 60%;
+  margin: auto;
+}
+.imageAndPlansButton {
+  margin: 5px 0px;
+  padding: 3px 5px;
+  border-bottom: 1px solid gainsboro;
+  background: lightgray;
+  margin-left: 2px;
+}
+.imageAndPlansButton:hover {
+  background: black;
+  color: white;
+}
+.imageAndPlansButton.active {
+  background: red;
+  color: white;
 }
 
 .App {
   text-align: center;
 }
+.buttonBackground {
+  width: 60%;
+  margin: auto;
+  /* background: rgb(238, 238, 238); */
+}
+.imageAndPlansButton {
+  margin: 5px 0px;
+  padding: 3px 5px;
+  border-bottom: 1px solid gainsboro;
+  background: lightgray;
+  margin-left: 2px;
+}
+.imageAndPlansButton:hover {
+  background: black;
+  color: white;
+}
+.imageAndPlansButton.active {
+  background: red;
+  color: white;
+}
+.map-container {
+  position: relative;
+  width: 1000px;
+  height: 500px;
+}
 
 .App-logo {
   height: 40vmin;
 }
-
 
 .App-link {
   color: #09d3ac;

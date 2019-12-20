@@ -8,3 +8,7 @@
 .login-form-button {
     width: 100%;
 }
+
+.login-form-button-to-register {
+    color: #1890ff;
+}

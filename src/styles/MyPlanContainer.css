@@ -1,0 +1,33 @@
+.plan-container {
+    height: calc(100vh - 61px - 50px);
+    overflow: auto;
+    position: relative;
+}
+
+.plan-title {
+    font-size: 20px;
+    margin-left: 20px;
+}
+
+.plan-container::-webkit-scrollbar { 
+    display: none; 
+}
+
+.arrow-and-time {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: sticky;
+}
+
+#plan_edit_button {
+    position: absolute;
+    left: 10px;
+    margin-top: 20px;
+}
+
+#plan_save_button {
+    position: absolute;
+    right: 10px;
+    margin-top: 20px;
+}

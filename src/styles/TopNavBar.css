@@ -1,0 +1,43 @@
+.landing-header {
+    background-color: transparent;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.landing-header div {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    text-align: center;
+
+}
+
+#nav_profile_img:hover {
+    border: 1px solid white;
+}
+
+.landing-header #welcome_message {
+    color: white;
+    font-weight: bold;
+}
+
+#nav_profile_img {
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 2vw;
+}
+
+.landing-header button, .navLink {
+    margin: 0 2vw;
+    color: white;
+    font-weight: bold;
+}
+
+.landing-header button:hover {
+    color: #484848;
+}
+.landing-header .navLink:hover {
+    color: #484848;
+}

@@ -1,0 +1,34 @@
+.App-header {
+  background-color: white;
+  width: 80%;
+  margin: auto;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid gainsboro;
+}
+.App-logo {
+  height: 8vmin;
+  float: left;
+  margin-left: 20px;
+  padding: 10px;
+}
+.App-logo:hover {
+  cursor: pointer;
+}
+
+.user-logo {
+  height: 8vmin;
+  /* float: left; */
+  margin-left: 20px;
+  padding: 10px;
+}
+.user-logo {
+  cursor: pointer;
+}
+.searchBar {
+  width: 30%;
+  font-size: 1.4em;
+  border-radius: 10px;
+}

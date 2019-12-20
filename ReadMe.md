@@ -97,11 +97,16 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 ## Authors
 
-* Lu Yi
-* Yanjie Niu
-* Yuanchen Shi
-* Mu Chen
-* Bing Zhou
+* [Lu Yi](https://github.com/Annabel1234)
+* [Yanjie Niu](https://github.com/angieniu)
+* [Yuanchen Shi](https://github.com/YC-S)
+* [Mu Chen](https://github.com/muchensthughs)
+* [Bing Zhou](https://github.com/bingzhoucmu)
+* [Shuo Liu](https://github.com/liushuo1014)
+* [Quan Ma](https://guthub.com/quanmahameed)
+* [Tong Kong](https://github.com/tkong233)
+* [Yang Deng](https://github.com/oliveDY)
+* [Yanting Zhong](https://github.com/yz3150)
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 

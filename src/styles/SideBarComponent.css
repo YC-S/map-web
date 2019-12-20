@@ -1,0 +1,32 @@
+.sidebar-component {
+    border-bottom: solid 1px lightgray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden !important;
+}
+
+.sidebar-component:hover {
+    background-color: gainsboro;
+}
+
+.sidebar-description-and-button {
+    margin-left: 20px;
+}
+
+.sidebar-description {
+    width: 260px;
+    height: 88px;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    word-wrap: break-word;
+    text-overflow: ellipsis;
+}
+
+.add-to-trip-button {
+    float: right;
+}
+
+
