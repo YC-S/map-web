@@ -7,6 +7,10 @@
   border-bottom: 1px solid gainsboro;
 }
 
+.tabs-container {
+  text-align: center;
+}
+
 .head-profile {
   /* flex-grow: 2; */
   width: 150px;
@@ -17,6 +21,7 @@
   border: 1px solid gray;
   margin-right: 15px;
 }
+
 
 #nameAndEditProfile {
   display: flex;
@@ -54,9 +59,16 @@
   padding-left: 20px;
   margin: auto;
 }
+
 .post {
+  padding-top: 20px;
   position: relative;
   /* padding-top: 20px; */
   float: left;
   margin-left: 20px;
+}
+
+.plan-tab {
+  width: 900px;
+  margin: auto;
 }

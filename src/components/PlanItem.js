@@ -13,7 +13,6 @@ const Container = styled.div`
 class PlanItem extends React.Component {
     state = {
         inTrip: true,
-    
     }
 
     handleDelete = (e) => {

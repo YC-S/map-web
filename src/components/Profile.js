@@ -1,11 +1,14 @@
 import React from "react";
+import boy from "../images/boy.svg";
 import { SettingProfile } from "./SettingProfile";
 // import boy from "../images/boy.svg";
+
 
 export class Profile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+
       name: "John Smith",
       signature:
         "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.",
@@ -55,6 +58,7 @@ export class Profile extends React.Component {
     return (
       <div className="profile">
         {/* head profile */}
+
         <img
           src={this.state.headProfile}
           alt="boy-head"

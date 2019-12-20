@@ -1,14 +1,15 @@
 import React from "react";
+
+//need to download react-router-dom
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+import HelpPage from "./HelpPage";
+import ProfilePage from "./ProfilePage";
 import Landing from "./Landing";
 import MapPage from "./MapPage";
 import PageNotFound from "./PageNotFound";
-import ProfilePage from "./ProfilePage";
-import HelpPage from "./HelpPage";
-
 
 const AppRouter = () => (
-    <BrowserRouter>
+  <BrowserRouter>
     <div>
       {/* this swtich will loop through each of the route and check if there is a match */}
         <Switch>
@@ -21,9 +22,8 @@ const AppRouter = () => (
           <Route component={PageNotFound} />       
         </Switch>
     </div>
-    
-    </BrowserRouter>
-)
+  </BrowserRouter>
+);
 
 export default AppRouter;
 
