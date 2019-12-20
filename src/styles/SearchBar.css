@@ -1,0 +1,13 @@
+.search-bar-wrapper-landing {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20vh;
+}
+
+.search-bar-wrapper-map-left {
+    width: 85%;
+    display: inline-block;
+   
+}
+

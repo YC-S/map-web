@@ -4,6 +4,28 @@
 @import "./styles/Profile.css";
 @import "./styles/PlanView.css";
 @import "./styles/SettingProfile.css";
+@import './styles/App.css';
+@import './styles/Landing.css';
+@import './styles/TopNavBar.css';
+@import './styles/SearchCard.css';
+@import './styles/SearchBar.css';
+@import './styles/LoginForm.css';
+@import './styles/AuthorizationModal.css';
+@import './styles/SideBarComponent.css';
+@import './styles/SideBarTopContainer.css';
+@import  './styles/SideBarContent.css';
+@import './styles/MyPlanContainer.css';
+@import './styles/MapPage.css';
+@import './styles/Map.css';
+@import './styles/Arrow.css';
+@import './styles/PlanItem.css';
+@import './styles/MapSideBar.css';
+@import './styles/PlanSettingModal.css';
+@import '~antd/dist/antd.css';
+@import '~react-datepicker/dist/react-datepicker.css';
+
+
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",

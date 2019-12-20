@@ -1,0 +1,30 @@
+.plan-item {
+    border: 1px solid grey;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden !important;
+    background-color: gainsboro;
+    
+}
+
+/* .plan-item:hover {
+    background-color: gainsboro;
+} */
+
+.plan-item-description {
+    width: 220px;
+    height: 68px; 
+    margin-left: 10px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    word-wrap: break-word;
+    text-overflow: ellipsis;
+}
+
+.add-to-trip-button {
+    margin-right: 10px;
+}
