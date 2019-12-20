@@ -7,6 +7,10 @@
   border-bottom: 1px solid gainsboro;
 }
 
+.tabs-container {
+  text-align: center;
+}
+
 .head-profile {
   /* flex-grow: 2; */
   width: 30%;

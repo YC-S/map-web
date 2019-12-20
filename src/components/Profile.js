@@ -9,9 +9,11 @@ export class Profile extends React.Component {
     };
     this.handleOnClick = this.handleOnClick.bind(this);
   }
+
   handleOnClick = () => {
     return <div>{alert("button clicked")}</div>;
   };
+
   render() {
     return (
       <div className="profile">
