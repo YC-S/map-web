@@ -1,3 +1,23 @@
+/* <<<<<<< HEAD */
+.buttonBackground {
+  width: 60%;
+  margin: auto;
+}
+.imageAndPlansButton {
+  margin: 5px 0px;
+  padding: 3px 5px;
+  border-bottom: 1px solid gainsboro;
+  background: lightgray;
+  margin-left: 2px;
+}
+.imageAndPlansButton:hover {
+  background: black;
+  color: white;
+}
+.imageAndPlansButton.active {
+  background: red;
+  color: white;
+}
 
 .App {
   text-align: center;
@@ -7,7 +27,10 @@
   height: 40vmin;
 }
 
+/* <<<<<<< HEAD */
+/* ======= */
 
+/* >>>>>>> master */
 .App-link {
   color: #09d3ac;
 }
