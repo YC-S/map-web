@@ -6,13 +6,16 @@ import * as turf from '@turf/turf';
 mapboxgl.accessToken = 'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4M29iazA2Z2gycXA4N2pmbDZmangifQ.-g_vE53SD2WrJ6tFX7QHmA';
 let map;
 let currentMarkers=[];
-class Map extends React.Component {
-  state = {
-    lng: -122.335167,
-    lat: 47.608013,
-    zoom: 10,
-  }
 
+class Map extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      lng: -122.335167,
+      lat: 47.608013,
+      zoom: 13
+    };
+  }
 
 
   handleResponse = (response) => {

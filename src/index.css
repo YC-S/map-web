@@ -18,7 +18,10 @@
 @import '~antd/dist/antd.css';
 @import '~react-datepicker/dist/react-datepicker.css';
 
-
+@import "./styles/Header.css";
+@import "./styles/Image.css";
+@import "./styles/Profile.css";
+@import "./styles/PlanView.css";
 
 body {
   margin: 0;

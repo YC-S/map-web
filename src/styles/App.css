@@ -1,13 +1,47 @@
+<<<<<<< HEAD
 
 .App {
   text-align: center;
 }
 
+=======
+.App {
+  text-align: center;
+}
+.buttonBackground {
+  width: 60%;
+  margin: auto;
+  /* background: rgb(238, 238, 238); */
+}
+.imageAndPlansButton {
+  margin: 5px 0px;
+  padding: 3px 5px;
+  border-bottom: 1px solid gainsboro;
+  background: lightgray;
+  margin-left: 2px;
+}
+.imageAndPlansButton:hover {
+  background: black;
+  color: white;
+}
+.imageAndPlansButton.active {
+  background: red;
+  color: white;
+}
+.map-container {
+  position: relative;
+  width: 1000px;
+  height: 500px;
+}
+>>>>>>> 7d978d3be8560753b6a2e9636b66d8b96a8c4ca3
 .App-logo {
   height: 40vmin;
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7d978d3be8560753b6a2e9636b66d8b96a8c4ca3
 .App-link {
   color: #09d3ac;
 }
