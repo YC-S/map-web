@@ -30,7 +30,10 @@ class RegistrationForm extends React.Component {
                     this.setState({ loading: false });
                     this.props.hideForm();
                     console.log('hiding register form');
-                    this.props.setToMap(true);
+                    // any redirections goes here
+                    if (this.props.setToMap) {
+                        this.props.setToMap(true);
+                    }
                 })
                 .catch(error => {
                     this.setState({errMessage: error})

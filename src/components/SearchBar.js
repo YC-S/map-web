@@ -5,16 +5,16 @@ class SearchBar extends React.Component {
 
     onSelect = (value) => {
         console.log('onSelect', value);
-        this.props.handleSelectLocation(value);
+        this.props.handleClickSearch(value);
     }
 
     onSubmit = e => {
         e.preventDefault();
         // verification comes inside here
-        this.props.form.validateFields((err, value) => {
+        this.props.form.validateFields((err, values) => {
             if (!err) {
-                console.log('Received values of search form: ', value);
-                debugger;
+                console.log('Received values of search form: ', values);
+                this.props.handleClickSearch(values.searchTerm);
             }
         });
     };
@@ -29,7 +29,7 @@ class SearchBar extends React.Component {
                 <Form onSubmit={this.onSubmit}>
                 <Form.Item>
                 {getFieldDecorator('searchTerm', {
-                        rules: [{ required: true, message: 'Please input wheat you want to search!' }],
+                        rules: [{ required: false}],
                     })(
                         <AutoComplete
                     className="search-bar"

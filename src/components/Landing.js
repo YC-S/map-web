@@ -1,7 +1,6 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 import TopNavBar from "./TopNavBar"
-import SearchCard from "./SearchCard"
 import WrappedAdvancedSearchForm from "./SearchBar"
 import AuthorizationModal from "./AuthorizationModal"
 
@@ -39,7 +38,7 @@ class Landing extends React.Component {
         })
     }
 
-    handleSelectLocation = (location) => {
+    handleSearchCity = (location) => {
         // jump to map page with corresponding coordinates
         const locations = {
             'Seattle': [-122.335167, 47.608013],
@@ -47,17 +46,21 @@ class Landing extends React.Component {
             'Chicago': [-87.623177, 41.881832],
         }
         const selectedLoc = locations[location];
-        this.props.history.push(`/map?lng=${selectedLoc[0]}&lat=${selectedLoc[1]}`)
+        if (selectedLoc) {
+            this.props.history.push(`/map?lng=${selectedLoc[0]}&lat=${selectedLoc[1]}`);
+        } 
+        
     }
 
     render() {
         if (this.state.toMap) {
+            // this should go to profile in the future
             return <Redirect to='/map?lng=-122.335167&lat=47.608013' />
         }
         return (
             <div className="landing">
                 <TopNavBar showLogin={this.showLogin} showRegister={this.showRegister}/>
-                <WrappedAdvancedSearchForm class={"search-bar-wrapper-landing"} dataSource={['Seattle', 'Chicago', 'San Francisco']} handleSelectLocation={this.handleSelectLocation}/>
+                <WrappedAdvancedSearchForm class={"search-bar-wrapper-landing"} dataSource={['Seattle', 'Chicago', 'San Francisco']} handleClickSearch={this.handleSearchCity}/>
                 <AuthorizationModal visibleLogin={this.state.visibleLogin} visibleRegister={this.state.visibleRegister} hideForm={this.hideForm} setToMap={this.setToMap} showRegister={this.showRegister}/>
             </div>
         );

@@ -161,8 +161,6 @@ class MapPage extends React.Component {
         })
     }
 
-    setToMap = () => {}
-
     componentDidMount() {
         // get top recommended items in that city
         fetch('http://localhost:8080/search/searchTerm')
@@ -192,7 +190,7 @@ class MapPage extends React.Component {
                         <Switch id="route-switch" checkedChildren="On" unCheckedChildren="Off" checked={showRoute} onChange={this.handleRouteSwitch} disabled={disableRoute}/>
                     </div>
                 </div>
-                <AuthorizationModal visibleLogin={this.state.visibleLogin} visibleRegister={this.state.visibleRegister} hideForm={this.hideForm} setToMap={this.setToMap} showRegister={this.showRegister}/>
+                <AuthorizationModal visibleLogin={this.state.visibleLogin} visibleRegister={this.state.visibleRegister} hideForm={this.hideForm} showRegister={this.showRegister}/>
             </div>
         );
     }

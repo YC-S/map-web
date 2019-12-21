@@ -20,7 +20,10 @@ class LoginForm extends React.Component {
                     this.setState({ loading: false });
                     this.props.hideForm();
                     console.log('hiding login form');
-                    this.props.setToMap(true);
+                    // redirections goes here
+                    if (this.props.setToMap) {
+                        this.props.setToMap(true);
+                    }
                     }
                 ) 
                 .catch(error => {
