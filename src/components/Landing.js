@@ -52,7 +52,7 @@ class Landing extends React.Component {
 
     render() {
         if (this.state.toMap) {
-            return <Redirect to='/map?lng=-122.335167&lat=47.608013&plan=null' />
+            return <Redirect to='/map?lng=-122.335167&lat=47.608013' />
         }
         return (
             <div className="landing">

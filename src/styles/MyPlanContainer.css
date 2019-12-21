@@ -31,3 +31,9 @@
     right: 10px;
     margin-top: 20px;
 }
+
+.plan-time-label {
+    font-size: 1.1em;
+    font-weight: 700;
+    padding-left: 1rem;
+}
