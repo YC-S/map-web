@@ -40,7 +40,7 @@ addMarker = (point, style) => {
   const popup = new mapboxgl.Popup({offset: popupOffsets, className: 'my-class', closeButton: false,
   closeOnClick: false})
   .setLngLat([point.lng, point.lat])
-  .setHTML('<div style="display:flex;width:150px;align-items:center;justify-content:space-around;"><img src="' + point.imgURL + '" height="80" width="80" /><h1>'+ point.title + '</h1></div>')
+  .setHTML('<div style="display:flex;width:180px;align-items:center;justify-content:space-between;"><img src="' + point.imgURL + '" height="80" width="80" style="margin: 5px"/><h1>'+ point.name + '</h1></div>')
   .setMaxWidth("300px")
   .addTo(map);
     const marker = new mapboxgl.Marker(style);
@@ -183,7 +183,6 @@ addMarker = (point, style) => {
     });
 
     //map.addControl(geocoder, 'top-right');
-
     const marker = new mapboxgl.Marker({'color': '#008000'})// Create a new green marker
     geocoder.on('result', function(data) { // When the geocoder returns a result
       const point = data.result.center; // Capture the result coordinates

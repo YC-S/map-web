@@ -20,15 +20,16 @@ class MapSideBar extends React.Component {
       }
 
     render() {
+        console.log(this.props.data);
         const { collapse } = this.state;
-        const { addPointsToPlan, data, pointsInPlan, handleHoverSearchResult, deletePointsFromPlan, rearrangePointsInPlan, showRoute, routeObj, handleDisableRoute, handleEnableRoute, planId, planTitle, setPlanTitle, showLogin, popConfirmDisabled, disablePopConfirm }= this.props;
+        const { addPointsToPlan, data, pointsInPlan, handleHoverSearchResult, deletePointsFromPlan, rearrangePointsInPlan, showRoute, routeObj, handleDisableRoute, handleEnableRoute, planId, planTitle, setPlanTitle, showLogin, popConfirmDisabled, disablePopConfirm, handleSearchPlace}= this.props;
         return (
             <div className={"mapSidebar"}>
                 <div className="tab-content" style={{width: collapse? "0":"400px", padding: collapse? "0":"10px",  transition: "0.2s"}}>
                 <Tabs defaultActiveKey="1" onChange={this.callback} tabBarStyle={{textAlign: "center"}}>
                     <TabPane tab="&emsp;Discovery&emsp;" key="1">
                         <div className="map-sidebar-main" >
-                            <SideBarTopContainer />
+                            <SideBarTopContainer handleSearchPlace={handleSearchPlace}/>
                             <SideBarContent data={data} addPointsToPlan={addPointsToPlan} pointsInPlan={pointsInPlan} handleHoverSearchResult={handleHoverSearchResult} popConfirmDisabled={popConfirmDisabled} disablePopConfirm={disablePopConfirm}/>
                         </div>
                     </TabPane>

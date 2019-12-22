@@ -23,14 +23,16 @@ class SideBarComponent extends React.Component {
     }
 
     render() {
-
         const { componentData, handleHoverSearchResult, popConfirmDisabled } = this.props;
         const { inTrip } = this.state;
         return (
             <div onMouseEnter={handleHoverSearchResult(componentData)} onMouseLeave={handleHoverSearchResult()} className='sidebar-component' style={{ height: inTrip? "0":"132px", transition: "0.3s", visibility: inTrip ? "hidden":"visible"}}>
                 <img src={componentData.imgURL} alt=" " height="100" width="100" />
                 <div className="sidebar-description-and-button">
-                    <div className='sidebar-description'>{componentData.description}</div>
+                    <div className='sidebar-description'>
+                    <h1>{componentData.name}</h1>
+                    <p>{componentData.category}</p>
+                    </div>
                     <Popconfirm placement="top" title={"Recommended 6 number of places have reached, are you sure about adding more?"} onConfirm={this.confirmAddPlace} okText="Yes" cancelText="No" disabled={popConfirmDisabled}>
                         <Button shape="round" size="small" type="primary" className="add-to-trip-button" onClick={popConfirmDisabled ? this.handleAddToTrip : null}>Add to trip</Button>
                     </Popconfirm>

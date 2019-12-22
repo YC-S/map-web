@@ -137,7 +137,7 @@ class MyPlanContainer extends React.Component {
                                             {ind === 0 || !showRoute || dragging ? null : <div className="arrow-and-time">
                                                 <Arrow />
                                                 {routeObj && (routeObj.routes[0].legs.length === pointsInPlan.length - 1) ?
-                                                    <div style={{ textAlign: "center" }}>{Math.ceil(routeObj.routes[0].legs[ind - 1].duration / 60)} min </div> : null}
+                                                    <div style={{ textAlign: "center" }}>{Math.ceil(routeObj.routes[0].legs[ind - 1].duration / 60)} min driving</div> : null}
                                             </div>}
                                             <PLanItem editing={editing} setDragging={this.setDragging} index={ind} data={point} deletePointsFromPlan={deletePointsFromPlan} addPointsToPlan={addPointsToPlan}/>
                                         </div>

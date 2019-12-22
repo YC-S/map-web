@@ -2,7 +2,13 @@ import handleResponse from './APIUtils';
 
 export const SearchService = {
     getCategories,
-    getSearchResult
+    getSearchResult,
+    fetchInitialPlaces
+}
+
+function fetchInitialPlaces() {
+    return fetch('http://localhost:8080/landing')
+    .then(handleResponse)
 }
 
 // note: searchTerm needs to be a string without space
@@ -22,6 +28,6 @@ function getSearchResult(searchTerm) {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
     };
-    return fetch(`http://localhost:8080/search/results/${searchTerm}`, requestOptions)
+    return fetch(`http://localhost:8080/search?keyword=${searchTerm}`, requestOptions)
     .then(handleResponse)
 }

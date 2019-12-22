@@ -50,7 +50,10 @@ class PlanItem extends React.Component {
                         onMouseDown={this.handleMouseDown} onMouseUp={()=> {setDragging(false)}}
                         className={"plan-item"} style={{height: inTrip? "104px":"0", transition: "0.3s", visibility: inTrip ? "visible":"hidden"}}>
                         <img src={data.imgURL} alt=" " height="80" width="80" />
-                        <div className='plan-item-description'>{data.description}</div>
+                        <div className='plan-item-description'>
+                        <h1>{data.description}</h1>
+                        <p>{data.category}</p>
+                        </div>
                         <div style={{width: editing?"56px":"0", transition: "0.3s", display: "flex"}}>
                         <Button style={{visibility: editing? "visible":"hidden"}} onMouseDown={(e) => {e.stopPropagation()}} shape="circle" size="small" type="danger" className="add-to-trip-button" onClick={this.handleDelete}><FontAwesomeIcon icon={faMinus} /></Button>
                         <Button style={{visibility: editing? "visible":"hidden"}} onMouseDown={(e) => {e.stopPropagation()}} shape="circle" size="small" type="primary" className="add-to-trip-button" onClick={this.handleDuplicate}><FontAwesomeIcon icon={faPlus} /></Button>
