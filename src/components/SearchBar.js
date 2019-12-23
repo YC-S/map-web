@@ -59,5 +59,5 @@ class SearchBar extends React.Component {
 }
 
 const WrappedAdvancedSearchForm = Form.create({ name: 'advanced_search' })(SearchBar);
-export default WrappedAdvancedSearchForm;
 
+export default WrappedAdvancedSearchForm;
