@@ -7,6 +7,7 @@ import { Switch, Icon } from 'antd';
 import handleResponse from '../api/APIUtils';
 import AuthorizationModal from './AuthorizationModal';
 import cloneDeep from 'lodash/cloneDeep';
+import { SearchService } from '../api/SearchServices';
 
 class MapPage extends React.Component {
     constructor(props) {
@@ -161,13 +162,37 @@ class MapPage extends React.Component {
         })
     }
 
-    setToMap = () => {}
+    handleSearchPlace = (searchTerm) => {
+        SearchService.getSearchResult(searchTerm)
+        .then(data => {
+            const newData = this.extractData(data);
+            this.setState({data: newData});
+        })
+        .catch(error => console.log(error))
+    }
+
+    extractData = (data) => {
+        return data.map(e => {
+            return {
+                id: e.id,
+                name: e.name,
+                imgURL: e.image_url,
+                lat: e.coordinates.latitude,
+                lng: e.coordinates.longitude,
+                category: e.categories[0].title,
+                location: e.location,
+            }
+        });
+    }
 
     componentDidMount() {
-        // get top recommended items in that city
-        fetch('http://localhost:8080/search/searchTerm')
-        .then(handleResponse)
-        .then(data => this.setState({data: data}))
+        // get top recommended items in the city
+        SearchService.fetchInitialPlaces()
+        .then(data => {
+            const newData = this.extractData(data);
+            this.setState({data: newData});
+        })
+            //this.setState({data: data})
         .catch (error => console.log(error));
 
         // fetch plan based on planId
@@ -186,13 +211,18 @@ class MapPage extends React.Component {
                 </div>
                 <div className="map-page-main">
                     <Map data={data} pointsInPlan={pointsInPlan} location={location} showRoute={showRoute} selectedPoint={selectedPoint} updatePlan={updatePlan} setUpdatePlan={this.setUpdatePlan} setRouteObj={this.setRouteObj} />
-                    <MapSideBar data={data} addPointsToPlan={this.addPointsToPlan} pointsInPlan={pointsInPlan} handleHoverSearchResult={this.handleHoverSearchResult} deletePointsFromPlan={this.deletePointsFromPlan} rearrangePointsInPlan={this.rearrangePointsInPlan} showRoute={showRoute} routeObj={routeObj} handleDisableRoute={this.handleDisableRoute} handleEnableRoute={this.handleEnableRoute} planId={planId} planTitle={planTitle} setPlanTitle={this.setPlanTitle} showLogin={this.showLogin} popConfirmDisabled={popConfirmDisabled} disablePopConfirm={this.disablePopConfirm}/>
+                    <MapSideBar data={data} addPointsToPlan={this.addPointsToPlan} pointsInPlan={pointsInPlan} handleHoverSearchResult={this.handleHoverSearchResult} 
+                    deletePointsFromPlan={this.deletePointsFromPlan} rearrangePointsInPlan={this.rearrangePointsInPlan} 
+                    showRoute={showRoute} routeObj={routeObj} handleDisableRoute={this.handleDisableRoute} 
+                    handleEnableRoute={this.handleEnableRoute} planId={planId} planTitle={planTitle} 
+                    setPlanTitle={this.setPlanTitle} showLogin={this.showLogin} popConfirmDisabled={popConfirmDisabled} 
+                    disablePopConfirm={this.disablePopConfirm} handleSearchPlace={this.handleSearchPlace}/>
                     <div className="show-route-container">
                         <span id="route-button-notation">Route</span>
                         <Switch id="route-switch" checkedChildren="On" unCheckedChildren="Off" checked={showRoute} onChange={this.handleRouteSwitch} disabled={disableRoute}/>
                     </div>
                 </div>
-                <AuthorizationModal visibleLogin={this.state.visibleLogin} visibleRegister={this.state.visibleRegister} hideForm={this.hideForm} setToMap={this.setToMap} showRegister={this.showRegister}/>
+                <AuthorizationModal visibleLogin={this.state.visibleLogin} visibleRegister={this.state.visibleRegister} hideForm={this.hideForm} showRegister={this.showRegister}/>
             </div>
         );
     }

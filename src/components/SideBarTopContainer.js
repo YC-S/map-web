@@ -6,7 +6,7 @@ class SideBarTopContainer extends React.Component {
     render() {
         return (
             <div className="sidebar-top-container">
-                <SearchBar class={"search-bar-wrapper-map-left"} dataSource={['cafe', 'Restaurant']}/>
+                <SearchBar class={"search-bar-wrapper-map-left"} dataSource={['cafe', 'Restaurant']} handleClickSearch={this.props.handleSearchPlace}/>
                 <div className='map-page-sidebar-filter-buttons'>
                     <Radio.Group value={"large"} onChange={this.handleSizeChange}>
                         <Radio.Button>Events</Radio.Button>

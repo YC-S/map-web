@@ -13,11 +13,9 @@ class Map extends React.Component {
     this.state = {
       lng: -122.335167,
       lat: 47.608013,
-      zoom: 13
+      zoom: 10
     };
   }
-
-
   handleResponse = (response) => {
     return response.text().then(text => {
         const data = text && JSON.parse(text);
@@ -25,7 +23,6 @@ class Map extends React.Component {
             const error = (data && data.message) || response.statusText;
             return Promise.reject(error);
         }
-
         return data;
     });
 }
@@ -46,7 +43,7 @@ addMarker = (point, style) => {
   const popup = new mapboxgl.Popup({offset: popupOffsets, className: 'my-class', closeButton: false,
   closeOnClick: false})
   .setLngLat([point.lng, point.lat])
-  .setHTML('<div style="display:flex;width:150px;align-items:center;justify-content:space-around;"><img src="' + point.imgURL + '" height="80" width="80" /><h1>'+ point.title + '</h1></div>')
+  .setHTML('<div style="display:flex;width:180px;align-items:center;justify-content:space-between;"><img src="' + point.imgURL + '" height="80" width="80" style="margin: 5px"/><h1>'+ point.name + '</h1></div>')
   .setMaxWidth("300px")
   .addTo(map);
     const marker = new mapboxgl.Marker(style);
@@ -71,8 +68,7 @@ addMarker = (point, style) => {
         // add markers
         if (selectedPoint) {
             this.addMarker(selectedPoint, {'color': 'rgba(0, 128, 0, 0.5)'});
-        }
-        
+        }   
         for (let i = 0; i < pointsInPlan.length; i++) {
             this.addMarker(pointsInPlan[i], {'color': 'rgb(0, 128, 0)'});
         }
@@ -96,6 +92,7 @@ addMarker = (point, style) => {
                     // Update the `route` source by getting the route source
                     // and setting the data equal to routeGeoJSON
                     setRouteObj(data);
+                    console.log(data);
                     const routeGeoJSON = turf.featureCollection([turf.feature(data.routes[0].geometry)]);
                     map.getSource('route')
                     .setData(routeGeoJSON);
@@ -189,7 +186,6 @@ addMarker = (point, style) => {
     });
 
     //map.addControl(geocoder, 'top-right');
-
     const marker = new mapboxgl.Marker({'color': '#008000'})// Create a new green marker
     geocoder.on('result', function(data) { // When the geocoder returns a result
       const point = data.result.center; // Capture the result coordinates

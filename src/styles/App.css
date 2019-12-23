@@ -55,3 +55,9 @@
 .App-link {
   color: #09d3ac;
 }
+
+.leaflet-bottom, .leaflet-top {
+  z-index: 0 !important;
+  position: absolute;
+  pointer-events: none;
+}
