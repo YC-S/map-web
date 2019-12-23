@@ -103,7 +103,7 @@ class MyPlanContainer extends React.Component {
 
     calculateTimeInMins = (routeObj) => {
         if (routeObj) {
-            return Math.ceil(routeObj.routes[0].legs.reduce( (acc, leg) => {return leg.duration + acc}, 0)/60);    
+            return Math.ceil(routeObj.routes[0].legs.reduce( (acc, leg) => {return leg.duration + acc}, 0)/60) + this.props.pointsInPlan.length * 90;    
         } 
         return 0;
     }
@@ -146,7 +146,7 @@ class MyPlanContainer extends React.Component {
                                 </div>
                             )}
                         </Droppable>
-                        {!showRoute || dragging || !routeObj ? null : <div style={{color: this.calculateTimeInMins(routeObj) > 50 ? "red":"black"}} className="plan-time-label">Total Travel Time: {this.showTime(this.calculateTimeInMins(routeObj))}</div>}
+                        {!showRoute || dragging || !routeObj ? null : <div style={{color: this.calculateTimeInMins(routeObj) > 60*8 ? "red":"black"}} className="plan-time-label">Total Travel Time: {this.showTime(this.calculateTimeInMins(routeObj))}</div>}
                         {pointsInPlan.length > 0 ?
                             (<div>
                                 {editing ? null : <Button id="plan_edit_button" type="primary" onClick={this.handleClickEdit}>Edit</Button>}
