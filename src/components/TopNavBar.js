@@ -3,6 +3,7 @@ import { userService } from '../api/UserServices';
 import {Redirect} from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import profile_icon from '../assets/default-user-icon.jpg';
+import logo from "../assets/images/youtuan-logo.png";
 
 class TopNavBar extends React.Component {
     handleLoginClick = () => {
@@ -27,6 +28,7 @@ class TopNavBar extends React.Component {
     render() {
         return (
             <div>
+                <img src={logo} className="landing-logo" alt="logo" />
                 <header className="landing-header">
                     {localStorage.getItem('user') ? 
                     <div>
