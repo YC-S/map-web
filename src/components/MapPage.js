@@ -6,6 +6,7 @@ import * as QueryString from "query-string"
 import { Switch, Icon } from 'antd';
 import handleResponse from '../api/APIUtils';
 import AuthorizationModal from './AuthorizationModal';
+import PlaceCard from './PlaceCard';
 import cloneDeep from 'lodash/cloneDeep';
 import { SearchService } from '../api/SearchServices';
 import { PlanService } from '../api/PlanServices';
@@ -29,6 +30,21 @@ class MapPage extends React.Component {
             visibleLogin: false,
             visibleRegister: false,
             popConfirmDisabled: true,
+            placeCardVisible: false,
+            placeCardData: null,
+        }
+    }
+
+    setPlaceCardData = (data) => {
+        this.setState({placeCardData: data});
+        if (!this.state.placeCardVisible) {
+            this.setState({placeCardVisible: true});
+        }
+    }
+
+    setPlaceCardVisibility = (visible) => {
+        if (this.state.placeCardVisible !== visible) {
+            this.setState({placeCardVisible: visible});
         }
     }
 
@@ -145,6 +161,7 @@ class MapPage extends React.Component {
     }
 
     extractData = (data) => {
+        console.log(data);
         return data.map(e => {
             return {
                 id: e.id,
@@ -154,6 +171,10 @@ class MapPage extends React.Component {
                 lng: e.coordinates.longitude,
                 category: e.categories[0].title,
                 location: e.location,
+                display_phone: e.display_phone,
+                rating: e.rating,
+                is_closed: e.is_closed,
+                description: e.description,
             }
         });
     }
@@ -192,7 +213,7 @@ class MapPage extends React.Component {
     }
 
     render() {
-        const {pointsInPlan, data, location, showRoute, selectedPoint, updatePlan, routeObj, disableRoute, planId, planTitle, plan, popConfirmDisabled} = this.state;       
+        const {pointsInPlan, data, location, showRoute, selectedPoint, updatePlan, routeObj, disableRoute, planId, planTitle, plan, popConfirmDisabled, placeCardVisible, placeCardData} = this.state;       
         return (
             <div className="map-page">
                 <div className="nav-bar-other">
@@ -206,7 +227,9 @@ class MapPage extends React.Component {
                     handleEnableRoute={this.handleEnableRoute} planId={planId} planTitle={planTitle} plan={plan}
                     setPlanTitle={this.setPlanTitle} showLogin={this.showLogin} popConfirmDisabled={popConfirmDisabled} 
                     disablePopConfirm={this.disablePopConfirm} handleSearchPlace={this.handleSearchPlace}
-                    setPlanId={this.setPlanId} setPlan={this.setPlan}/>
+                    setPlanId={this.setPlanId} setPlan={this.setPlan} setPlaceCardData={this.setPlaceCardData}/>
+                    
+                    {placeCardVisible ? <PlaceCard setPlaceCardVisibility={this.setPlaceCardVisibility} placeCardVisible={placeCardVisible} placeCardData={placeCardData}/> : null}
                     <div className="show-route-container">
                         <span id="route-button-notation">Route</span>
                         <Switch id="route-switch" checkedChildren="On" unCheckedChildren="Off" checked={showRoute} onChange={this.handleRouteSwitch} disabled={disableRoute}/>

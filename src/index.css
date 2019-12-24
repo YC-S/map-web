@@ -23,6 +23,7 @@
 @import './styles/PlanSettingModal.css';
 @import '~antd/dist/antd.css';
 @import '~react-datepicker/dist/react-datepicker.css';
+@import './styles/PlaceCard.css';
 
 @import "./styles/Header.css";
 @import "./styles/Image.css";
