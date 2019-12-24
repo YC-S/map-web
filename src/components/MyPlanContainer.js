@@ -49,13 +49,13 @@ class MyPlanContainer extends React.Component {
     }
 
     handleClickSavePlan = () => {
-        const { pointsInPlan, planId, showLogin } = this.props;
+        const { pointsInPlan, planId, showLogin, plan } = this.props;
         if (localStorage.getItem("user")) {
             // user logged in
             // if ther is no planId paramter in url
             if (planId) {
                 // update plan
-                PlanService.updatePlan(localStorage.getItem('user'), planId, pointsInPlan)
+                PlanService.updatePlan(pointsInPlan, plan)
                     .then(() => {
                         console.log('Plan successfully updated!');
                     })
@@ -89,13 +89,12 @@ class MyPlanContainer extends React.Component {
             this.props.setPlanTitle(values.title);
 
             // call create plan api and get back an id
-            // then assign the id to planId 
+            // then assign the id to planId, assign plan to plan 
             // ************ code goes here ***************
-            //
-            //
             PlanService.createPlan(JSON.parse(localStorage.getItem('user')), this.props.pointsInPlan, values.title, 'Seattle')
-            .then(() => {
-                this.setState({planId: 1});
+            .then((plan) => {
+                this.props.setPlanId(plan.id);
+                this.props.setPlan(plan);
             })
             .catch(err => console.log(err))
         });

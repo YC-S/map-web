@@ -8,6 +8,7 @@ import handleResponse from '../api/APIUtils';
 import AuthorizationModal from './AuthorizationModal';
 import cloneDeep from 'lodash/cloneDeep';
 import { SearchService } from '../api/SearchServices';
+import { PlanService } from '../api/PlanServices';
 
 class MapPage extends React.Component {
     constructor(props) {
@@ -15,46 +16,11 @@ class MapPage extends React.Component {
         const params = QueryString.parse(props.location.search);
         this.state = {
             location: [parseFloat(params.lng), parseFloat(params.lat)],
-            data: [
-                // {
-                //     id: 1,
-                //     lng: -122.335167,
-                //     lat:  47.608013,
-                //     imgURL: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpChfpdl2pEQxJWEH-Q_FsZyg3SLkV3DzS3-VE17mBgXZkFljX&s',
-                //     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam hendrerit nisi sed sollicitudin pellentesque. Nunc p, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam hendrerit nisi sed sollicitudin pellentesque. Nunc posuere purus rhoncus '
-                // },
-                // {
-                //     id: 2,
-                //     lng: -122.325167,
-                //     lat:  47.608013,
-                //     imgURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpChfpdl2pEQxJWEH-Q_FsZyg3SLkV3DzS3-VE17mBgXZkFljX&s",
-                //     description: 'Lorem ipsum ',
-                // },
-                // {
-                //     id: 3,
-                //     lng: -122.345167,
-                //     lat:  47.628013,
-                //     imgURL: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpChfpdl2pEQxJWEH-Q_FsZyg3SLkV3DzS3-VE17mBgXZkFljX&s',
-                //     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam hendrerit nisi sed sollicitudin pellentesque. Nunc posuere purus rhoncus '
-                // },
-                // {
-                //     id: 4,
-                //     lng: -122.365167,
-                //     lat:  47.618013,
-                //     imgURL: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpChfpdl2pEQxJWEH-Q_FsZyg3SLkV3DzS3-VE17mBgXZkFljX&s',
-                //     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam hendrerit nisi sed sollicitudin pellentesque. Nunc posuere purus rhoncus '
-                // },
-                // {
-                //     id: 5,
-                //     lng: -122.345167,
-                //     lat:  47.598013,
-                //     imgURL: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpChfpdl2pEQxJWEH-Q_FsZyg3SLkV3DzS3-VE17mBgXZkFljX&s',
-                //     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam hendrerit nisi sed sollicitudin pellentesque. Nunc posuere purus rhoncus '
-                // },
-            ],
+            data: [],
             pointsInPlan: [],
             planId: params.plan,
             planTitle: null,
+            plan: null,
             updatePlan: false,
             selectedPoint: null,
             showRoute: false,
@@ -64,6 +30,13 @@ class MapPage extends React.Component {
             visibleRegister: false,
             popConfirmDisabled: true,
         }
+    }
+
+    setPlan = (plan) => {
+        this.setState({plan: plan});
+    }
+    setPlanId = (id) => {
+        this.setState({planId: id});
     }
 
     setRouteObj = (routeObj) => {
@@ -197,13 +170,29 @@ class MapPage extends React.Component {
 
         // fetch plan based on planId
         // **************** add code here ******************
-        // set planTitle
-        //
-        //
+        // set planTitle & points in plan
+        if (this.state.planId) {
+            PlanService.getPlan(this.state.planId)
+            .then(plan => {
+                this.setState({plan: plan});
+                this.setState({planTitle: plan.planTitle});
+                PlanService.getPlanItems(this.state.planId)
+                .then(data => {
+                    const pointsInPlan = this.extractData(data);
+                    pointsInPlan.map(point => {
+                        point.draggingId = Math.floor(Math.random() * 1000000).toString();
+                        return point;
+                    });
+                    this.setState({pointsInPlan: pointsInPlan});
+                })               
+            })
+            .catch(err => console.log(err));
+        }
+
     }
 
     render() {
-        const {pointsInPlan, data, location, showRoute, selectedPoint, updatePlan, routeObj, disableRoute, planId, planTitle, popConfirmDisabled, roundTrip} = this.state;       
+        const {pointsInPlan, data, location, showRoute, selectedPoint, updatePlan, routeObj, disableRoute, planId, planTitle, plan, popConfirmDisabled} = this.state;       
         return (
             <div className="map-page">
                 <div className="nav-bar-other">
@@ -214,9 +203,10 @@ class MapPage extends React.Component {
                     <MapSideBar data={data} addPointsToPlan={this.addPointsToPlan} pointsInPlan={pointsInPlan} handleHoverSearchResult={this.handleHoverSearchResult} 
                     deletePointsFromPlan={this.deletePointsFromPlan} rearrangePointsInPlan={this.rearrangePointsInPlan} 
                     showRoute={showRoute} routeObj={routeObj} handleDisableRoute={this.handleDisableRoute} 
-                    handleEnableRoute={this.handleEnableRoute} planId={planId} planTitle={planTitle} 
+                    handleEnableRoute={this.handleEnableRoute} planId={planId} planTitle={planTitle} plan={plan}
                     setPlanTitle={this.setPlanTitle} showLogin={this.showLogin} popConfirmDisabled={popConfirmDisabled} 
-                    disablePopConfirm={this.disablePopConfirm} handleSearchPlace={this.handleSearchPlace}/>
+                    disablePopConfirm={this.disablePopConfirm} handleSearchPlace={this.handleSearchPlace}
+                    setPlanId={this.setPlanId} setPlan={this.setPlan}/>
                     <div className="show-route-container">
                         <span id="route-button-notation">Route</span>
                         <Switch id="route-switch" checkedChildren="On" unCheckedChildren="Off" checked={showRoute} onChange={this.handleRouteSwitch} disabled={disableRoute}/>
