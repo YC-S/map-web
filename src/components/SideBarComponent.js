@@ -8,6 +8,7 @@ class SideBarComponent extends React.Component {
     }
 
     handleAddToTrip = (e) => {
+        e.stopPropagation();
         // animation to hide this card
         this.setState(prevState => ({inTrip: !prevState.inTrip}));
         // add it to state in mapPage, add to database, add to cache?
@@ -15,9 +16,13 @@ class SideBarComponent extends React.Component {
 
     };
 
+    onClickItem = () => {
+        this.props.setPlaceCardData(this.props.componentData);
+    }
 
-    confirmAddPlace = () => {
-        //this.setState({popConfirmDisabled: true});
+
+    confirmAddPlace = (e) => {
+        e.stopPropagation();
         this.props.disablePopConfirm();
         this.handleAddToTrip();
     }
@@ -26,7 +31,7 @@ class SideBarComponent extends React.Component {
         const { componentData, handleHoverSearchResult, popConfirmDisabled } = this.props;
         const { inTrip } = this.state;
         return (
-            <div onMouseEnter={handleHoverSearchResult(componentData)} onMouseLeave={handleHoverSearchResult()} className='sidebar-component' style={{ height: inTrip? "0":"132px", transition: "0.3s", visibility: inTrip ? "hidden":"visible"}}>
+            <div onMouseEnter={handleHoverSearchResult(componentData)} onMouseLeave={handleHoverSearchResult()} onClick={this.onClickItem} className='sidebar-component' style={{ height: inTrip? "0":"132px", transition: "0.3s", visibility: inTrip ? "hidden":"visible"}}>
                 <img src={componentData.imgURL} alt=" " height="100" width="100" />
                 <div className="sidebar-description-and-button">
                     <div className='sidebar-description'>

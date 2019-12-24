@@ -1,0 +1,14 @@
+.place-card {
+    position: absolute;
+    left: 450px;
+    top: 30px;
+}
+
+.place-card-content {
+    height: 70vh;
+    overflow: auto;
+}
+
+.place-card-content::-webkit-scrollbar { 
+    display: none; 
+}

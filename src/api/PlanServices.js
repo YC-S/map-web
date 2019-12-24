@@ -23,14 +23,17 @@ function getPlanItems(planId) {
     .then(handleResponse)
 }
 
-function updatePlan(user, planId, pointsInPlan) {
+function updatePlan(pointsInPlan, plan) {
     const planItems = pointsInPlan.map(point => point.id);
     const requestOptions = {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ user, 
-            id: planId, 
+        body: JSON.stringify({ 
+            user: plan.user, 
+            id: plan.id, 
             planItems: planItems.join(","),
+            planTitle: plan.planTitle,
+            city: plan.city
         }),
     };
     return fetch(`http://localhost:8080/api/addPlan`, requestOptions)
