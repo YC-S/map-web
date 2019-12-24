@@ -21,7 +21,7 @@ class MapSideBar extends React.Component {
 
     render() {
         const { collapse } = this.state;
-        const { addPointsToPlan, data, pointsInPlan, handleHoverSearchResult, deletePointsFromPlan, rearrangePointsInPlan, showRoute, routeObj, handleDisableRoute, handleEnableRoute, planId, planTitle, plan, setPlanTitle, showLogin, popConfirmDisabled, disablePopConfirm, handleSearchPlace, setPlanId, setPlan}= this.props;
+        const { addPointsToPlan, data, pointsInPlan, handleHoverSearchResult, deletePointsFromPlan, rearrangePointsInPlan, showRoute, routeObj, handleDisableRoute, handleEnableRoute, planId, planTitle, plan, setPlanTitle, showLogin, popConfirmDisabled, disablePopConfirm, handleSearchPlace, setPlanId, setPlan, setPlaceCardData}= this.props;
         return (
             <div className={"mapSidebar"}>
                 <div className="tab-content" style={{width: collapse? "0":"400px", padding: collapse? "0":"10px",  transition: "0.2s"}}>
@@ -29,7 +29,7 @@ class MapSideBar extends React.Component {
                     <TabPane tab="&emsp;Discovery&emsp;" key="1">
                         <div className="map-sidebar-main" >
                             <SideBarTopContainer handleSearchPlace={handleSearchPlace}/>
-                            <SideBarContent data={data} addPointsToPlan={addPointsToPlan} pointsInPlan={pointsInPlan} handleHoverSearchResult={handleHoverSearchResult} popConfirmDisabled={popConfirmDisabled} disablePopConfirm={disablePopConfirm}/>
+                            <SideBarContent data={data} addPointsToPlan={addPointsToPlan} pointsInPlan={pointsInPlan} handleHoverSearchResult={handleHoverSearchResult} popConfirmDisabled={popConfirmDisabled} disablePopConfirm={disablePopConfirm} setPlaceCardData={setPlaceCardData}/>
                         </div>
                     </TabPane>
                     <TabPane tab="&emsp;&emsp;My Plan&emsp;&emsp;" key="2">
