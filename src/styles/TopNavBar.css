@@ -14,6 +14,13 @@
 
 }
 
+.landing-logo {
+    padding-left: 10px;
+    padding-top: 3px;
+    height: 50px;
+    float: left;
+}
+
 #nav_profile_img:hover {
     border: 1px solid white;
 }
