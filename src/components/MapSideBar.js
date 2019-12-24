@@ -20,9 +20,8 @@ class MapSideBar extends React.Component {
       }
 
     render() {
-        console.log(this.props.data);
         const { collapse } = this.state;
-        const { addPointsToPlan, data, pointsInPlan, handleHoverSearchResult, deletePointsFromPlan, rearrangePointsInPlan, showRoute, routeObj, handleDisableRoute, handleEnableRoute, planId, planTitle, setPlanTitle, showLogin, popConfirmDisabled, disablePopConfirm, handleSearchPlace}= this.props;
+        const { addPointsToPlan, data, pointsInPlan, handleHoverSearchResult, deletePointsFromPlan, rearrangePointsInPlan, showRoute, routeObj, handleDisableRoute, handleEnableRoute, planId, planTitle, plan, setPlanTitle, showLogin, popConfirmDisabled, disablePopConfirm, handleSearchPlace, setPlanId, setPlan}= this.props;
         return (
             <div className={"mapSidebar"}>
                 <div className="tab-content" style={{width: collapse? "0":"400px", padding: collapse? "0":"10px",  transition: "0.2s"}}>
@@ -35,7 +34,7 @@ class MapSideBar extends React.Component {
                     </TabPane>
                     <TabPane tab="&emsp;&emsp;My Plan&emsp;&emsp;" key="2">
                         <div className="map-sidebar-main" >
-                            <MyPlanContainer pointsInPlan={pointsInPlan} addPointsToPlan={addPointsToPlan} deletePointsFromPlan={deletePointsFromPlan} rearrangePointsInPlan={rearrangePointsInPlan} showRoute={showRoute} routeObj={routeObj} handleDisableRoute={handleDisableRoute} handleEnableRoute={handleEnableRoute} planId={planId} planTitle={planTitle} setPlanTitle={setPlanTitle} showLogin={showLogin}/>
+                            <MyPlanContainer pointsInPlan={pointsInPlan} addPointsToPlan={addPointsToPlan} deletePointsFromPlan={deletePointsFromPlan} rearrangePointsInPlan={rearrangePointsInPlan} showRoute={showRoute} routeObj={routeObj} handleDisableRoute={handleDisableRoute} handleEnableRoute={handleEnableRoute} planId={planId} planTitle={planTitle} plan={plan} setPlanTitle={setPlanTitle} showLogin={showLogin} setPlanId={setPlanId} setPlan={setPlan}/>
                         </div>
                     </TabPane>
                 </Tabs>
