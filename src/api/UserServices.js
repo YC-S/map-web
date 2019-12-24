@@ -16,24 +16,24 @@ function login(username, password) {
 
     return fetch(`http://localhost:8080/users/login`, requestOptions)
         .then(handleResponse)
-        .then(() => {
+        .then((user) => {
             // login successful if there's a user in the response
-            //if (user) {
+            if (user) {
                 console.log("user is logged in");
                 // store user details and basic auth credentials in local storage 
                 // to keep user logged in between page refreshes
                 // for later authorization 
                 //user.authdata = window.btoa(username + ':' + password);
-                localStorage.setItem('username', username);
-            //}
-            //return user;
+                localStorage.setItem('user', JSON.stringify(user));
+            }
+            return user;
         })
         
 }
 
 function logout() {
     // remove user from local storage to log user out
-    localStorage.removeItem('username');
+    localStorage.removeItem('user');
 }
 
 function register(username, password, email) {
@@ -44,28 +44,25 @@ function register(username, password, email) {
     };
     return fetch(`http://localhost:8080/users/register`, requestOptions)
         .then(handleResponse)
-        .then(() => {
+        .then((user) => {
             // login successful if there's a user in the response
-            //if (user) {
+            if (user) {
                 console.log("user is registered and logged in");
                 // store user details and basic auth credentials in local storage 
                 // to keep user logged in between page refreshes
                 // for later authorization 
                 //user.authdata = window.btoa(username + ':' + password);
-                localStorage.setItem('username', username);
-            //}
-            //return user;
+                localStorage.setItem('user', JSON.stringify(user));
+            }
+            return user;
         })
 }
 
-function getProfileImg(username) {
-    username = encodeURIComponent(username);
+function getProfileImg(profile_id) {
     const requestOptions = {
         method: 'GET',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username })
     };
-    return fetch(`http://localhost:8080/profileImage/${username}`, requestOptions)
+    return fetch(`http://localhost:8080/profileImage/${profile_id}`, requestOptions)
     .then(handleResponse)
 }
 

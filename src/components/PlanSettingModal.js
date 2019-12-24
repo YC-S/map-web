@@ -21,9 +21,9 @@ export const PlanSettingModal = Form.create({ name: 'form_in_modal' })(
                 rules: [{ required: true, message: 'Please name your plan!' }],
               })(<Input />)}
             </Form.Item>
-            <Form.Item label="Description">
+            {/* <Form.Item label="Description">
               {getFieldDecorator('description')(<Input type="textarea" />)}
-            </Form.Item>
+            </Form.Item> */}
             <Form.Item className="plan-create-form_last-form-item">
               {getFieldDecorator('modifier', {
                 initialValue: 'public',
