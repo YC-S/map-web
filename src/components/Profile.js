@@ -54,6 +54,11 @@ export class Profile extends React.Component {
     this.setState({ visible: false });
   };
 
+  componentDidMount() {
+    // get profile data and update states
+    
+  }
+
   render() {
     return (
       <div className="profile">
