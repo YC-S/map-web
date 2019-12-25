@@ -34,7 +34,7 @@ class TopNavBar extends React.Component {
                     <div>
                         <div id="welcome_message">Hi, {JSON.parse(localStorage.getItem('user')).username}!</div>
                                                 {/* link to profile page through profile image */}
-                                                <Link to="/"><div id="nav_profile_img"><img src={profile_icon} alt=" " width="30px" height="30px"></img></div></Link>
+                                                <Link to="/profile"><div id="nav_profile_img"><img src={profile_icon} alt=" " width="30px" height="30px"></img></div></Link>
                         <Link className="navLink" to="/" onClick={this.handleLogoutClick}>Logout</Link>
                     </div> 
                     : 

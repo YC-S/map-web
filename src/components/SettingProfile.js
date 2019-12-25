@@ -15,7 +15,7 @@ export class SettingProfile extends React.Component {
         </div>
         <Modal
           visible={visible}
-          title="Settings"
+          title="Update Profile"
           onOk={this.props.handleOk}
           onCancel={this.props.handleCancel}
           footer={[
@@ -35,13 +35,16 @@ export class SettingProfile extends React.Component {
           <div className="modalContainer">
             <Input
               id="inputUserName"
-              placeholder="user name"
-              // onChange={this.props.handleUsername}
+              placeholder="First name"
+            />
+            <Input
+              id="inputUserName"
+              placeholder="Last name"
             />
             <Input
               id="inputSignature"
               placeholder="Signature"
-              maxLength="274"
+              maxLength={274}
             />
           </div>
         </Modal>
