@@ -1,54 +1,118 @@
 import React from "react";
 import "antd/dist/antd.css";
-import { Modal, Button, Input } from "antd";
+import { ProfileService } from '../api/ProfileServices';
+import { Modal, Form, Input, Button, Upload, Icon } from 'antd';
 
 export class SettingProfile extends React.Component {
+  state = {
+    visible: false,
+  }
+
+  handleCancel = () => {
+    this.setState({ visible: false });
+  };
+
+  handleShowForm = () => {
+    this.setState({ visible: true });
+  }
+
+  saveFormRef = formRef => {
+    this.formRef = formRef;
+  };
+
+  handleUpdateProfile = () => {
+    const { form } = this.formRef.props;
+    form.validateFields((err, values) => {
+        if (err) {
+            return;
+        }
+        console.log('Received values of form: ', values);
+        // save profile and reload page to update profile fields
+        ProfileService.updateProfile(values.firstName, values.lastName, values.signature, values.profileImg[0].originFileObj, this.props.passedDown.profile)
+        .then(data => {
+          console.log(data);
+        })
+        .catch(err => console.log(err))
+        form.resetFields();
+        this.setState({ visible: false });
+    });
+}
   render() {
-    const { visible, loading } = this.props.passedDown;
     return (
       <div>
         <div id="nameAndEditProfile">
           <span id="person-name">{this.props.passedDown.name}</span>
-          <Button className="edit-profile" onClick={this.props.showModal}>
+          <Button className="edit-profile" onClick={this.handleShowForm}>
             Edit Profile <i className="fa fa-cog"></i>
           </Button>
         </div>
-        <Modal
-          visible={visible}
-          title="Update Profile"
-          onOk={this.props.handleOk}
-          onCancel={this.props.handleCancel}
-          footer={[
-            <Button key="back" onClick={this.props.handleCancel}>
-              Return
-            </Button>,
-            <Button
-              key="submit"
-              type="primary"
-              loading={loading}
-              onClick={this.props.handleOk}
-            >
-              Submit
-            </Button>
-          ]}
-        >
-          <div className="modalContainer">
-            <Input
-              id="inputUserName"
-              placeholder="First name"
-            />
-            <Input
-              id="inputUserName"
-              placeholder="Last name"
-            />
-            <Input
-              id="inputSignature"
-              placeholder="Signature"
-              maxLength={274}
-            />
-          </div>
-        </Modal>
+        <ProfileSettingModal wrappedComponentRef={this.saveFormRef} visible={this.state.visible} onCancel={this.handleCancel} onSubmit={this.handleUpdateProfile}/>
       </div>
     );
   }
 }
+
+
+const ProfileSettingModal = Form.create({ name: 'form_in_modal' })(
+  class extends React.Component {
+    normFile = e => {
+      console.log('Upload event:', e);
+      if (Array.isArray(e)) {
+        return e;
+      }
+      if (e.fileList.length > 1) {
+        e.fileList.shift();
+      }
+      return e && e.fileList;
+    };
+    dummyRequest = ({ file, onSuccess }) => {
+      setTimeout(() => {
+        onSuccess("ok");
+      }, 0);
+    }
+    render() {
+      const { visible, onCancel, onSubmit, form, loading } = this.props;
+      const { getFieldDecorator } = form;
+      return (
+        <Modal
+          visible={visible}
+          title="Update Profile"
+          okText="Update"
+          onCancel={onCancel}
+          onOk={onSubmit}
+        >
+          <Form layout="vertical">
+            <Form.Item label="First Name">
+              {getFieldDecorator('firstName', {
+                rules: [{ required: true, message: 'Please input your name!' }],
+              })(<Input />)}
+            </Form.Item>
+            <Form.Item label="Last Name">
+              {getFieldDecorator('lastName', {
+                rules: [{ required: false }],
+              })(<Input />)}
+            </Form.Item>
+            <Form.Item label="Signature">
+              {getFieldDecorator('signature', {
+                rules: [{ required: false, message: 'Please input your signature!' }],
+              })(<Input />)}
+            </Form.Item>
+            <Form.Item label="Profile Image">
+          {getFieldDecorator('profileImg', {
+            valuePropName: 'fileList',
+            getValueFromEvent: this.normFile,
+          })(
+            <Upload.Dragger name="files" customRequest={this.dummyRequest}>
+              <p className="ant-upload-drag-icon">
+                <Icon type="inbox" />
+              </p>
+              <p className="ant-upload-text">Click or drag file to this area to upload</p>
+            </Upload.Dragger>,
+          )}
+        </Form.Item>
+          </Form>
+        </Modal>
+      );
+    }
+  },
+);
