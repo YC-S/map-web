@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card } from 'antd';
+import { Card, Rate } from 'antd';
 
 
 class PlaceCard extends React.Component {
@@ -14,9 +14,10 @@ class PlaceCard extends React.Component {
                 <Card title="" extra={<a href="#" onClick={this.onClick}>Close</a>} style={{ width: 600 }}>
                     <div className="place-card-content">
                         <img src={placeCardData.imgURL} alt="" style={{width: "100%", height: "auto"}}></img>
-                        <div style={{display: "flex", justifyContent: "space-between", marginTop: "20px"}}>
-                            <h1 style={{fontSize: "1.1rem"}}>{placeCardData.name}</h1>
-                            <p>Rating: {placeCardData.rating}</p>
+                        <div style={{display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: "20px"}}>
+                            <h1 style={{fontSize: "1.1rem", margin: "0"}}>{placeCardData.name}</h1>
+                            {/* <p>Rating: {placeCardData.rating}</p> */}
+                            <div>Rating: <Rate disabled value={placeCardData.rating} /></div>
                         </div>
                         <p>{placeCardData.description}</p>
                     <p>Contact: {placeCardData.display_phone}</p>

@@ -1,6 +1,6 @@
 import React from "react";
-import boy from "../images/boy.svg";
 import { SettingProfile } from "./SettingProfile";
+import { ProfileService } from '../api/ProfileServices';
 // import boy from "../images/boy.svg";
 
 
@@ -8,55 +8,36 @@ export class Profile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-
       name: "John Smith",
       signature:
         "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.",
-      loading: false,
-      visible: false,
-      headProfile: require("../images/boy.svg")
+      headProfile: require("../images/boy.svg"),
+      profile: null,
     };
-    // this.handleOnClick = this.handleOnClick.bind(this);
   }
-  // handleOnClick = () => {
-  //   return <div>{alert("button clicked")}</div>;
-  // };
-  showModal = () => {
-    this.setState({
-      visible: true
-    });
-  };
-  // handleUsername = e => {
-  //   console.log(e.target.value);
-  // };
-
-  handleOk = e => {
-    let username = document.getElementById("inputUserName").value;
-    let signature = document.getElementById("inputSignature").value;
-    this.setState({ loading: true });
-    setTimeout(() => {
-      this.setState({ loading: false, visible: false });
-    }, 3000);
-    if (username) {
-      this.setState({ name: username });
-    }
-    if (signature) {
-      this.setState({
-        signature: signature
-      });
-    }
-    // return username || signature
-    //   ? this.setState({ name: username, signature: signature })
-    //   : this.state;
-  };
-
-  handleCancel = () => {
-    this.setState({ visible: false });
-  };
-
   componentDidMount() {
     // get profile data and update states
-    
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (user) {
+      ProfileService.getProfile(user.cores_profile.id)
+      .then(profile => {
+        console.log(profile);
+        const name = (profile.firstName ? profile.firstName : "") + (profile.lastName ? (" " + profile.lastName) : "");
+        this.setState(prevState => ({
+          name: name === "" ? prevState.name : name,
+          signature: profile.description || prevState.description,
+          profile: profile,
+        }));
+      })
+      .catch(err => console.log(err));
+
+      ProfileService.getProfileImage(user.cores_profile.id)
+      .then(imgURL => {
+        console.log(imgURL);
+        this.setState({headProfile: imgURL});
+      })
+      .catch(err => {console.log("Profile Image retrieval failed: " + err)});
+    }
   }
 
   render() {
@@ -72,16 +53,8 @@ export class Profile extends React.Component {
         <div>
           {/* user information and button to let user change his/her profile */}
           <h4>
-            
-            {/* <button className="edit-profile" onClick={this.handleOnClick}>
-              Edit Profile <i className="fa fa-cog"></i>
-            </button> */}
             <SettingProfile
               passedDown={this.state}
-              showModal={this.showModal}
-              handleCancel={this.handleCancel}
-              handleOk={this.handleOk}
-              handleUsername={this.handleUsername}
             />
           </h4>
           {/* text description which can let user personalize their expression */}
