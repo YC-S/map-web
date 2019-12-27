@@ -23,13 +23,12 @@ class RegistrationForm extends React.Component {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
-                console.log('Received values of form: ', values);
+                //console.log('Received values of form: ', values);
                 this.setState({ loading: true });
                 userService.register(values.username, values.password, values.email)
                 .then(() => {
                     this.setState({ loading: false });
                     this.props.hideForm();
-                    console.log('hiding register form');
                     // any redirections goes here
                     if (this.props.setToMap) {
                         this.props.setToMap(true);

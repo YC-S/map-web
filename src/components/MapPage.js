@@ -160,7 +160,7 @@ class MapPage extends React.Component {
     }
 
     extractData = (data) => {
-        console.log(data);
+        //console.log(data);
         return data.map(e => {
             return {
                 id: e.id,

@@ -15,14 +15,13 @@ export class Profile extends React.Component {
       profile: null,
     };
   }
-  
+
   componentDidMount() {
     // get profile data and update states
     const user = JSON.parse(localStorage.getItem("user"));
     if (user) {
       ProfileService.getProfile(user.cores_profile.id)
       .then(profile => {
-        console.log(profile);
         const name = (profile.firstName ? profile.firstName : "") + (profile.lastName ? (" " + profile.lastName) : "");
         this.setState(prevState => ({
           name: name === "" ? prevState.name : name,
@@ -34,7 +33,6 @@ export class Profile extends React.Component {
 
       ProfileService.getProfileImage(user.cores_profile.id)
       .then(imgURL => {
-        console.log(imgURL);
         this.setState({headProfile: imgURL});
       })
       .catch(err => {console.log("Profile Image retrieval failed: " + err)});

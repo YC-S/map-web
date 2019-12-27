@@ -6,6 +6,7 @@ import { Modal, Form, Input, Button, Upload, Icon } from 'antd';
 export class SettingProfile extends React.Component {
   state = {
     visible: false,
+    loading: false,
   }
 
   handleCancel = () => {
@@ -21,6 +22,7 @@ export class SettingProfile extends React.Component {
   };
 
   handleUpdateProfile = () => {
+    this.setState({loading: true});
     const { form } = this.formRef.props;
     form.validateFields((err, values) => {
         if (err) {
@@ -29,16 +31,18 @@ export class SettingProfile extends React.Component {
         console.log('Received values of form: ', values);
         // save profile and reload page to update profile fields
         ProfileService.updateProfile(values.firstName, values.lastName, values.signature, values.profileImg[0].originFileObj, this.props.passedDown.profile)
-        .then(data => {
-          console.log(data);
+        .then(profile => {
           // update profile information in localStorage user
           const user = JSON.parse(localStorage.getItem("user"));
-          user.cores_profile = data;
-          debugger;
+          user.cores_profile = profile;
           localStorage.setItem("user", JSON.stringify(user));
-          form.resetFields();
-          this.setState({ visible: false });
-          window.location.reload();
+          // still need to figure out how to make sure everything is ready on the backend
+          setTimeout(() => {
+            form.resetFields();
+            this.setState({ visible: false });
+            this.setState({loading: false});
+            window.location.reload();
+          }, 0);
         })
         .catch(err => console.log(err))
     });
@@ -52,7 +56,7 @@ export class SettingProfile extends React.Component {
             Edit Profile <i className="fa fa-cog"></i>
           </Button>
         </div>
-        <ProfileSettingModal wrappedComponentRef={this.saveFormRef} visible={this.state.visible} onCancel={this.handleCancel} onSubmit={this.handleUpdateProfile}/>
+        <ProfileSettingModal wrappedComponentRef={this.saveFormRef} visible={this.state.visible} loading={this.state.loading} onCancel={this.handleCancel} onSubmit={this.handleUpdateProfile}/>
       </div>
     );
   }
@@ -86,6 +90,7 @@ const ProfileSettingModal = Form.create({ name: 'form_in_modal' })(
           okText="Update"
           onCancel={onCancel}
           onOk={onSubmit}
+          confirmLoading={loading}
         >
           <Form layout="vertical">
             <Form.Item label="First Name">
