@@ -92,7 +92,6 @@ addMarker = (point, style) => {
                     // Update the `route` source by getting the route source
                     // and setting the data equal to routeGeoJSON
                     setRouteObj(data);
-                    console.log(data);
                     const routeGeoJSON = turf.featureCollection([turf.feature(data.routes[0].geometry)]);
                     map.getSource('route')
                     .setData(routeGeoJSON);

@@ -41,7 +41,6 @@ export class PlanView extends Component {
     const user = JSON.parse(localStorage.getItem("user"));
     PlanService.getPlans(user)
     .then(plans => {
-      console.log(plans);
       const extractedPlans = plans.map(plan => ({
         planId: plan.id,
         planTitle: plan.planTitle,

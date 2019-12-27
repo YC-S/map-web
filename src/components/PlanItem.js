@@ -16,15 +16,10 @@ class PlanItem extends React.Component {
     }
 
     handleDelete = (e) => {
-        this.setState({inTrip: false});
-        console.log(this.props.data.id + "delete clicked");       
+        this.setState({inTrip: false});     
         setTimeout(() => {this.props.deletePointsFromPlan(this.props.index)}, 300)
     }
-
-    // handleMouseDown = () => {
-    //     this.props.setDragging(true);
-    // }
-
+    
     handleDuplicate = () => {
         this.props.addPointsToPlan(this.props.data, this.props.index);
     }
@@ -46,7 +41,6 @@ class PlanItem extends React.Component {
                         >
                     {
                         <div id={`planItem${data.draggingId}`}
-                        //onMouseDown={this.handleMouseDown} onMouseUp={()=> {setDragging(false)}}
                         className={"plan-item"} style={{height: inTrip? "130px":"0", transition: "0.3s", visibility: inTrip ? "visible":"hidden"}}>
                         <img src={data.imgURL} alt=" " height="110" width="110" />
                         <div className='plan-item-description'>

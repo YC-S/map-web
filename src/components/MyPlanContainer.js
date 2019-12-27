@@ -82,7 +82,7 @@ class MyPlanContainer extends React.Component {
             if (err) {
                 return;
             }
-            console.log('Received values of form: ', values);
+            //console.log('Received values of form: ', values);
             form.resetFields();
             this.setState({ planSettingVisible: false, editing: false });
             this.props.handleEnableRoute();

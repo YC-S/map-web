@@ -29,7 +29,6 @@ class TopNavBar extends React.Component {
         if (user) {
             ProfileService.getProfile(user.cores_profile.id)
             .then(profile => {
-                console.log(profile);
                 const name = (profile.firstName ? profile.firstName : "") + (profile.lastName ? (" " + profile.lastName) : "");
                 this.setState({name: name});
             })

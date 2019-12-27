@@ -4,7 +4,7 @@ import { Icon, Input, AutoComplete, Form } from 'antd';
 class SearchBar extends React.Component {
 
     onSelect = (value) => {
-        console.log('onSelect', value);
+        //console.log('onSelect', value);
         this.props.handleClickSearch(value);
     }
 
@@ -13,7 +13,7 @@ class SearchBar extends React.Component {
         // verification comes inside here
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                console.log('Received values of search form: ', values);
+                //console.log('Received values of search form: ', values);
                 this.props.handleClickSearch(values.searchTerm);
             }
         });

@@ -30,11 +30,9 @@ export class SettingProfile extends React.Component {
         // save profile and reload page to update profile fields
         ProfileService.updateProfile(values.firstName, values.lastName, values.signature, values.profileImg[0].originFileObj, this.props.passedDown.profile)
         .then(data => {
-          console.log(data);
           // update profile information in localStorage user
           const user = JSON.parse(localStorage.getItem("user"));
           user.cores_profile = data;
-          debugger;
           localStorage.setItem("user", JSON.stringify(user));
           form.resetFields();
           this.setState({ visible: false });
