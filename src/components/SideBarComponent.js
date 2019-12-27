@@ -8,7 +8,6 @@ class SideBarComponent extends React.Component {
     }
 
     handleAddToTrip = (e) => {
-        e.stopPropagation();
         // animation to hide this card
         this.setState(prevState => ({inTrip: !prevState.inTrip}));
         // add it to state in mapPage, add to database, add to cache?
@@ -22,7 +21,7 @@ class SideBarComponent extends React.Component {
 
 
     confirmAddPlace = (e) => {
-        e.stopPropagation();
+        //e.stopPropagation();
         this.props.disablePopConfirm();
         this.handleAddToTrip();
     }
@@ -39,7 +38,7 @@ class SideBarComponent extends React.Component {
                     <p>{componentData.category}</p>
                     </div>
                     <Popconfirm placement="top" title={"Recommended 6 number of places have reached, are you sure about adding more?"} onConfirm={this.confirmAddPlace} okText="Yes" cancelText="No" disabled={popConfirmDisabled}>
-                        <Button shape="round" size="small" type="primary" className="add-to-trip-button" onClick={popConfirmDisabled ? this.handleAddToTrip : null}>Add to trip</Button>
+                        <Button shape="round" size="small" type="primary" className="add-to-trip-button" onClick={e => {e.stopPropagation(); if (popConfirmDisabled) {this.handleAddToTrip()} }}>Add to trip</Button>
                     </Popconfirm>
                 </div>
 
