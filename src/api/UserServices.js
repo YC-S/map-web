@@ -1,4 +1,4 @@
-
+import handleResponse from './APIUtils';
 
 export const userService = {
     login,
@@ -14,8 +14,8 @@ function login(username, password) {
         body: JSON.stringify({ username, password })
     };
 
-    return fetch(`http://localhost:8080/users/login`, requestOptions)
-        .then(handleResponse)
+    return fetch(`http://localhost:8080/api/users/login`, requestOptions)
+        .then(handleResponseUser)
         .then((user) => {
             // login successful if there's a user in the response
             if (user) {
@@ -32,8 +32,16 @@ function login(username, password) {
 }
 
 function logout() {
-    // remove user from local storage to log user out
-    localStorage.removeItem('user');
+    const requestOptions = {
+        method: 'POST',
+    };
+    return fetch(`http://localhost:8080/api/users/logout`, requestOptions)
+        .then(handleResponse)
+        .then(() => {
+            localStorage.removeItem('user');
+        })
+        .catch(err => console.log(err));
+        // remove user from local storage 
 }
 
 function register(username, password, email) {
@@ -42,8 +50,8 @@ function register(username, password, email) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password, email })
     };
-    return fetch(`http://localhost:8080/users/register`, requestOptions)
-        .then(handleResponse)
+    return fetch(`http://localhost:8080/api/users/register`, requestOptions)
+        .then(handleResponseUser)
         .then((user) => {
             // login successful if there's a user in the response
             if (user) {
@@ -62,11 +70,11 @@ function getProfileImg(profile_id) {
     const requestOptions = {
         method: 'GET',
     };
-    return fetch(`http://localhost:8080/profileImage/${profile_id}`, requestOptions)
+    return fetch(`http://localhost:8080/api/profileImage/${profile_id}`, requestOptions)
     .then(handleResponse)
 }
 
-function handleResponse(response) {
+function handleResponseUser(response) {
     return response.text().then(text => {
         //console.log(response);
         const data = text && JSON.parse(text);

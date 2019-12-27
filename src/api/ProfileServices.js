@@ -19,6 +19,13 @@ function getProfileImage(profileId) {
         method: 'GET',
     };
     return fetch(`http://localhost:8080/api/profileImage/${profileId}`, requestOptions)
+    .then(response => {
+        if (!response.ok) {   
+        const error = response.statusText;
+        return Promise.reject(error);
+        }
+        return response;
+    })
     .then(response => response.blob())
     .then(blob => {
         return URL.createObjectURL(blob);

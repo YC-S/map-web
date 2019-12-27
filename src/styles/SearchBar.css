@@ -8,6 +8,7 @@
 .search-bar-wrapper-map-left {
     width: 85%;
     display: inline-block;
-   
+    margin: 0 auto;
+    display: table;
 }
 

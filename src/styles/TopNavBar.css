@@ -1,9 +1,8 @@
 .landing-header {
-    background-color: transparent;
     height: 50px;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: flex-start;
 }
 
 .landing-header div {
@@ -11,14 +10,22 @@
     align-items: center;
     justify-content: flex-end;
     text-align: center;
+    flex-grow: 5;
+}
 
+#header-img-div {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-grow: 1;
 }
 
 .landing-logo {
     padding-left: 10px;
-    padding-top: 3px;
+    /* padding-top: 3px; */
     height: 50px;
-    float: left;
+    /* float: left; */
+    /* align-self: flex-start; */
 }
 
 #nav_profile_img:hover {
