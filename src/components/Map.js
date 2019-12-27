@@ -1,6 +1,6 @@
 import React from 'react';
 import mapboxgl from 'mapbox-gl';
-import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
+//import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import * as turf from '@turf/turf';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4M29iazA2Z2gycXA4N2pmbDZmangifQ.-g_vE53SD2WrJ6tFX7QHmA';
@@ -69,6 +69,7 @@ addMarker = (point, style) => {
         if (selectedPoint) {
             this.addMarker(selectedPoint, {'color': 'rgba(0, 128, 0, 0.5)'});
         }   
+
         for (let i = 0; i < pointsInPlan.length; i++) {
             this.addMarker(pointsInPlan[i], {'color': 'rgb(0, 128, 0)'});
         }
@@ -177,21 +178,24 @@ addMarker = (point, style) => {
               'text-halo-width': 3
             }
           }, 'waterway-label');
+          for (let i = 0; i < this.props.pointsInPlan.length; i++) {
+            this.addMarker(this.props.pointsInPlan[i], {'color': 'rgb(0, 128, 0)'});
+        }
     })
 
-    const geocoder = new MapboxGeocoder({
-      accessToken: mapboxgl.accessToken,
-      mapboxgl: mapboxgl
-    });
+    // const geocoder = new MapboxGeocoder({
+    //   accessToken: mapboxgl.accessToken,
+    //   mapboxgl: mapboxgl
+    // });
 
     //map.addControl(geocoder, 'top-right');
-    const marker = new mapboxgl.Marker({'color': '#008000'})// Create a new green marker
-    geocoder.on('result', function(data) { // When the geocoder returns a result
-      const point = data.result.center; // Capture the result coordinates
-      console.log(data);
-      marker.setLngLat(point).addTo(map); // Add the marker to the map at the result coordinates
+    // const marker = new mapboxgl.Marker({'color': '#008000'})// Create a new green marker
+    // geocoder.on('result', function(data) { // When the geocoder returns a result
+    //   const point = data.result.center; // Capture the result coordinates
+    //   console.log(data);
+    //   marker.setLngLat(point).addTo(map); // Add the marker to the map at the result coordinates
 
-    });
+    // });
 
   }
 
