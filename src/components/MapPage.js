@@ -3,8 +3,7 @@ import TopNavBar from "./TopNavBar"
 import Map from "./Map"
 import MapSideBar from "./MapSideBar"
 import * as QueryString from "query-string"
-import { Switch, Icon } from 'antd';
-import handleResponse from '../api/APIUtils';
+import { Switch } from 'antd';
 import AuthorizationModal from './AuthorizationModal';
 import PlaceCard from './PlaceCard';
 import cloneDeep from 'lodash/cloneDeep';
@@ -217,7 +216,7 @@ class MapPage extends React.Component {
         return (
             <div className="map-page">
                 <div className="nav-bar-other">
-                    <TopNavBar showLogin={this.showLogin} showRegister={this.showRegister}/>
+                    <TopNavBar showLogin={this.showLogin} showRegister={this.showRegister} landing={false}/>
                 </div>
                 <div className="map-page-main">
                     <Map data={data} pointsInPlan={pointsInPlan} location={location} showRoute={showRoute} selectedPoint={selectedPoint} updatePlan={updatePlan} setUpdatePlan={this.setUpdatePlan} setRouteObj={this.setRouteObj} />

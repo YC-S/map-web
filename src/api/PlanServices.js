@@ -4,7 +4,8 @@ export const PlanService = {
     getPlan,
     getPlanItems,
     updatePlan,
-    createPlan
+    createPlan,
+    getPlans
 }
 
 function getPlan(planId) {
@@ -23,13 +24,13 @@ function getPlanItems(planId) {
     .then(handleResponse)
 }
 
-function updatePlan(pointsInPlan, plan) {
+function updatePlan(user, pointsInPlan, plan) {
     const planItems = pointsInPlan.map(point => point.id);
     const requestOptions = {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
-            user: plan.user, 
+            user: user, 
             id: plan.id, 
             planItems: planItems.join(","),
             planTitle: plan.planTitle,
@@ -45,11 +46,17 @@ function createPlan(user, pointsInPlan, planTitle, city) {
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ user, 
+        body: JSON.stringify({ 
+            user, 
             planItems: planItems.join(","), 
             planTitle, 
             city}),
     };
-    return fetch(`http://localhost:8080/api/addPlan`, requestOptions)
+    return fetch(`http://localhost:8080/api/addPlan/${user.id}`, requestOptions)
+    .then(handleResponse)
+}
+
+function getPlans(user) {
+    return fetch(`http://localhost:8080/api/getPlans/${user.id}`)
     .then(handleResponse)
 }

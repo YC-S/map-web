@@ -4,6 +4,7 @@ import { Profile } from "./Profile";
 import { Images } from "./ProfileImageTab";
 import { PlanView } from "./ProfilePlanTab";
 import { TempPlace } from "./ProfileTempTab";
+import TopNavBar from "./TopNavBar"
 
 import { Tabs } from 'antd';
 
@@ -14,6 +15,7 @@ const { TabPane } = Tabs;
 //profile page
 class ProfilePage extends React.Component {
   state = {
+
         //image list consist of all image user uploaded, will change once database is ready
 
         imageList: [
@@ -49,7 +51,7 @@ class ProfilePage extends React.Component {
       render() {
           return(
             <div className='tabs-container'>
-              <Header />
+              <TopNavBar landing={false}/>
               <Profile numberOfImages={this.state.imageList.length} />
 
               <Tabs defaultActiveKey="1">

@@ -15,6 +15,7 @@ export class Profile extends React.Component {
       profile: null,
     };
   }
+  
   componentDidMount() {
     // get profile data and update states
     const user = JSON.parse(localStorage.getItem("user"));

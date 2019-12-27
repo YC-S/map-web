@@ -55,11 +55,11 @@ class Landing extends React.Component {
     render() {
         if (this.state.toMap) {
             // this should go to profile in the future
-            return <Redirect to='/map?lng=-122.335167&lat=47.608013' />
+            return <Redirect to='/profile' />
         }
         return (
             <div className="landing">
-                <TopNavBar showLogin={this.showLogin} showRegister={this.showRegister}/>
+                <TopNavBar showLogin={this.showLogin} showRegister={this.showRegister} landing={true}/>
                 <WrappedAdvancedSearchForm class={"search-bar-wrapper-landing"} dataSource={['Seattle', 'Chicago', 'San Francisco']} handleClickSearch={this.handleSearchCity}/>
                 <AuthorizationModal visibleLogin={this.state.visibleLogin} visibleRegister={this.state.visibleRegister} hideForm={this.hideForm} setToMap={this.setToMap} showRegister={this.showRegister}/>
             </div>

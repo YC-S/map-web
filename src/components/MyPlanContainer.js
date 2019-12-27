@@ -55,7 +55,7 @@ class MyPlanContainer extends React.Component {
             // if ther is no planId paramter in url
             if (planId) {
                 // update plan
-                PlanService.updatePlan(pointsInPlan, plan)
+                PlanService.updatePlan(JSON.parse(localStorage.getItem('user')), pointsInPlan, plan)
                     .then(() => {
                         console.log('Plan successfully updated!');
                     })

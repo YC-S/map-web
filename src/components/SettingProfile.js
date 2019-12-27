@@ -31,10 +31,16 @@ export class SettingProfile extends React.Component {
         ProfileService.updateProfile(values.firstName, values.lastName, values.signature, values.profileImg[0].originFileObj, this.props.passedDown.profile)
         .then(data => {
           console.log(data);
+          // update profile information in localStorage user
+          const user = JSON.parse(localStorage.getItem("user"));
+          user.cores_profile = data;
+          debugger;
+          localStorage.setItem("user", JSON.stringify(user));
+          form.resetFields();
+          this.setState({ visible: false });
+          window.location.reload();
         })
         .catch(err => console.log(err))
-        form.resetFields();
-        this.setState({ visible: false });
     });
 }
   render() {
