@@ -23,13 +23,17 @@ class TopNavBar extends React.Component {
         userService.logout();
     }
 
-    componentDidMount() {
+    
+
+    getProfile = () => {
         const user = JSON.parse(localStorage.getItem("user"));
         // fetch all the information: user profile photo, username
+        let name;
+        let profileImg;
         if (user) {
             ProfileService.getProfile(user.cores_profile.id)
             .then(profile => {
-                const name = (profile.firstName ? profile.firstName : "") + (profile.lastName ? (" " + profile.lastName) : "");
+                name = (profile.firstName ? profile.firstName : "") + (profile.lastName ? (" " + profile.lastName) : "");
                 this.setState({name: name});
             })
             .catch(err => {console.log('Failed to fetch profile: ' + err)});
@@ -37,10 +41,21 @@ class TopNavBar extends React.Component {
             ProfileService.getProfileImage(user.cores_profile.id)
             .then(imgURL => {
                 console.log(imgURL);
+                profileImg = imgURL;
                 this.setState({profileImg: imgURL});
             })
             .catch(err => {console.log("Profile Image retrieval failed: " + err)});
         }
+        return {name, profileImg};
+    }
+
+    componentDidUpdate() {
+        if (!this.state.name) {
+            this.getProfile();
+        }
+    }
+    componentDidMount() {
+        this.getProfile();
     }
 
     render() {
