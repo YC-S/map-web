@@ -1,8 +1,9 @@
 .sidebar-component {
     border-bottom: solid 1px lightgray;
     display: flex;
+    max-width: 350px;
     align-items: center;
-    justify-content: center;
+    justify-content: left;
     overflow: hidden !important;
 }
 
@@ -12,11 +13,13 @@
 
 .sidebar-description-and-button {
     margin-left: 20px;
+    width: 70%;
 }
 
 .sidebar-description {
-    width: 260px;
-    height: 88px;
+    /* width: 260px; */
+    max-width: 260px;
+    /* height: 88px; */
     display: -webkit-box;
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
@@ -27,6 +30,8 @@
 
 .add-to-trip-button {
     float: right;
+    margin-top: 5px;
+    margin-bottom: 8px;
 }
 
 

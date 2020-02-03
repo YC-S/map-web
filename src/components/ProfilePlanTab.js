@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { List, Avatar } from 'antd';
 import { PlanService } from '../api/PlanServices';
+import { Link } from 'react-router-dom';
 
 export class PlanView extends Component {
   state = {
@@ -61,13 +62,13 @@ render() {
               <List.Item>
                   <List.Item.Meta
                       //{/* avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />} */}
-                      title={<a href={`/map?lng=${-122.335167}&lat=${47.608013}&plan=${item.planId}`}>{item.planTitle}</a>}
+                      title={<Link to={`/map?lng=${-122.335167}&lat=${47.608013}&plan=${item.planId}`}>{item.planTitle}</Link>}
                       description={'City: '+ item.city}
                   />
               </List.Item>
           )}
         />
-        <a style={{fontWeight: "800", marginTop: "50px"}} href={`/map?lng=${-122.335167}&lat=${47.608013}`}>Create New Plan </a>
+        <Link style={{fontWeight: "800", marginTop: "50px"}} to={`/map?lng=${-122.335167}&lat=${47.608013}`}>Create New Plan </Link>
         </div>
 
     );

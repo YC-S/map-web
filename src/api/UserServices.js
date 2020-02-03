@@ -3,8 +3,7 @@ import handleResponse from './APIUtils';
 export const userService = {
     login,
     logout,
-    register,
-    getProfileImg
+    register
 };
 
 function login(username, password) {
@@ -14,7 +13,7 @@ function login(username, password) {
         body: JSON.stringify({ username, password })
     };
 
-    return fetch(`http://localhost:8080/api/users/login`, requestOptions)
+    return fetch(`http://ec2-52-53-149-187.us-west-1.compute.amazonaws.com:8080/api/users/login`, requestOptions)
         .then(handleResponseUser)
         .then((user) => {
             // login successful if there's a user in the response
@@ -35,7 +34,7 @@ function logout() {
     const requestOptions = {
         method: 'POST',
     };
-    return fetch(`http://localhost:8080/api/users/logout`, requestOptions)
+    return fetch(`http://ec2-52-53-149-187.us-west-1.compute.amazonaws.com:8080/api/users/logout`, requestOptions)
         .then(handleResponse)
         .then(() => {
             localStorage.removeItem('user');
@@ -50,7 +49,7 @@ function register(username, password, email) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password, email })
     };
-    return fetch(`http://localhost:8080/api/users/register`, requestOptions)
+    return fetch(`http://ec2-52-53-149-187.us-west-1.compute.amazonaws.com:8080/api/users/register`, requestOptions)
         .then(handleResponseUser)
         .then((user) => {
             // login successful if there's a user in the response
@@ -64,14 +63,6 @@ function register(username, password, email) {
             }
             return user;
         })
-}
-
-function getProfileImg(profile_id) {
-    const requestOptions = {
-        method: 'GET',
-    };
-    return fetch(`http://localhost:8080/api/profileImage/${profile_id}`, requestOptions)
-    .then(handleResponse)
 }
 
 function handleResponseUser(response) {

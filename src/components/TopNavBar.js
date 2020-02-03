@@ -9,7 +9,7 @@ import { ProfileService } from '../api/ProfileServices';
 class TopNavBar extends React.Component {
     state = {
         name: null,
-        profileImg: require('../assets/default-user-icon.jpg'),
+        profileImg: null,
     }
     handleLoginClick = () => {
         this.props.showLogin();
@@ -21,6 +21,7 @@ class TopNavBar extends React.Component {
 
     handleLogoutClick = () => {
         userService.logout();
+        this.setState({name: null, profileImg: null});
     }
 
     
@@ -50,7 +51,8 @@ class TopNavBar extends React.Component {
     }
 
     componentDidUpdate() {
-        if (!this.state.name) {
+        console.log('top nav update');
+        if (this.state.name == null) {
             this.getProfile();
         }
     }
@@ -70,7 +72,7 @@ class TopNavBar extends React.Component {
                     <div>
                         <div id="welcome_message">Hi {this.state.name ? `, ${this.state.name}!` : null}</div>
                                                 {/* link to profile page through profile image */}
-                                                <Link to="/profile"><div id="nav_profile_img"><img src={this.state.profileImg} alt=" " width="30px" height="30px"></img></div></Link>
+                                                <Link to="/profile"><div id="nav_profile_img"><img src={this.state.profileImg ? this.state.profileImg : require('../assets/default-user-icon.jpg')} alt=" " width="30px" height="30px"></img></div></Link>
                         <Link className="navLink" to="/" onClick={this.handleLogoutClick}>Logout</Link>
                     </div> 
                     : 

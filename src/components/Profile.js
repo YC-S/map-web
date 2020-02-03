@@ -49,7 +49,7 @@ export class Profile extends React.Component {
           alt="boy-head"
           className="head-profile"
         />
-        <div>
+        <div id="profile-right">
           {/* user information and button to let user change his/her profile */}
           <h4>
             <SettingProfile

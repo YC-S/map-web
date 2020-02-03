@@ -60,7 +60,8 @@ class Landing extends React.Component {
         return (
             <div className="landing">
                 <TopNavBar showLogin={this.showLogin} showRegister={this.showRegister} landing={true}/>
-                <WrappedAdvancedSearchForm class={"search-bar-wrapper-landing"} dataSource={['Seattle', 'Chicago', 'San Francisco']} handleClickSearch={this.handleSearchCity}/>
+                <WrappedAdvancedSearchForm class={"search-bar-wrapper-landing"} dataSource={['Seattle']} handleClickSearch={this.handleSearchCity}/>
+                <div id="copyright">© Zeeshan373@imgur.com/gallery/PSA4M</div>
                 <AuthorizationModal visibleLogin={this.state.visibleLogin} visibleRegister={this.state.visibleRegister} hideForm={this.hideForm} setToMap={this.setToMap} showRegister={this.showRegister}/>
             </div>
         );

@@ -12,7 +12,7 @@ export class Images extends Component {
       <div className="imageContainer">
         {this.props.imageList.map((image, idx) => (
           <img
-            src={this.props.imageList[1]}
+            src={this.props.imageList[idx]}
             key={idx}
             alt={image}
             className="image"
