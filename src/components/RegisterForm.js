@@ -27,7 +27,6 @@ class RegistrationForm extends React.Component {
                 this.setState({ loading: true });
                 userService.register(values.username, values.password, values.email)
                 .then(() => {
-                    this.setState({ loading: false });
                     this.props.hideForm();
                     // any redirections goes here
                     if (this.props.setToMap) {
@@ -36,7 +35,8 @@ class RegistrationForm extends React.Component {
                 })
                 .catch(error => {
                     this.setState({errMessage: error})
-                })                
+                });
+                this.setState({ loading: false });                
             }
         });
     };
@@ -49,7 +49,7 @@ class RegistrationForm extends React.Component {
     compareToFirstPassword = (rule, value, callback) => {
         const { form } = this.props;
         if (value && value !== form.getFieldValue('password')) {
-            callback('Two passwords that you enter is inconsistent!');
+            callback('Two passwords that you entered are inconsistent!');
         } else {
             callback();
         }

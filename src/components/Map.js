@@ -3,7 +3,8 @@ import mapboxgl from 'mapbox-gl';
 //import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import * as turf from '@turf/turf';
 
-mapboxgl.accessToken = 'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4M29iazA2Z2gycXA4N2pmbDZmangifQ.-g_vE53SD2WrJ6tFX7QHmA';
+mapboxgl.accessToken = 'pk.eyJ1IjoiY2hlbm11NTg5OCIsImEiOiJjazYzeGFlNWUwZXJyM2tvOHBhZmh3bDg5In0.7ZmzdKH0kMJN9i5o3j7rzw';
+// mapboxgl.accessToken = 'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4M29iazA2Z2gycXA4N2pmbDZmangifQ.-g_vE53SD2WrJ6tFX7QHmA';
 let map;
 let currentMarkers=[];
 

@@ -32,6 +32,18 @@ export class SettingProfile extends React.Component {
         // save profile and reload page to update profile fields
         ProfileService.updateProfile(values.firstName, values.lastName, values.signature, values.profileImg[0].originFileObj, this.props.passedDown.profile)
         .then(profile => {
+          // if no error but profile return empty then refetch profile
+          if (profile === "" || profile.id === "" || profile.id === " ") {
+            const user = JSON.parse(localStorage.getItem("user"));
+            console.log("profile is empty");
+            return ProfileService.getProfile(user.cores_profile.id)
+          } else {
+            console.log("profile is not empty");
+            return profile;
+          }
+        })
+        .then(profile => {
+          console.log("Profile updated to" + JSON.stringify(profile));
           // update profile information in localStorage user
           const user = JSON.parse(localStorage.getItem("user"));
           user.cores_profile = profile;
@@ -53,7 +65,7 @@ export class SettingProfile extends React.Component {
         <div id="nameAndEditProfile">
           <span id="person-name">{this.props.passedDown.name}</span>
           <Button className="edit-profile" onClick={this.handleShowForm}>
-            Edit Profile <i className="fa fa-cog"></i>
+            Edit Profile 
           </Button>
         </div>
         <ProfileSettingModal wrappedComponentRef={this.saveFormRef} visible={this.state.visible} loading={this.state.loading} onCancel={this.handleCancel} onSubmit={this.handleUpdateProfile}/>
@@ -105,13 +117,14 @@ const ProfileSettingModal = Form.create({ name: 'form_in_modal' })(
             </Form.Item>
             <Form.Item label="Signature">
               {getFieldDecorator('signature', {
-                rules: [{ required: false, message: 'Please input your signature!' }],
+                rules: [{ required: false }],
               })(<Input />)}
             </Form.Item>
             <Form.Item label="Profile Image">
           {getFieldDecorator('profileImg', {
             valuePropName: 'fileList',
             getValueFromEvent: this.normFile,
+            rules: [{ required: true, message: 'Please upload your profile!' }],
           })(
             <Upload.Dragger name="files" customRequest={this.dummyRequest}>
               <p className="ant-upload-drag-icon">

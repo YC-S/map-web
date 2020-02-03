@@ -11,7 +11,7 @@ class PlaceCard extends React.Component {
         console.log(placeCardData);
         return (
             <div className="place-card">
-                <Card title="" extra={<a href="#" onClick={this.onClick}>Close</a>} style={{ width: 600 }}>
+                <Card title="" extra={<a href="#" onClick={this.onClick}>Close</a>}>
                     <div className="place-card-content">
                         <img src={placeCardData.imgURL} alt="" style={{width: "100%", height: "auto"}}></img>
                         <div style={{display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: "20px"}}>

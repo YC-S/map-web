@@ -61,8 +61,8 @@ class ProfilePage extends React.Component {
                 <TabPane tab="Plans" key="2">
                   <PlanView planList={this.state.planList} />
                 </TabPane>
-                <TabPane tab="Temp" key="3">
-                    content of a temp tab
+                <TabPane tab="Friends" key="3">
+                    Friend list comes here...
                 </TabPane>
               </Tabs>
           </div>

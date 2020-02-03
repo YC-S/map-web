@@ -7,7 +7,7 @@ export const SearchService = {
 }
 
 function fetchInitialPlaces() {
-    return fetch('http://localhost:8080/landing')
+    return fetch('http://ec2-52-53-149-187.us-west-1.compute.amazonaws.com:8080/landing')
     .then(handleResponse)
 }
 
@@ -18,7 +18,7 @@ function getCategories(searchTerm) {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
     };
-    return fetch(`http://localhost:8080/search/categories/${searchTerm}`, requestOptions)
+    return fetch(`http://ec2-52-53-149-187.us-west-1.compute.amazonaws.com:8080/search/categories/${searchTerm}`, requestOptions)
     .then(handleResponse)
 }
 
@@ -28,6 +28,6 @@ function getSearchResult(searchTerm) {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
     };
-    return fetch(`http://localhost:8080/search?keyword=${searchTerm}`, requestOptions)
+    return fetch(`http://ec2-52-53-149-187.us-west-1.compute.amazonaws.com:8080/search?keyword=${searchTerm}`, requestOptions)
     .then(handleResponse)
 }

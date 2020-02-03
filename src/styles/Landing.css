@@ -3,5 +3,13 @@
     height: 100vh;
     background-size: cover;
     background-repeat: no-repeat;
+    position: relative;
+}
+
+#copyright {
+    color: lightyellow;
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
 }
 

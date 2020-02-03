@@ -12,7 +12,7 @@ function getPlan(planId) {
     const requestOptions = {
         method: 'GET',
     };
-    return fetch(`http://localhost:8080/api/plans/${planId}`, requestOptions)
+    return fetch(`http://ec2-52-53-149-187.us-west-1.compute.amazonaws.com:8080/api/plans/${planId}`, requestOptions)
     .then(handleResponse)
 }
 
@@ -20,7 +20,7 @@ function getPlanItems(planId) {
     const requestOptions = {
         method: 'GET',
     };
-    return fetch(`http://localhost:8080/api/planItems/${planId}`, requestOptions)
+    return fetch(`http://ec2-52-53-149-187.us-west-1.compute.amazonaws.com:8080/api/planItems/${planId}`, requestOptions)
     .then(handleResponse)
 }
 
@@ -37,7 +37,7 @@ function updatePlan(user, pointsInPlan, plan) {
             city: plan.city
         }),
     };
-    return fetch(`http://localhost:8080/api/addPlan`, requestOptions)
+    return fetch(`http://ec2-52-53-149-187.us-west-1.compute.amazonaws.com:8080/api/addPlan`, requestOptions)
     .then(handleResponse)
 }
 
@@ -52,11 +52,11 @@ function createPlan(user, pointsInPlan, planTitle, city) {
             planTitle, 
             city}),
     };
-    return fetch(`http://localhost:8080/api/addPlan/${user.id}`, requestOptions)
+    return fetch(`http://ec2-52-53-149-187.us-west-1.compute.amazonaws.com:8080/api/addPlan/${user.id}`, requestOptions)
     .then(handleResponse)
 }
 
 function getPlans(user) {
-    return fetch(`http://localhost:8080/api/getPlans/${user.id}`)
+    return fetch(`http://ec2-52-53-149-187.us-west-1.compute.amazonaws.com:8080/api/getPlans/${user.id}`)
     .then(handleResponse)
 }

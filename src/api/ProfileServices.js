@@ -1,4 +1,5 @@
 import handleResponse from './APIUtils';
+import imageCompression from 'browser-image-compression';
 
 export const ProfileService = {
     getProfile,
@@ -10,7 +11,7 @@ function getProfile(profileId) {
     const requestOptions = {
         method: 'GET',
     };
-    return fetch(`http://localhost:8080/api/profile/${profileId}`, requestOptions)
+    return fetch(`http://ec2-52-53-149-187.us-west-1.compute.amazonaws.com:8080/api/profile/${profileId}`, requestOptions)
     .then(handleResponse)
 }
 
@@ -18,11 +19,11 @@ function getProfileImage(profileId) {
     const requestOptions = {
         method: 'GET',
     };
-    return fetch(`http://localhost:8080/api/profileImage/${profileId}`, requestOptions)
+    return fetch(`http://ec2-52-53-149-187.us-west-1.compute.amazonaws.com:8080/api/profileImage/${profileId}`, requestOptions)
     .then(response => {
         if (!response.ok) {   
-        const error = response.statusText;
-        return Promise.reject(error);
+            const error = response.statusText;
+            return Promise.reject(error);
         }
         return response;
     })
@@ -41,6 +42,7 @@ function updateProfile(firstName, lastName, description, profileImage, profile) 
         description, 
         user: profile.user,
     });
+
     const parts = [
         new Blob([profileString], {type: 'application/json'}),
         'same way as you do with blob',
@@ -52,13 +54,22 @@ function updateProfile(firstName, lastName, description, profileImage, profile) 
     });
     console.log(file);
     formData.append("json", file);
-    formData.append("file", profileImage);
-    const requestOptions = {
-        method: 'POST',
-        //headers: { 'Content-Type': 'multipart/form-data' },
-        body: formData,
-    };
-    //delete requestOptions.headers['Content-Type'];
-    return fetch(`http://localhost:8080/api/saveProfile`, requestOptions)
-    .then(handleResponse)
+
+    console.log(profileImage);
+    const options = { 
+        maxSizeMB: 0.5          // (default: Number.POSITIVE_INFINITY)
+    }
+    return imageCompression(profileImage, options)
+    .then(data => {
+        console.log(data);
+        formData.append("file", data);
+        const requestOptions = {
+            method: 'POST',
+            //headers: { 'Content-Type': 'multipart/form-data' },
+            body: formData,
+        };
+        //delete requestOptions.headers['Content-Type'];
+        return fetch(`http://ec2-52-53-149-187.us-west-1.compute.amazonaws.com:8080/api/saveProfile`, requestOptions)
+    })
+    .then(handleResponse) 
 }

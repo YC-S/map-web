@@ -20,7 +20,7 @@ class MapSideBar extends React.Component {
         const { addPointsToPlan, data, pointsInPlan, handleHoverSearchResult, deletePointsFromPlan, rearrangePointsInPlan, showRoute, routeObj, handleDisableRoute, handleEnableRoute, planId, planTitle, plan, setPlanTitle, showLogin, popConfirmDisabled, disablePopConfirm, handleSearchPlace, setPlanId, setPlan, setPlaceCardData}= this.props;
         return (
             <div className={"mapSidebar"}>
-                <div className="tab-content" style={{width: collapse? "0":"400px", padding: collapse? "0":"10px",  transition: "0.2s"}}>
+                <div className="tab-content" style={{width: collapse? "0":"400px", maxWidth: collapse? "0":"100vw", padding: collapse? "0":"10px",  transition: "0.2s"}}>
                 <Tabs defaultActiveKey="1" tabBarStyle={{textAlign: "center"}}>
                     <TabPane tab="&emsp;Discovery&emsp;" key="1">
                         <div className="map-sidebar-main" >

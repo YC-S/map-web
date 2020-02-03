@@ -9,7 +9,7 @@ import { ProfileService } from '../api/ProfileServices';
 class TopNavBar extends React.Component {
     state = {
         name: null,
-        profileImg: require('../assets/default-user-icon.jpg'),
+        profileImg: null,
     }
     handleLoginClick = () => {
         this.props.showLogin();
@@ -21,15 +21,20 @@ class TopNavBar extends React.Component {
 
     handleLogoutClick = () => {
         userService.logout();
+        this.setState({name: null, profileImg: null});
     }
 
-    componentDidMount() {
+    
+
+    getProfile = () => {
         const user = JSON.parse(localStorage.getItem("user"));
         // fetch all the information: user profile photo, username
+        let name;
+        let profileImg;
         if (user) {
             ProfileService.getProfile(user.cores_profile.id)
             .then(profile => {
-                const name = (profile.firstName ? profile.firstName : "") + (profile.lastName ? (" " + profile.lastName) : "");
+                name = (profile.firstName ? profile.firstName : "") + (profile.lastName ? (" " + profile.lastName) : "");
                 this.setState({name: name});
             })
             .catch(err => {console.log('Failed to fetch profile: ' + err)});
@@ -37,10 +42,22 @@ class TopNavBar extends React.Component {
             ProfileService.getProfileImage(user.cores_profile.id)
             .then(imgURL => {
                 console.log(imgURL);
+                profileImg = imgURL;
                 this.setState({profileImg: imgURL});
             })
             .catch(err => {console.log("Profile Image retrieval failed: " + err)});
         }
+        return {name, profileImg};
+    }
+
+    componentDidUpdate() {
+        console.log('top nav update');
+        if (this.state.name == null) {
+            this.getProfile();
+        }
+    }
+    componentDidMount() {
+        this.getProfile();
     }
 
     render() {
@@ -55,7 +72,7 @@ class TopNavBar extends React.Component {
                     <div>
                         <div id="welcome_message">Hi {this.state.name ? `, ${this.state.name}!` : null}</div>
                                                 {/* link to profile page through profile image */}
-                                                <Link to="/profile"><div id="nav_profile_img"><img src={this.state.profileImg} alt=" " width="30px" height="30px"></img></div></Link>
+                                                <Link to="/profile"><div id="nav_profile_img"><img src={this.state.profileImg ? this.state.profileImg : require('../assets/default-user-icon.jpg')} alt=" " width="30px" height="30px"></img></div></Link>
                         <Link className="navLink" to="/" onClick={this.handleLogoutClick}>Logout</Link>
                     </div> 
                     : 
